@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // );
 
 // const passport = require("./middleware/passport");
-// const authRoute = require("./routes/authRoute");
+const authRoute = require("./routes/authRoute");
 const indexRoute = require("./routes/indexRoute");
 
 // Middleware for express
@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRoute);
-// app.use("/auth", authRoute);
+app.use("/auth", authRoute);
 
 app.listen(port, () => {
   console.log(`🚀 Server has started on port ${port}`);
