@@ -29,6 +29,12 @@ const indexRoute = require("./routes/indexRoute");
 // Middleware for express
 app.use(express.json());
 app.use(expressLayouts);
+
+app.set("layout auth/login", false);
+app.get('/auth/login', (req, res) => {
+  res.render('login', { layout: 'login' });
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
