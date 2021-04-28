@@ -6,25 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- <link rel="shortcut icon" type="image/x-icon" href="/secure-icon.png" /> -->
     <!-- Styles -->
-    <!-- <link
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    /> -->
+      href='css/style.css'
+    />
     <!-- Icons CDN -->
-    <!-- <link
+    <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
     <script
       src="https://kit.fontawesome.com/761d42c757.js"
       crossorigin="anonymous"
-    ></script> -->
+    ></script>
     <title>Contendr</title>
   </head>
 
   <body>
+    <nav>
+      <a href="/">
+      <img class="logo" src="logo.png" alt="contendr logo" width="140px" height="auto"></a>
+
+      <a href="search" class="search"><i class="fas fa-search"></i></a>
+      <img id="displayPicture" src="mockUser.png" alt="display picture" width="40px" height="auto">
+    </nav>
     <div class="container"><%- body %></div>
 
     <!-- Bootstrap JS -->
@@ -43,5 +49,11 @@
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
       crossorigin="anonymous"
     ></script> -->
+
+    <footer>
+      <a href="/" class="home"><i class="fas fa-home"></i></a>
+      <a href="createChallenge" id="challengeButton">Start a Challenge</a>
+      <img id="notifications" src="notifications.png" alt="notifications" width="25px" height="auto">
+    </footer>
   </body>
 </html>
