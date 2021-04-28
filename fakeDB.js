@@ -29,7 +29,6 @@ const database = {
   posts: [
     {
       postId: "abc1",
-      userId: "billgates",
       player1: "billgates",
       player2: "james123",
       category: "dance",
@@ -49,3 +48,5 @@ const database = {
     },
   ],
 };
+
+module.exports = { database };
