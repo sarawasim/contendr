@@ -10,5 +10,8 @@ router.get("/createChallenge", (req, res) => {
   res.render("createChallenge");
 });
 
+router.post("/createChallenge", (req, res) => {
+  console.log(req.body)
+})
 
 module.exports = router;
