@@ -28,7 +28,7 @@ database.connect((err, dbConnection) => {
 });
 
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "/public")));
 app.use(
   session({
     secret: "secret",
