@@ -43,7 +43,6 @@ const githubLogin = new GitHubStrategy(
 );
 
 passport.serializeUser(function (user, done) {
-  console.log("serializeUser ---------+++++ " + JSON.stringify(user));
   done(null, user.id);
 });
 
