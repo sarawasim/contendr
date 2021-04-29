@@ -5,7 +5,7 @@ const path = require('path');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, './test');
+    cb(null, './public/tempImages');
   },
   filename: function (req, file, cb) {
     cb( null, file.originalname);
@@ -22,13 +22,13 @@ const upload = multer({
     const mimetype = fileTypes.test(file.mimetype);
 
     if(extname && mimetype) {
-      return cb(null, true)
+      return cb(null, true);
     } else {
       cb('Error: Images only please!');
     }
   }
 })
 
-module.exports = upload;
+module.exports = {upload};
 
 

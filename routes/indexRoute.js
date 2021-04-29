@@ -1,36 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
-// const { upload } = require("../middleware/upload")
-// jojo's multer image upload mess
-const path = require('path');
-const multer = require('multer');
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './tempImages');
-  },
-  filename: function (req, file, cb) {
-    cb( null, file.originalname);
-  }
-})
-
-const upload = multer({
-  storage: storage,
-  limits: {fileSize: 10000000},
-  fileFilter: function (req, file, cb) {
-    const fileTypes = /jpeg|jpg|png|gif/;
-
-    const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = fileTypes.test(file.mimetype);
-
-    if(extname && mimetype) {
-      return cb(null, true)
-    } else {
-      cb('Error: Images only please!');
-    }
-  }
-})
-// end of mess
+const { upload } = require("../middleware/upload");
 
 const crypto = require("crypto");
 
@@ -46,7 +17,7 @@ router.get("/createChallenge", (req, res) => {
 });
 
 router.post("/createChallenge", upload.single('fileUpload'), (req, res) => {
-  res.send("Success!")
+  res.send("Success!");
 })
 
 module.exports = router;
