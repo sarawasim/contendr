@@ -1,0 +1,64 @@
+body {
+    background-image: linear-gradient(to right, #5177FF, #55C2FF);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+}
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  grid-row: 1;
+  grid-column: 3/4;
+  height: 20px;
+  width: 400px;
+  border-radius: 20px;
+  box-sizing: unset;
+}
+
+input {
+    border: none;
+    height: 35px;
+    width: 440px;
+    border-radius: 20px;
+    text-align: center;
+    color: #5177FF;
+}
+
+#login{
+    background-image: linear-gradient(#5177FF, #55C2FF); 
+}
+
+#github{
+    background-image: linear-gradient(#3f3f3f, #a3a3a3); 
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: #FF85DD;
+}
+
+a:active {
+  color: white;
+}

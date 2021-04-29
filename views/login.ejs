@@ -1,45 +1,49 @@
-<div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body text-center">
-      <h1 class="mb-3">
-        <img src="/secure-icon.png" alt="icon" width="20%" />
-      </h1>
-      <h2>Login</h2>
-      <form action="/auth/login" method="POST">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            placeholder="Enter Email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Enter Password"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
-        <p style="margin: 2px">OR</p>
-      </form>
-      <form action="/auth/github" method="post">
-        <button
-          type="submit"
-          class="btn btn-primary btn-block"
-          style="background-color: #414141; border: darkgray"
-        >
-          Login with GitHub
-        </button>
-      </form>
-      <p class="mt-4">New User? <a href="/auth/register">Register</a></p>
-      <p>Forgot Password? <a href="/auth/forgot">Reset</a></p>
-    </div>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Styles -->
+    <link rel="stylesheet" href='/css/loginStyle.css' />
+    <!-- Icons CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <title>Contendr</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/">
+        <img class="logo" src="/logo-white.png" alt="contendr logo" width="140px" height="auto"></a>
+    </nav>
+    <h2>challenge your friends!</h2>
+    <form action="/auth/login" method="POST">
+      <div class="form-group">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          placeholder="email"
+        />
+      </div>
+      <br>
+      <div class="form-group">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="password"
+        />
+      </div>
+        <p><a href="/auth/forgot">forgot password?</a></p>
+        <button type="submit" class="button" id="login">Login</button>
+    </form>
+    <br>
+    <form action="/auth/github" method="post">
+      <button type="submit" class="button" id="github">Login with GitHub</button>
+    </form>
+      <p class="mt-4">New? <a href="/auth/register">sign up</a> with email</p>
+  </body> 
+</html>
