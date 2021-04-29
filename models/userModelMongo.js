@@ -39,6 +39,7 @@ const userModel = {
     console.log("user model users-------------- " + JSON.stringify(users));
     const user = users.find((user) => user.id === id);
     if (user) {
+      console.log("the user is ---------------------- " + JSON.stringify(user));
       return user;
     }
     console.log(`Couldn't find user with id: ${id}`);
