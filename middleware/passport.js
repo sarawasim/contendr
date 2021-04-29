@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const userController = require("../controllers/userControllerMongo");
-const GitHubStrategy = require("Passport-GitHub2");
+// const GitHubStrategy = require("Passport-GitHub2");
 require("dotenv").config();
 
 const localLogin = new LocalStrategy(
@@ -22,24 +22,24 @@ const localLogin = new LocalStrategy(
   }
 );
 // let userProfile;
-const githubLogin = new GitHubStrategy(
-  {
-    clientID: process.env.clientID,
-    clientSecret: process.env.clientSecret,
-    callbackURL: "http://localhost:8080/auth/github/callback",
-    scope: ["user:email"],
-  },
-  async function (accessToken, refreshToken, profile, done) {
-    // console.log(
-    //   "the profile is ---------------------------- " + JSON.stringify(profile));
-    const user = await userController.findOrCreate(profile);
-    return user
-      ? done(null, user)
-      : done(null, false, {
-          message: "Somethin' went wrong, ehyy!",
-        });
-  }
-);
+// const githubLogin = new GitHubStrategy(
+//   {
+//     clientID: process.env.clientID,
+//     clientSecret: process.env.clientSecret,
+//     callbackURL: "http://localhost:8080/auth/github/callback",
+//     scope: ["user:email"],
+//   },
+//   async function (accessToken, refreshToken, profile, done) {
+//     // console.log(
+//     //   "the profile is ---------------------------- " + JSON.stringify(profile));
+//     const user = await userController.findOrCreate(profile);
+//     return user
+//       ? done(null, user)
+//       : done(null, false, {
+//           message: "Somethin' went wrong, ehyy!",
+//         });
+//   }
+// );
 
 passport.serializeUser(async function (user, done) {
   console.log("useeerrrrrrrrrrrrrrrr serial " + user);
@@ -56,4 +56,4 @@ passport.deserializeUser(async function (id, done) {
 });
 
 module.exports = passport.use(localLogin);
-module.exports = passport.use(githubLogin);
+// module.exports = passport.use(githubLogin);
