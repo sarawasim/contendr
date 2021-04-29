@@ -1,5 +1,5 @@
 const userModel = require("../models/userModelMongo").userModel;
-const { database } = require("../fakeDB");
+const database = include("databaseConnection/databaseConnection");
 
 const getUserByEmailIdAndPassword = async (email, password) => {
   let user = await userModel.findOne(email);
@@ -11,6 +11,7 @@ const getUserByEmailIdAndPassword = async (email, password) => {
   }
   return null;
 };
+
 const getUserById = (id) => {
   let user = userModel.findById(id);
   if (user) {
@@ -29,16 +30,19 @@ function isUserValid(user, password) {
   return user.password === password;
 }
 
-function findOrCreate(profile) {
+async function findOrCreate(profile) {
+  console.log("find or create has been reached +++++++++++++++");
+
   //will first find if user is in DB, and if not then user will be added to DB
   // console.log(
   //   "\nthe name of profile is --------- " + JSON.stringify(profile._json.name)
   // );
-  let user = userModel.findById(parseInt(profile.id));
+  let user = await userModel.findById(parseInt(profile.id));
   if (user) {
     return user;
   } else {
-    const userCollection = database.db("lab_example").collection("users");
+    console.log("creating has been reached");
+    const userCollection = database.db("Contendr").collection("users");
     await userCollection.insertOne({
       id: parseInt(profile.id),
       email: profile.emails[0].value,
@@ -46,7 +50,7 @@ function findOrCreate(profile) {
       Posts: [],
       following: [],
     });
-    user = userModel.findById(parseInt(profile.id)); //this will find user again after they have been added to DB
+    user = await userModel.findById(parseInt(profile.id)); //this will find user again after they have been added to DB
     return user;
   }
 }

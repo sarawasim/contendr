@@ -21,12 +21,12 @@ const getUserById = (id) => {
 };
 
 function isUserValid(user, password) {
-  console.log(
-    "isUserValid --- user password is " +
-      JSON.stringify(user.password) +
-      " , and inputed password is " +
-      password
-  );
+  // console.log(
+  //   "isUserValid --- user password is " +
+  //     JSON.stringify(user.password) +
+  //     " , and inputed password is " +
+  //     password
+  // );
   return user.password === password;
 }
 
