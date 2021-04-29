@@ -7,7 +7,7 @@ const userModel = {
     const users = await userCollection
       .find()
       .project({
-        _id: 1,
+        id: 1,
         email: 1,
         username: 1,
         posts: 1,
