@@ -11,7 +11,7 @@ const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const path = require("path");
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 const dotenv = require("dotenv").config();
 
 const app = express();
@@ -51,8 +51,8 @@ app.use(express.json());
 app.use(expressLayouts);
 
 app.set("layout auth/login", false);
-app.get('/auth/login', (req, res) => {
-  res.render('login', { layout: 'login' });
+app.get("/auth/login", (req, res) => {
+  res.render("login", { layout: "login" });
 });
 
 app.use(express.urlencoded({ extended: true }));
