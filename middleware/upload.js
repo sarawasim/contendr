@@ -1,12 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
-// const { upload } = require("../middleware/upload")
 const path = require('path');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, './tempImages');
+    cb(null, './test');
   },
   filename: function (req, file, cb) {
     cb( null, file.originalname);
@@ -30,16 +26,6 @@ const upload = multer({
   }
 })
 
-router.get("/", ensureAuthenticated, (req, res) => {
-  res.render("index");
-});
+module.exports = upload;
 
-router.get("/createChallenge", (req, res) => {
-  res.render("createChallenge");
-});
 
-router.post("/createChallenge", upload.single('fileUpload'), (req, res) => {
-  res.send("Success!")
-})
-
-module.exports = router;
