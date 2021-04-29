@@ -2,7 +2,10 @@ const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
 const { json } = require("express");
+const crypto = require("crypto");
 
+const Joi = require("joi");
+const { ObjectId } = require("bson");
 const router = express.Router();
 
 router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));

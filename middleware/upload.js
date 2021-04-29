@@ -1,3 +1,6 @@
+// jojo's first attempt to things clean. but "upload" would not work in indexRoute.
+// had to put all this code into indexRoute for now
+
 const path = require('path');
 const multer = require('multer');
 const storage = multer.diskStorage({

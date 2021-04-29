@@ -1,3 +1,12 @@
+//Define the include function for absolute file name
+global.base_dir = __dirname;
+global.abs_path = function (path) {
+  return base_dir + path;
+};
+global.include = function (file) {
+  return require(abs_path("/" + file));
+};
+
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
@@ -6,6 +15,17 @@ const port = process.env.port || 8080;
 const dotenv = require("dotenv").config();
 
 const app = express();
+
+const database = include("databaseConnection/databaseConnection");
+
+database.connect((err, dbConnection) => {
+  if (!err) {
+    console.log("Successfully connected to MongoDB");
+  } else {
+    console.log("Error Connecting to MongoDB");
+    console.log(err);
+  }
+});
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -29,12 +49,6 @@ const indexRoute = require("./routes/indexRoute");
 // Middleware for express
 app.use(express.json());
 app.use(expressLayouts);
-
-app.set("layout auth/login", false);
-app.get('/auth/login', (req, res) => {
-  res.render('login', { layout: 'login' });
-});
-
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
