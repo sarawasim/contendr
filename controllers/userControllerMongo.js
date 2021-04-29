@@ -1,5 +1,4 @@
-const userModel = require("../models/userModel").userModel;
-// ^^ use this for fake db
+const userModel = require("../models/userModelMongo").userModel;
 const { database } = require("../fakeDB");
 
 const getUserByEmailIdAndPassword = async (email, password) => {
@@ -39,8 +38,8 @@ function findOrCreate(profile) {
   if (user) {
     return user;
   } else {
-    database.users.push({
-      // if there is no user found in the DB, add user to DB then check again and return user
+    const userCollection = database.db("lab_example").collection("users");
+    await userCollection.insertOne({
       id: parseInt(profile.id),
       email: profile.emails[0].value,
       username: profile.displayName,

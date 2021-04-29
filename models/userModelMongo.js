@@ -28,8 +28,15 @@ const userModel = {
     const userCollection = database.db("Contendr").collection("users");
     const users = await userCollection
       .find()
-      .project({ id: 1, email: 1, username: 1, posts: 1, following: 1 })
+      .project({
+        id: 1,
+        email: 1,
+        username: 1,
+        posts: 1,
+        following: 1,
+      })
       .toArray();
+    console.log("user model users-------------- " + JSON.stringify(users));
     const user = users.find((user) => user.id === id);
     if (user) {
       return user;
