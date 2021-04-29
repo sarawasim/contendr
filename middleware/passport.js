@@ -26,7 +26,7 @@ const githubLogin = new GitHubStrategy(
   {
     clientID: "943dc2e4fd607dea3ece",
     clientSecret: "9aaa5521a436373351eab09bdf3563dd5e75ef3d",
-    callbackURL: "http://localhost:8080/auth/github/callback",
+    callbackURL: "https://contendr.herokuapp.com/auth/github/callback",
     scope: ["user:email"],
   },
   async function (accessToken, refreshToken, profile, done) {
