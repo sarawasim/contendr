@@ -1,10 +1,11 @@
-const userModel = require("../models/userModel").userModel;
+const userModel = require("../models/userModelMongo").userModel;
 const { database } = require("../fakeDB");
 
-const getUserByEmailIdAndPassword = (email, password) => {
-  let user = userModel.findOne(email);
+const getUserByEmailIdAndPassword = async (email, password) => {
+  let user = await userModel.findOne(email);
+  console.log("getUserByEmailIdAndPassword --- user: " + JSON.stringify(user));
   if (user) {
-    if (isUserValid(user, password)) {
+    if (await isUserValid(user, password)) {
       return user;
     }
   }
@@ -19,7 +20,13 @@ const getUserById = (id) => {
 };
 
 function isUserValid(user, password) {
-  return user.password === password;
+  console.log(
+    "isUserValid --- user password is " +
+      JSON.stringify(user.password) +
+      " , and inputed password is " +
+      password
+  );
+  return String(user.password) == password;
 }
 
 function findOrCreate(profile) {

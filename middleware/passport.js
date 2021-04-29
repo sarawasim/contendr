@@ -2,7 +2,6 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const userController = require("../controllers/userController");
 const GitHubStrategy = require("Passport-GitHub2").Strategy;
-const { database } = require("../models/userModel");
 require("dotenv").config();
 
 const localLogin = new LocalStrategy(
@@ -10,8 +9,12 @@ const localLogin = new LocalStrategy(
     usernameField: "email",
     passwordField: "password",
   },
-  (email, password, done) => {
-    const user = userController.getUserByEmailIdAndPassword(email, password);
+  async (email, password, done) => {
+    const user = await userController.getUserByEmailIdAndPassword(
+      email,
+      password
+    );
+    console.log("local login user --------- " + JSON.stringify(user));
     return user
       ? done(null, user)
       : done(null, false, {
