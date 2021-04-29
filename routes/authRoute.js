@@ -45,6 +45,16 @@ router.get("/logout", (req, res) => {
   res.redirect("/auth/login");
 });
 
+router.get("/register", (req, res) => {
+  res.render("login");
+  res.redirect("/auth/login");
+});
+
+router.post("/register", (req, res) => {
+  req.logout();
+  res.redirect("/auth/login");
+});
+
 // router.get("/revoke/:sessionID", (req, res) => {
 //   //grabs sessionID passed from URL param from clicking revoke <a> tag
 //   const sessionID = req.params.sessionID;
