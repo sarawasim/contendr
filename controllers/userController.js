@@ -1,4 +1,6 @@
 const userModel = require("../models/userModelMongo").userModel;
+// const userModel = require("../models/userModel").userModel;
+// ^^ use this for fake db
 const { database } = require("../fakeDB");
 
 const getUserByEmailIdAndPassword = async (email, password) => {
