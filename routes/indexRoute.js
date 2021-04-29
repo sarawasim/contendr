@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
-<<<<<<< HEAD
 // const { upload } = require("../middleware/upload")
+// jojo's multer image upload mess
 const path = require('path');
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -30,12 +30,12 @@ const upload = multer({
     }
   }
 })
-=======
+// end of mess
+
 const crypto = require("crypto");
 
 const Joi = require("joi");
 const { ObjectId } = require("bson");
->>>>>>> 4619879258b980b9c32a365d03bf380089e7276f
 
 router.get("/", ensureAuthenticated, (req, res) => {
   res.render("index");
@@ -45,14 +45,8 @@ router.get("/createChallenge", (req, res) => {
   res.render("createChallenge");
 });
 
-<<<<<<< HEAD
 router.post("/createChallenge", upload.single('fileUpload'), (req, res) => {
   res.send("Success!")
 })
-=======
-router.post("/createChallenge", (req, res) => {
-  console.log(req.body);
-});
->>>>>>> 4619879258b980b9c32a365d03bf380089e7276f
 
 module.exports = router;
