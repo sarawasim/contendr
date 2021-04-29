@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const userController = require("../controllers/userControllerMongo");
-const GitHubStrategy = require("Passport-GitHub2").Strategy;
+const GitHubStrategy = require("Passport-GitHub2");
 require("dotenv").config();
 
 const localLogin = new LocalStrategy(
