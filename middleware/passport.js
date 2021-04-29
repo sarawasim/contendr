@@ -24,8 +24,8 @@ const localLogin = new LocalStrategy(
 let userProfile;
 const githubLogin = new GitHubStrategy(
   {
-    clientID: "943dc2e4fd607dea3ece",
-    clientSecret: "9aaa5521a436373351eab09bdf3563dd5e75ef3d",
+    clientID: "ba416bc506e9fb4bd33a",
+    clientSecret: "935ed656a2d2fe0915568e2fad4e035a2d5f61b1",
     callbackURL: "https://contendr.herokuapp.com/auth/github/callback",
     scope: ["user:email"],
   },
