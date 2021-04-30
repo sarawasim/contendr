@@ -22,7 +22,7 @@ body {
   grid-row: 1;
   grid-column: 3/4;
   height: 20px;
-  width: 400px;
+  width: 350px;
   border-radius: 20px;
   box-sizing: unset;
 }
@@ -30,7 +30,7 @@ body {
 input {
     border: none;
     height: 35px;
-    width: 440px;
+    width: 390px;
     border-radius: 20px;
     text-align: center;
     color: #5177FF;
@@ -62,4 +62,18 @@ a:hover {
 
 a:active {
   color: white;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    max-width: 600px;
+  }
+
+  .button {
+  max-width: 300px;
+}
+
+input {
+    max-width: 340px;
+}
 }
