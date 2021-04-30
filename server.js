@@ -13,6 +13,7 @@ const session = require("express-session");
 const path = require("path");
 const port = process.env.PORT || 8080;
 const dotenv = require("dotenv").config();
+const { generateUploadURL } = require("./controllers/s3controller");
 
 const app = express();
 
@@ -53,6 +54,10 @@ app.use(expressLayouts);
 app.set("layout auth/login", false);
 app.get("/auth/login", (req, res) => {
   res.render("login", { layout: "login" });
+});
+app.get("/s3url", async (req, res) => {
+  const url = await generateUploadURL();
+  res.send({ url });
 });
 
 app.use(express.urlencoded({ extended: true }));
