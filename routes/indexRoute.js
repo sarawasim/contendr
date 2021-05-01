@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
 const { upload } = require("../middleware/upload");
+const {path} = require('path')
 
 const crypto = require("crypto");
 
@@ -17,7 +18,10 @@ router.get("/createChallenge", (req, res) => {
 });
 
 router.post("/createChallenge", upload.single('fileUpload'), (req, res) => {
-  res.send("Success!");
+  console.log("testing req.body")
+  console.log(req.file.filename)
+  let filename = req.file.filename
+  res.render("test", {image: "tempImages/"+filename})
 })
 
 module.exports = router;
