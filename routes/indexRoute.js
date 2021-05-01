@@ -16,8 +16,8 @@ router.get("/createChallenge", (req, res) => {
   res.render("createChallenge");
 });
 
-router.post("/createChallenge", upload.single('fileUpload'), (req, res) => {
-  res.send("Success!");
-})
+// router.post("/createChallenge", upload.single('fileUpload'), (req, res) => {
+//   res.send("Success!");
+// })
 
 module.exports = router;
