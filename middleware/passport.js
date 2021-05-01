@@ -29,7 +29,7 @@ if (process.env.IS_HEROKU) {
     {
       clientID: process.env.clientID,
       clientSecret: process.env.clientSecret,
-      callbackURL: "https://contendr.herokuapp.com/auth/github/callback",
+      callbackURL: "http://contendr.win/auth/github/callback",
       scope: ["user:email"],
     },
     async function (accessToken, refreshToken, profile, done) {
