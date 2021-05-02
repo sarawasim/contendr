@@ -31,7 +31,7 @@ router.post(
     console.log(req.file.filename);
     let filename = req.file.filename;
     res.render("test", { image: "tempImages/" + filename });
-    // need to add form data into Mongo DB's "posts" collection
+    // need to add form data and upload url into Mongo DB's "posts" collection
   }
 );
 
