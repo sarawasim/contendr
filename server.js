@@ -13,7 +13,7 @@ const session = require("express-session");
 const path = require("path");
 const port = process.env.PORT || 8080;
 const dotenv = require("dotenv").config();
-const { generateUploadURL } = require("./controllers/s3controller");
+const { generateUploadURL } = require("./models/s3model");
 
 const app = express();
 
