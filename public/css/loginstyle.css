@@ -9,7 +9,7 @@ body {
 }
 
 .small-text{
-  font-size: .8rem
+  font-size: .8rem;
 }
 
 .button {
@@ -69,21 +69,36 @@ a:active {
 
 .wave{
   position: absolute;
-  bottom: 0;
+  bottom: 150px;
   left: 0;
-  width: 150%;
+  width: 100%;
+  z-index: -1000;
+}
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 155px;
+    width: 100%;
+    background-color: white;
+    z-index: -1000;
 }
 
 @media screen and (max-width: 600px) {
   body {
-    max-width: 600px;
+    min-width: fit-content;
   }
 
-  .button {
+    .button {
   max-width: 300px;
 }
 
 input {
     max-width: 340px;
+}
+
+.wave{
+  width:100%;
 }
 }
