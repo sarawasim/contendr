@@ -13,12 +13,12 @@ const session = require("express-session");
 const path = require("path");
 const port = process.env.PORT || 8080;
 const dotenv = require("dotenv").config();
-const { generateUploadURL } = require("./controllers/s3controller");
+const { generateUploadURL } = require("./models/s3model");
 
 const app = express();
 
 const database = include("databaseConnection/databaseConnection");
-
+// establish connection to Mongo Atlas db
 database.connect((err, dbConnection) => {
   if (!err) {
     console.log("Successfully connected to MongoDB");
@@ -30,9 +30,10 @@ database.connect((err, dbConnection) => {
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
+// creates session cookie for client
 app.use(
   session({
-    secret: "secret",
+    secret: "secretSauce1234!",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -51,16 +52,20 @@ const indexRoute = require("./routes/indexRoute");
 app.use(express.json());
 app.use(expressLayouts);
 
+// layouts for ejs
 app.set("layout auth/login", false);
 app.get("/auth/login", (req, res) => {
   res.render("login", { layout: "login" });
 });
+
+// gets upload url for s3 bucket. This is used in scripts/upload.js
 app.get("/s3url", async (req, res) => {
   const url = await generateUploadURL();
   res.send({ url });
 });
 
 app.use(express.urlencoded({ extended: true }));
+// init passport strats
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -18,6 +18,7 @@ const s3 = new aws.S3({
 });
 
 async function generateUploadURL() {
+  // creates unique url for user to upload to s3 bucket
   const rawBytes = await crypto.randomBytes(16);
   const imageName = rawBytes.toString("hex");
 
