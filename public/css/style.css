@@ -146,3 +146,9 @@ footer {
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+@media screen and (max-width: 600px) {
+  body {
+    max-width: 600px;
+  }
+}

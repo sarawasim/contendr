@@ -14,6 +14,7 @@
     <title>Contendr</title>
   </head>
   <body>
+    <div class="wrapper">
     <nav>
       <a href="/">
         <img
@@ -24,7 +25,10 @@
           height="auto"
       /></a>
     </nav>
+    <br>
     <h2>challenge your friends!</h2>
+    <br>
+    <br>
     <form action="/auth/login" method="POST">
       <div class="form-group">
         <input
@@ -45,7 +49,9 @@
           placeholder="password"
         />
       </div>
-      <p><a href="/auth/forgot">forgot password?</a></p>
+      <p class="small-text"><a href="/auth/forgot">forgot password?</a></p>
+      <br>
+      <br>
       <button type="submit" class="button" id="login">Login</button>
     </form>
     <br />
@@ -54,7 +60,7 @@
         Login with GitHub
       </button>
     </form>
-    <p class="mt-4">New? <a href="/auth/register">sign up</a> with email</p>
+    <p class="small-text">new? <a href="/auth/register">sign up</a> with email</p>
 
     <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
       <path fill="#fff" fill-opacity="1"
@@ -62,4 +68,5 @@
       </path>
     </svg>
   </body>
+  </div>
 </html>
