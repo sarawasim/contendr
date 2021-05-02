@@ -51,7 +51,8 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  req.logout();
+  const passwordPepper = "S3cr3+oD3lCli3nt3";
+
   res.redirect("/auth/login");
 });
 
