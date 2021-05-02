@@ -69,7 +69,7 @@ a:active {
 
 .wave{
   position: absolute;
-  bottom: 150px;
+  bottom: 50px;
   left: 0;
   width: 100%;
   z-index: -1000;
@@ -79,7 +79,7 @@ footer{
     position: fixed;
     left: 0;
     bottom: 0;
-    height: 155px;
+    height: 70px;
     width: 100%;
     background-color: white;
     z-index: -1000;
