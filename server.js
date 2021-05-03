@@ -57,6 +57,10 @@ app.set("layout auth/login", false);
 app.get("/auth/login", (req, res) => {
   res.render("login", { layout: "login" });
 });
+app.set("layout auth/register", false);
+app.get("/auth/register", (req, res) => {
+  res.render("register", { layout: "register" });
+});
 
 // gets upload url for s3 bucket. This is used in scripts/upload.js
 app.get("/s3url", async (req, res) => {
