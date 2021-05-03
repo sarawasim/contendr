@@ -3,9 +3,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    min-height: 86vh;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.small-text{
+  font-size: .8rem;
 }
 
 .button {
@@ -65,21 +69,36 @@ a:active {
 
 .wave{
   position: absolute;
-  bottom: 0;
+  bottom: 12vh;
   left: 0;
-  width: 150%;
+  width: 100%;
+  z-index: -1000;
+}
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    min-height: 14vh;
+    width: 100%;
+    background-color: white;
+    z-index: -1000;
 }
 
 @media screen and (max-width: 600px) {
   body {
-    max-width: 600px;
+    min-width: fit-content;
   }
 
-  .button {
+    .button {
   max-width: 300px;
 }
 
 input {
     max-width: 340px;
+}
+
+.wave{
+  width:100%;
 }
 }
