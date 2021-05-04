@@ -57,6 +57,7 @@ app.set("layout auth/login", false);
 app.get("/auth/login", (req, res) => {
   res.render("login", { layout: "login" });
 });
+
 app.set("layout auth/register", false);
 app.get("/auth/register", (req, res) => {
   res.render("register", { layout: "register" });
@@ -65,6 +66,11 @@ app.get("/auth/register", (req, res) => {
 app.set("layout createChallenge", false);
 app.get("/createChallenge", (req, res) => {
   res.render("createChallenge", { layout: "layoutB" });
+});
+
+app.set("layout post", false);
+app.get("/post", (req, res) => {
+  res.render("post", { layout: "post" });
 });
 
 // gets upload url for s3 bucket. This is used in scripts/upload.js
