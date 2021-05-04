@@ -21,6 +21,13 @@ const getUserByEmailIdAndPassword = async (email, password) => {
   return null;
 };
 
+const getUsername = (input) => {
+  let user = userModel.findByUsername(input)
+  if (user) {
+    return user
+  }
+}
+
 const getUserById = (id) => {
   let user = userModel.findById(id);
   if (user) {
@@ -147,4 +154,5 @@ module.exports = {
   getUserById,
   findOrCreate,
   registerUser,
+  getUsername,
 };

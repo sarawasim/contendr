@@ -5,6 +5,28 @@ const passwordPepper = "S3cr3+oD3lCli3nt3";
 const crypto = require("crypto");
 
 const userModel = {
+  findByUsername: async (username) => {
+    const userCollection = database.db("Contendr").collection("users");
+    const users = await userCollection
+      .find()
+      .project({
+        id: 1,
+        email: 1,
+        username: 1,
+        posts: 1,
+        following: 1,
+        password: 1,
+      })
+      .toArray();
+    console.log("user model users-------------- " + JSON.stringify(users));
+    const user = users.find((user) => user.username === username);
+    if (user) {
+      console.log("the user is ---------------------- " + JSON.stringify(user));
+
+      return user;
+    }
+    throw new Error(`Couldn't find user with username: ${username}`);
+  },
   findOne: async (email) => {
     const userCollection = database.db("Contendr").collection("users");
     const users = await userCollection
