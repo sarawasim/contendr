@@ -2,10 +2,11 @@
 <div>
     <div class="">
       <form action="/createChallenge" method="POST" enctype="multipart/form-data">
-        <div class="shadow sm:rounded-md sm:overflow-hidden">
-          <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <div class="grid grid-cols-3 gap-6">
-              <div class="col-span-3 sm:col-span-2">
+
+      <div class="shadow sm:rounded-md sm:overflow-hidden">
+        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+          <div class="grid grid-cols-3 gap-6">
+            <div class="col-span-3 sm:col-span-2">
                 <label for="searchUser" class="block text-sm font-medium text-gray-700">
                   Select user to challenge
                 </label>
@@ -14,11 +15,16 @@
                     Username:
                   </span>
                   <input type="text" name="searchUser" id="searchUser" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Tap to search for user">
+                  
+                  <button type="submit" class="toggleSearch border-white">Search
+                  </button>
+                  <div id="dropSearch" style="display:none;">
+                    test
+                  </div>                 
                 </div>
-              </div>
             </div>
-
-            <div>
+          </div>
+        <div>
               <label for="titleInput" class="block text-sm font-medium text-gray-700">
                 Title
               </label>
