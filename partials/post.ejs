@@ -41,7 +41,7 @@
                 window.addEventListener("touchend", slideFinish);
                 function slideReady(e) {
                     /*prevent any other actions that may occur when moving over the image:*/
-                    e.preventDefault();
+                    e.stopPropagation();
                     /*the slider is now clicked and ready to move:*/
                     clicked = 1;
                     /*execute a function when the slider is moved:*/
