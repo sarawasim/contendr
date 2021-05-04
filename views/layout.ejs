@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- <link rel="shortcut icon" type="image/x-icon" href="/secure-icon.png" /> -->
     <!-- Styles -->
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
-      href='css/style.css'
     />
+    <link rel="stylesheet" href="css/style.css" />
     <!-- Icons CDN -->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -21,19 +21,34 @@
       crossorigin="anonymous"
     ></script>
     <title>Contendr</title>
+    <link rel="icon" href="assets/icons/tab-icon.png" />
   </head>
 
   <body>
     <nav>
       <a href="/">
-      <img class="logo" src="logo.png" alt="contendr logo" width="140px" height="auto"></a>
+        <img
+          class="logo"
+          src="logo.png"
+          alt="contendr logo"
+          width="140px"
+          height="auto"
+      /></a>
 
       <a href="search" class="search"><i class="fas fa-search"></i></a>
       <!-- <img id="displayPicture" src="mockUser.png" alt="display picture" width="40px" height="auto"> -->
-      
+
       <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn"><img class="dropbtn" id="displayPicture" src="mockUser.png" alt="display picture" width="40px" height="auto">
-</button>
+        <button onclick="myFunction()" class="dropbtn">
+          <img
+            class="dropbtn"
+            id="displayPicture"
+            src="mockUser.png"
+            alt="display picture"
+            width="40px"
+            height="auto"
+          />
+        </button>
         <div id="myDropdown" class="dropdown-content">
           <a href="/auth/logout">Logout</a>
           <!-- <a href="#home">Home</a>
@@ -41,7 +56,7 @@
           <a href="#contact">Contact</a> -->
         </div>
       </div>
-      
+
       <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
@@ -51,27 +66,31 @@
 
         // Close the dropdown if the user clicks outside of it
         window.onclick = function (event) {
-          if (!event.target.matches('.dropbtn')) {
+          if (!event.target.matches(".dropbtn")) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
             for (i = 0; i < dropdowns.length; i++) {
               var openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
+              if (openDropdown.classList.contains("show")) {
+                openDropdown.classList.remove("show");
               }
             }
           }
-        }
+        };
       </script>
-
-
     </nav>
     <div class="container"><%- body %></div>
 
     <footer>
       <a href="/" class="home"><i class="fas fa-home"></i></a>
       <a href="createChallenge" id="challengeButton">Start a Challenge</a>
-      <img id="notifications" src="notifications.png" alt="notifications" width="25px" height="auto">
+      <img
+        id="notifications"
+        src="notifications.png"
+        alt="notifications"
+        width="25px"
+        height="auto"
+      />
     </footer>
   </body>
 </html>
