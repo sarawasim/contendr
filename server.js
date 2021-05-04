@@ -62,6 +62,11 @@ app.get("/auth/register", (req, res) => {
   res.render("register", { layout: "register" });
 });
 
+app.set("layout createChallenge", false);
+app.get("/createChallenge", (req, res) => {
+  res.render("createChallenge", { layout: "layoutB" });
+});
+
 // gets upload url for s3 bucket. This is used in scripts/upload.js
 app.get("/s3url", async (req, res) => {
   const url = await generateUploadURL();

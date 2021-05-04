@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="/secure-icon.png" /> -->
+    <!-- Styles -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href='css/style.css'
+    />
+    <!-- Icons CDN -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/761d42c757.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <title>Contendr</title>
+  </head>
+
+  <body>
+    <nav>
+      <a href="/">
+      <img class="logo" src="logo.png" alt="contendr logo" width="140px" height="auto"></a>
+
+      <a href="search" class="search"><i class="fas fa-search"></i></a>
+      <!-- <img id="displayPicture" src="mockUser.png" alt="display picture" width="40px" height="auto"> -->
+      
+      <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn"><img class="dropbtn" id="displayPicture" src="mockUser.png" alt="display picture" width="40px" height="auto">
+</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="/auth/logout">Logout</a>
+          <!-- <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a> -->
+        </div>
+      </div>
+      
+      <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+      </script>
+
+
+    </nav>
+    <div class="container"><%- body %></div>
+
+    <footer>
+      <a href="/" class="home"><i class="fas fa-home"></i></a>
+      <img id="notifications" src="notifications.png" alt="notifications" width="25px" height="auto">
+    </footer>
+  </body>
+  <script type="module" src="./scripts/challengeForm.js"></script>
+</html>
