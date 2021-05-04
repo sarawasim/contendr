@@ -75,7 +75,7 @@
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   body {
     min-width: fit-content;
     margin: 0px;
