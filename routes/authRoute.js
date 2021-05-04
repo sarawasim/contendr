@@ -43,7 +43,7 @@ router.get("/logout", (req, res) => {
   res.redirect("/auth/login");
 });
 
-router.get("/register", (req, res) => {
+router.get("/register", forwardAuthenticated, (req, res) => {
   res.render("register");
 });
 
