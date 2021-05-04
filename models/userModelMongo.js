@@ -1,6 +1,9 @@
 // const { database } = require("../fakeDB");
 const database = include("databaseConnection/databaseConnection");
 
+const passwordPepper = "S3cr3+oD3lCli3nt3";
+const crypto = require("crypto");
+
 const userModel = {
   findByUsername: async (username) => {
     const userCollection = database.db("Contendr").collection("users");
@@ -35,6 +38,8 @@ const userModel = {
         posts: 1,
         following: 1,
         password: 1,
+        password_salt: 1,
+        password_hash: 1,
       })
       .toArray();
     console.log("user model users-------------- " + JSON.stringify(users));
@@ -67,6 +72,22 @@ const userModel = {
     console.log(`Couldn't find user with id: ${id}`);
     return null;
     // throw new Error(`Couldn't find user with id: ${id}`);
+  },
+
+  hashPassword: (password, salt) => {
+    console.log("HASHPASS()");
+    console.log("HASHPASS()");
+
+    const password_hash = crypto.createHash("sha512");
+    console.log("PASSWORD ============ " + password);
+    console.log("PASSWORD PEPPER ============ " + passwordPepper);
+
+    password_hash.update(password + passwordPepper + salt);
+    console.log("hash pass PASSWORD SALT ============ " + salt);
+    console.log("HASHPASS()");
+    console.log("HASHPASS()");
+
+    return password_hash.digest("hex");
   },
 };
 

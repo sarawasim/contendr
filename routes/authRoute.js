@@ -2,13 +2,9 @@ const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
 const { json } = require("express");
-const crypto = require("crypto");
 const { registerUser } = require("../controllers/userControllerMongo");
 
-const Joi = require("joi");
-const { ObjectId } = require("bson");
 const router = express.Router();
-const { v4: uuid } = require("uuid");
 
 router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
 
@@ -47,14 +43,13 @@ router.get("/logout", (req, res) => {
   res.redirect("/auth/login");
 });
 
-router.get("/register", (req, res) => {
+router.get("/register", forwardAuthenticated, (req, res) => {
   res.render("register");
 });
 
-const passwordPepper = "S3cr3+oD3lCli3nt3";
-
 router.post("/register", async (req, res) => {
   registerUser(req, res);
+  res.redirect("/auth/login");
 });
 
 // router.get("/revoke/:sessionID", (req, res) => {

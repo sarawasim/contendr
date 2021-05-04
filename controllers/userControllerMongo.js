@@ -9,6 +9,9 @@ const crypto = require("crypto");
 
 const getUserByEmailIdAndPassword = async (email, password) => {
   let user = await userModel.findOne(email);
+  console.log("getUserByEmailIdAndPassword ---------- PASSWORD " + password);
+  console.log("getUserByEmailIdAndPassword ---------- PASSWORD " + password);
+
   console.log("getUserByEmailIdAndPassword --- user: " + JSON.stringify(user));
   if (user) {
     if (await isUserValid(user, password)) {
@@ -34,13 +37,16 @@ const getUserById = (id) => {
 };
 
 function isUserValid(user, password) {
+  const passHash = userModel.hashPassword(password, user.password_salt);
+
   console.log(
     "isUserValid --- user password is " +
-      JSON.stringify(user.password) +
+      user.password_hash +
       " , and inputed password is " +
-      password
+      passHash
   );
-  return user.password === password;
+
+  return user.password_hash === passHash;
 }
 
 async function findOrCreate(profile) {
@@ -69,7 +75,12 @@ async function findOrCreate(profile) {
 }
 
 async function registerUser(req, res) {
-  let user = await userModel.findOne(req.body.email);
+  let user;
+  try {
+    user = await userModel.findOne(req.body.email);
+  } catch {
+    user = null;
+  }
   console.log("register user function user ------ " + JSON.stringify(user));
   if (user) {
     console.log(`User with email ${user.email} already exists.`);
@@ -105,21 +116,31 @@ async function registerUser(req, res) {
 
       password_salt.update(uuidv4());
 
-      const password_hash = crypto.createHash("sha512");
+      const passSalt = password_salt.digest("hex");
 
-      password_hash.update(req.body.password + passwordPepper + password_salt);
+      const passHash = userModel.hashPassword(req.body.password, passSalt);
+
+      // hash is not being stored correctly.
+      //every register gets the same password hash no matter what
 
       const userCollection = database.db("Contendr").collection("users");
+      // console.log("register()");
+      // console.log(req.body);
+      // console.log("salt ======= " + password_salt);
+
+      // console.log("hash === " + passHash);
+
+      // console.log("register()");
+
       await userCollection.insertOne({
         id: uuidv4(),
         email: req.body.email,
         username: req.body.username,
-        password_salt: password_salt.digest("hex"),
-        password_hash: password_hash.digest("hex"),
+        password_salt: passSalt,
+        password_hash: passHash,
         Posts: [],
         following: [],
       });
-      res.redirect("/auth/login");
     } catch (ex) {
       res.render("error", { message: "Error connecting to Mongo" });
       console.log("Error connecting to Mongo");
