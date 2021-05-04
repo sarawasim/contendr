@@ -10,6 +10,11 @@ const localLogin = new LocalStrategy(
     passwordField: "password",
   },
   async (email, password, done) => {
+    console.log("------------");
+    console.log("Form password post ------------ " + password);
+
+    console.log("------------");
+
     const user = await userController.getUserByEmailIdAndPassword(
       email,
       password
