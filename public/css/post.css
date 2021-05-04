@@ -27,11 +27,11 @@
     z-index: 9;
     cursor: ew-resize;
     /*set the appearance of the slider:*/
-    width: 15px;
-    height: 600px;
+    width: 30px;
+    height: 30px;
     background-color: white;
     opacity: .3;
-    /* border-radius: 50%; */
+    border-radius: 50%;
 }
 
 .bottomleft {
