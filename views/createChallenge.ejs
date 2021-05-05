@@ -14,7 +14,7 @@
                   <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                     Username:
                   </span>
-                  <input type="text" name="searchUser" id="searchUser" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Tap to search for user">
+                  <input type="text" name="searchUser" id="searchUser" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Tap to search">
                   
                   <button type="submit" class="toggleSearch border-white">Search
                   </button>
@@ -24,81 +24,122 @@
                 </div>
             </div>
           </div>
-        <div>
-              <label for="titleInput" class="block text-sm font-medium text-gray-700">
-                Title
+          
+          <div class="text-sm font-medium text-gray-700">
+            Category
+            <div class = "categoryContainer">
+              <label for="cat1" class="catLabel">
+                <img src="cat1.png">
+                <input type="radio" id="cat1" name="categoryInput" value="dance"> </input>
               </label>
-              <div class="mt-1">
-                <input id="titleInput" name="titleInput" rows="3" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Tap to enter">
-              </div>
-            </div>
-
-            <div>
-              <label for="categoryInput" class="block text-sm font-medium text-gray-700">
-                Category
+              <label for="cat2" class="catLabel">
+                <img src="cat2.png">
+                <input type="radio" id="cat2" name="categoryInput" value="food"> </input>
               </label>
-              <select id="categoryInput" name="categoryInput" rows="3" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" >
-                <option disabled hidden selected>Select one</option>
-                <option value="dance">Dance</option>
-                <option value="food">Food</option>
-                <option value="sports">Sports</option>
-                <option value="art">Art</option>
-                <option value="gaming">Gaming</option>
-                <option value="misc">Misc</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="descriptionInput" class="block text-sm font-medium text-gray-700">
-                Description
+              <label for="cat3" class="catLabel">
+                <img src="cat3.png">
+                <input type="radio" id="cat3" name="categoryInput" value="sports"> </input>
               </label>
-              <div class="mt-1">
-                <textarea id="descriptionInput" name="descriptionInput" rows="3" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Tap to enter"></textarea>
-              </div>
-              <p class="mt-2 text-sm text-gray-500">
-                Brief description for your challenge.
-              </p>
+              <label for="cat4" class="catLabel">
+                <img src="cat4.png">
+                <input type="radio" id="cat4" name="categoryInput" value="art"> </input>
+              </label>
+              <label for="cat5" class="catLabel">
+                <img src="cat5.png">
+                <input type="radio" id="cat5" name="categoryInput" value="gaming"> </input>
+              </label>
+              <label for="cat6" class="catLabel">
+                <img src="cat6.png">
+                <input type="radio" id="cat6" name="categoryInput" value="misc"> </input>
+              </label>
             </div>
+            <!-- <select id="categoryInput" name="categoryInput" rows="7" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" >
+              <option disabled hidden selected>Select one</option>
+              <option value="dance">Dance</option>
+              <option value="food">Food</option>
+              <option value="sports">Sports</option>
+              <option value="art">Art</option>
+              <option value="gaming">Gaming</option>
+              <option value="misc">Misc</option>
+            </select> -->
+          </div>
 
-            <div>
-              <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                <div class="space-y-1 text-center">
-                  <div class="justify-center flex text-sm text-gray-600">
-                    <label for="fileUpload" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-                      <span>Upload a file</span>
-                      <input id="fileUpload" name="fileUpload" type="file" class="sr-only" accept="image/gif, image/png, image/jpeg"
-                      onchange="showPreview(event)">
-                    </label>
-                    <script>
-                      function showPreview(event) {
-                        if (event.target.files.length > 0) {
-                          let src = URL.createObjectURL(event.target.files[0]);
-                          let preview = document.getElementById("previewImage")
-                          preview.src = src;
-                          preview.style.height="400px";
-                          preview.style.width="auto";
-                          preview.style.display="block";
-                        }
-                      }
-                    </script>
-                  </div>
-                  <div id="preview">
-                    <img id="previewImage">
-                  </div>
-                  <p class="text-xs text-gray-500">
-                    PNG, JPG, or GIF up to 10MB
-                  </p>
-                </div>
-              </div>
+          <div>
+            <label for="timeInput" class="block text-sm font-medium text-gray-700">
+              Time Limit
+            </label>
+            <div class="mt-1 inline-flex font-small text-gray-600 gap-6 timeContainer">
+              <label for="time720" class="timeLabel">
+                12 hours
+                <input type="radio" id="time720" name="timeInput" value="720" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">
+              </label>
+              <label for="time1440" class="timeLabel">
+                24 hours
+                <input type="radio" id="time1440" name="timeInput" value="1440" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">
+              </label>
+
             </div>
           </div>
-          <div class="px-4 py-3 bg-blue-500 text-center sm:px-6 text-white">
-            <button type="submit">
-              Challenge
-            </button>
+          <div>
+            <label for="titleInput" class="block text-sm font-medium text-gray-700">
+              Title
+            </label>
+            <div class="mt-1">
+              <input id="titleInput" name="titleInput" rows="3" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Tap to enter">
+            </div>
+          </div>
+
+          <div>
+            <label for="descriptionInput" class="block text-sm font-medium text-gray-700">
+              Description
+            </label>
+            <div class="mt-1">
+              <textarea id="descriptionInput" name="descriptionInput" rows="3" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Tap to enter"></textarea>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">
+              Brief description for your challenge.
+            </p>
+          </div>
+
+          <div>
+            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+              <div class="space-y-1 text-center">
+                <div class="justify-center flex text-sm text-gray-600">
+                  <label for="fileUpload" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                    <span>Upload a file</span>
+                    <input id="fileUpload" name="fileUpload" type="file" class="sr-only" accept="image/gif, image/png, image/jpeg"
+                    onchange="showPreview(event)">
+                  </label>
+                  <script>
+                    function showPreview(event) {
+                      if (event.target.files.length > 0) {
+                        let src = URL.createObjectURL(event.target.files[0]);
+                        let preview = document.getElementById("previewImage")
+                        preview.src = src;
+                        preview.style.height="400px";
+                        preview.style.width="auto";
+                        preview.style.display="block";
+                      }
+                    }
+                  </script>
+                </div>
+                <div id="preview">
+                  <img id="previewImage">
+                </div>
+                <p class="text-xs text-gray-500">
+                  PNG, JPG, or GIF up to 10MB
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </form>
-    </div>
+        <div class="px-4 py-3 bg-blue-500 text-center sm:px-6 text-white">
+          <button type="submit">
+            Challenge
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 
 </div>
