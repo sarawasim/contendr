@@ -34,8 +34,8 @@ const database = {
       category: "dance",
       description: "Microsoft is a nice company",
       createdAt: new Date(),
-      p1Likes: 2,
-      p2Likes: 3,
+      p1UploadID: "1",
+      p2UploadID: "1",
       comments: 0,
       commentList: [
         {
@@ -47,6 +47,8 @@ const database = {
       ],
     },
   ],
+
+  uploads: [{ id: "1", url: "blablh.combucket", Likes: 2 }],
 };
 
 module.exports = { database };
