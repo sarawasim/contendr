@@ -26,48 +26,8 @@
   </head>
 
   <body>
-    <nav>
-      <a href="/">
-      <img class="logo" src="logo.png" alt="contendr logo" width="140px" height="auto"></a>
+    <%- include ('../partials/nav.ejs') %>
 
-      <a href="search" class="search"><i class="fas fa-search"></i></a>
-      <!-- <img id="displayPicture" src="mockUser.png" alt="display picture" width="40px" height="auto"> -->
-      
-      <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn"><img class="dropbtn" id="displayPicture" src="mockUser.png" alt="display picture" width="40px" height="auto">
-</button>
-        <div id="myDropdown" class="dropdown-content">
-          <a href="/auth/logout">Logout</a>
-          <!-- <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a> -->
-        </div>
-      </div>
-      
-      <script>
-        /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function (event) {
-          if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-              var openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-              }
-            }
-          }
-        }
-      </script>
-
-
-    </nav>
     <div class="container"><%- body %></div>
 
     <footer>
