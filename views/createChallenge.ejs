@@ -63,12 +63,27 @@
             <div>
               <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                 <div class="space-y-1 text-center">
-                  <div class="flex text-sm text-gray-600">
+                  <div class="justify-center flex text-sm text-gray-600">
                     <label for="fileUpload" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
                       <span>Upload a file</span>
-                      <input id="fileUpload" name="fileUpload" type="file" class="sr-only" accept="image/gif, image/png, image/jpeg">
+                      <input id="fileUpload" name="fileUpload" type="file" class="sr-only" accept="image/gif, image/png, image/jpeg"
+                      onchange="showPreview(event)">
                     </label>
-                    <p class="pl-1">or drag and drop</p>
+                    <script>
+                      function showPreview(event) {
+                        if (event.target.files.length > 0) {
+                          let src = URL.createObjectURL(event.target.files[0]);
+                          let preview = document.getElementById("previewImage")
+                          preview.src = src;
+                          preview.style.height="400px";
+                          preview.style.width="auto";
+                          preview.style.display="block";
+                        }
+                      }
+                    </script>
+                  </div>
+                  <div id="preview">
+                    <img id="previewImage">
                   </div>
                   <p class="text-xs text-gray-500">
                     PNG, JPG, or GIF up to 10MB
