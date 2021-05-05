@@ -48,6 +48,7 @@
           function slideReady(e) {
             /*prevent any other actions that may occur when moving over the image:*/
             e.preventDefault();
+            e.stopPropagation();
             /*the slider is now clicked and ready to move:*/
             clicked = 1;
             /*execute a function when the slider is moved:*/
@@ -59,6 +60,8 @@
             clicked = 0;
           }
           function slideMove(e) {
+            e.preventDefault();
+            e.stopPropagation();
             var pos;
             /*if the slider is no longer clicked, exit this function:*/
             if (clicked == 0) return false;
