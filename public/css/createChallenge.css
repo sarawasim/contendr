@@ -1,0 +1,24 @@
+
+label img {
+  height: 200px;
+  width: 200px;
+}
+
+.categoryContainer {
+  width:500px;
+
+
+}
+.catLabel{
+  margin: 5px;
+  overflow: auto;
+  display: inline-flex;
+  flex-grow: inherit;
+
+}
+
+.timeContainer{}
+
+.timeLabel{
+  font-size: 12px;
+}

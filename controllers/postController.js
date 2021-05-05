@@ -11,7 +11,8 @@ async function createChallenge(req, res) {
       descriptionInput: Joi.string().max(150).required(),
       titleInput: Joi.string().max(50).required(),
       categoryInput: Joi.string().required(),
-      searchUser: Joi.string().required()
+      searchUser: Joi.string().required(),
+      timeInput: Joi.string().required()
     })
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
@@ -37,7 +38,8 @@ async function createChallenge(req, res) {
       p2Likes: [],
       createdAt: new Date(),
       comments: [],
-      commentList: []
+      commentList: [],
+      timeLimit: req.body.timeInput
     })
   } catch (ex) {
     console.log("i'm in the catch")
