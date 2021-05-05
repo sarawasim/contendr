@@ -1,8 +1,9 @@
 const challengeForm = document.querySelector("#challengeForm");
-const challengeInput = document.querySelector("#challengeInput");
+const challengeInput = document.querySelector(".challengeInput");
 
 challengeForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  console.log(JSON.stringify(challengeInput));
   const file = challengeInput.files[0];
 
   //get secure url from our Server
@@ -21,7 +22,7 @@ challengeForm.addEventListener("submit", async (event) => {
   const imageUrl = url.split("?")[0];
   console.log(imageUrl);
   //post request to the server to store any extra data
-  /*make fetch request to give other details 
+  /*make fetch request to give other details
   after image Successfully uploaded*/
 
   //this is just test output vv

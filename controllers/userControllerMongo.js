@@ -22,11 +22,11 @@ const getUserByEmailIdAndPassword = async (email, password) => {
 };
 
 const getUsername = (input) => {
-  let user = userModel.findByUsername(input)
+  let user = userModel.findByUsername(input);
   if (user) {
-    return user
+    return user;
   }
-}
+};
 
 const getUserById = (id) => {
   let user = userModel.findById(id);
@@ -66,7 +66,7 @@ async function findOrCreate(profile) {
       id: parseInt(profile.id),
       email: profile.emails[0].value,
       username: profile.displayName,
-      Posts: [],
+      posts: [],
       following: [],
     });
     user = await userModel.findById(parseInt(profile.id)); //this will find user again after they have been added to DB
@@ -138,7 +138,7 @@ async function registerUser(req, res) {
         username: req.body.username,
         password_salt: passSalt,
         password_hash: passHash,
-        Posts: [],
+        posts: [],
         following: [],
       });
     } catch (ex) {
