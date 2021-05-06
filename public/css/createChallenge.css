@@ -2,23 +2,34 @@
 
 .categoryContainer {
   width:500px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 3;
   justify-content: center;
 
   /* width:500px;
   height: 250px;
   overflow: auto;
-  white-space: nowrap; */
+  white-space: nowrap; */  
+}
+.categoryContainer1{
+  grid-row: 1;
+  display: inline-flex;
+}
+.categoryContainer2{
+  grid-row: 2;
+  display: inline-flex;
 
-  
+}
+.categoryContainer3{
+  grid-row: 3;
+  display: inline-flex;
+
 }
 .catLabel{
   height: 100%;
   width: 100%;
   margin: 5px;
-  display: inline-flex;
-  justify-content: center;
+
   
    /* display: inline-block;
    color: white;
@@ -31,13 +42,18 @@ label img {
   width: 200px;
 }
 
-.timeContainer{}
+.timeContainer{
+  display: grid;
+  justify-content: center;
+}
 
 .timeLabel{
   font-size: 12px;
+  grid-row: 1;
+
 }
 /* HIDE RADIO */
-[type=radio] { 
+.catLabel [type=radio] { 
   position: absolute;
   opacity: 0;
   width: 0;
@@ -52,6 +68,8 @@ label img {
 /* CHECKED STYLES */
 [type=radio]:checked + img {
   transform: scale(1.2);
+  border:1px solid hotpink;
+  border-radius: 5%;
 }
 /* .catLabel input[type="radio"]:checked+label{
   border: 10px solid hotpink;
