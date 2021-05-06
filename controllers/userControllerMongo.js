@@ -108,7 +108,9 @@ async function registerUser(req, res) {
 
       const schema = await Joi.object({
         email: Joi.string().min(5).max(40).required(),
-        password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{6,30}$")),
+        password: Joi.string().pattern(
+          new RegExp('^[a-zA-Z0-9!@#$&()\\-`.+,/"]{6,30}$')
+        ),
         username: Joi.string().max(15).required(),
         email: Joi.string().max(50).required(),
         //regex allows only letters and number. NOT Special characters
