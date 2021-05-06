@@ -1,20 +1,34 @@
 
-label img {
-  height: 200px;
-  width: 200px;
-}
 
 .categoryContainer {
   width:500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
+  /* width:500px;
+  height: 250px;
+  overflow: auto;
+  white-space: nowrap; */
 
+  
 }
 .catLabel{
+  height: 100%;
+  width: 100%;
   margin: 5px;
-  overflow: auto;
   display: inline-flex;
-  flex-grow: inherit;
-
+  justify-content: center;
+  
+   /* display: inline-block;
+   color: white;
+   text-align: center;
+   padding: 10px;
+   text-decoration: none; */
+}
+label img {
+  height: 200px;
+  width: 200px;
 }
 
 .timeContainer{}
@@ -22,3 +36,23 @@ label img {
 .timeLabel{
   font-size: 12px;
 }
+/* HIDE RADIO */
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  transform: scale(1.2);
+}
+/* .catLabel input[type="radio"]:checked+label{
+  border: 10px solid hotpink;
+} */

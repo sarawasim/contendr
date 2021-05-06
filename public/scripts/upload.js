@@ -1,7 +1,8 @@
 const challengeForm = document.querySelector("#challengeForm");
 const challengeInput = document.querySelector(".challengeInput");
+const submitForm = document.getElementById("submitForm")
 
-challengeForm.addEventListener("submit", async (event) => {
+submitForm.addEventListener("click", async (event) => {
   event.preventDefault();
   console.log(JSON.stringify(challengeInput));
   const file = challengeInput.files[0];
@@ -10,6 +11,7 @@ challengeForm.addEventListener("submit", async (event) => {
   const { url } = await fetch("/s3Url").then((res) => res.json());
   console.log(url);
 
+  
   //post image directly to the s3 bucket
   await fetch(url, {
     method: "PUT",
@@ -19,14 +21,19 @@ challengeForm.addEventListener("submit", async (event) => {
     body: file,
   });
 
-  const imageUrl = url.split("?")[0];
-  console.log(imageUrl);
-  //post request to the server to store any extra data
-  /*make fetch request to give other details
-  after image Successfully uploaded*/
+  //get s3 imageURL
+  const imageURL = url.split("?")[0];
+  console.log(imageURL);
+  
+  // append this imageURL to hidden input somewhere on createChallenge.ejs
+  let URLinput = document.createElement("INPUT");
+  URLinput.setAttribute("type", "hidden");
+  URLinput.setAttribute("value", imageURL);
+  URLinput.setAttribute("name", "imageURL")
+  let hiddenURL = document.getElementById("hiddenURL");
+  hiddenURL.appendChild(URLinput);
+  console.log(URLinput)
 
-  //this is just test output vv
-  const img = document.createElement("img");
-  img.src = imageUrl;
-  document.body.appendChild(img);
+  // submit form 
+  challengeForm.submit();
 });

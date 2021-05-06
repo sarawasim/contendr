@@ -21,12 +21,6 @@ const getUserByEmailIdAndPassword = async (email, password) => {
   return null;
 };
 
-const getUsername = (input) => {
-  let user = userModel.findByUsername(input);
-  if (user) {
-    return user;
-  }
-};
 
 const getUserById = (id) => {
   let user = userModel.findById(id);
@@ -35,6 +29,21 @@ const getUserById = (id) => {
   }
   return null;
 };
+
+const getFollowingUsernames = async (input) => {
+  let userArr = []
+  await Promise.all(input.map(async (id) => {
+    try {
+      let username = await getUserById(id.id)
+      userArr.push(username.username)
+    } catch (error) {
+      console.log(error)
+    }
+  }))
+  console.log(userArr)
+  return userArr;
+};
+
 
 function isUserValid(user, password) {
   const passHash = userModel.hashPassword(password, user.password_salt);
@@ -156,5 +165,5 @@ module.exports = {
   getUserById,
   findOrCreate,
   registerUser,
-  getUsername,
+  getFollowingUsernames,
 };

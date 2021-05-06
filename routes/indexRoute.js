@@ -7,7 +7,7 @@ const { createChallenge } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
-const getUsername = require("../controllers/userControllerMongo").getUsername;
+const {getFollowingUsernames} = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
   const userCollection = database.db("Contendr").collection("users");
@@ -94,11 +94,12 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   res.render("index", { feedPosts: feedPostsArray });
 });
 
-//^^------------- ^^ "/" route, index page, home/feed. ^^------------^^
-//^^------------------Defs need to get cleaned up---------------^^
-
-router.get("/createChallenge", ensureAuthenticated, (req, res) => {
-  res.render("createChallenge");
+router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
+  console.log("in the get");
+  let following = await getFollowingUsernames(req.user.following)
+  console.log("console logging array from router.get")
+  console.log(following)
+  res.render("createChallenge", { layout: "layoutB"});
 });
 
 router.post("/createChallenge/searchUsername", (req, res) => {
