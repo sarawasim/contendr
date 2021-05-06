@@ -7,7 +7,7 @@ const { createChallenge } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
-const getUsername = require("../controllers/userControllerMongo").getUsername;
+const {getFollowingUsernames} = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
   let postArray = [];
@@ -89,9 +89,11 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   res.render("index", { feedPosts: feedPostsArray });
 });
 
-router.get("/createChallenge", ensureAuthenticated, (req, res) => {
+router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   console.log("in the get");
-
+  let following = await getFollowingUsernames(req.user.following)
+  console.log("console logging array from router.get")
+  console.log(following)
   res.render("createChallenge", { layout: "layoutB"});
 });
 
@@ -102,11 +104,6 @@ router.post("/createChallenge/searchUsername", (req, res) => {
     res.render("/createChallenge", { user });
   } else console.log("failed");
 });
-
-router.post("/uploadImage", (req, res) => {
-  console.log(req.body.imageURL)
-})
-
 
 router.post(
   "/createChallenge",
