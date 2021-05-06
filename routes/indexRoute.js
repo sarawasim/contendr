@@ -10,7 +10,6 @@ const database = include("databaseConnection/databaseConnection");
 const getUsername = require("../controllers/userControllerMongo").getUsername;
 
 router.get("/", ensureAuthenticated, async (req, res) => {
-  let postArray = [];
   const userCollection = database.db("Contendr").collection("users");
   const users = await userCollection
     .find()
@@ -45,37 +44,43 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
   let feedPostsArray = [];
   thisUser["posts"].forEach((userPost) => {
-    console.log("USERPOST )))))))))" + JSON.stringify(userPost));
-    let userPostData = posts.find((post) => post.postId == userPost.postId);
+    let userPostData = posts.find((post) => post.postId === userPost.postId);
     feedPostsArray.push(userPostData);
   });
-  console.log(
-    "----------------- Feed Posts ------ " + JSON.stringify(feedPostsArray)
-  );
 
-  console.log(
-    "FOLLOWER ARRAY !@#$!@#$!@#$@#$@#$@#$ " + JSON.stringify(userFollowersArray)
-  );
   userFollowersArray.forEach((follower) => {
     follower["posts"].forEach((followerPost) => {
-      let followerPostData = posts.find((post) => {
-        post.postId === followerPost.id;
+      let alreadyHasPost = feedPostsArray.some((feedPost) => {
+        feedPost.postId === followerPost.postId;
       });
-      feedPostsArray.push(followerPostData);
+      console.log("FOLLOWER POST ~~~~~~~~~~~ " + JSON.stringify(followerPost));
+
+      console.log("FOLLOWER POST ~~~~~~~~~~~ " + JSON.stringify(followerPost));
+
+      console.log("ALREADY HAS ~~~~~~~~~~~ " + JSON.stringify(alreadyHasPost));
+
+      if (!alreadyHasPost) {
+        let followerPostData = posts.find((post) => {
+          return post.postId === followerPost.postId;
+        });
+        feedPostsArray.push(followerPostData);
+      }
     });
   });
 
-  for (i = 0; i < feedPostsArray.length - 1; i++) {
+  for (i = 0; i < feedPostsArray.length; i++) {
     console.log(
       "----------- Feed Posts length ------ " + feedPostsArray.length
     );
     for (j = 0; j < uploads.length; j++) {
       console.log("----------- uploads array length ------ " + uploads.length);
-      if (feedPostsArray[i].p1UploadId === uploads[j].id) {
-        feedPostsArray[i]["p1Upload"] = uploads[j];
-      }
-      if (feedPostsArray[i]["p2UploadId"] === uploads[j].id) {
-        feedPostsArray[i]["p2Upload"] = uploads[j];
+      if (feedPostsArray[i]) {
+        if (feedPostsArray[i].p1UploadId === uploads[j].id) {
+          feedPostsArray[i]["p1Upload"] = uploads[j];
+        }
+        if (feedPostsArray[i]["p2UploadId"] === uploads[j].id) {
+          feedPostsArray[i]["p2Upload"] = uploads[j];
+        }
       }
     }
   }
@@ -88,6 +93,9 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   // Each post contains urls to each video. display the urls in the ejs page.
   res.render("index", { feedPosts: feedPostsArray });
 });
+
+//^^------------- ^^ "/" route, index page, home/feed. ^^------------^^
+//^^------------------Defs need to get cleaned up---------------^^
 
 router.get("/createChallenge", ensureAuthenticated, (req, res) => {
   res.render("createChallenge");
