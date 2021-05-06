@@ -64,9 +64,9 @@ app.get("/auth/register", (req, res) => {
 });
 
 app.set("layout createChallenge", false);
-app.get("/createChallenge", (req, res) => {
-  res.render("createChallenge", { layout: "layoutB" });
-});
+// app.get("/createChallenge", (req, res) => {
+//   res.render("createChallenge", { layout: "layoutB" });
+// });
 
 app.set("layout post", false);
 app.get("/post", (req, res) => {

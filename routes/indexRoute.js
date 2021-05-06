@@ -90,7 +90,9 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 });
 
 router.get("/createChallenge", ensureAuthenticated, (req, res) => {
-  res.render("createChallenge");
+  console.log("in the get");
+
+  res.render("createChallenge", { layout: "layoutB"});
 });
 
 router.post("/createChallenge/searchUsername", (req, res) => {
@@ -100,6 +102,11 @@ router.post("/createChallenge/searchUsername", (req, res) => {
     res.render("/createChallenge", { user });
   } else console.log("failed");
 });
+
+router.post("/uploadImage", (req, res) => {
+  console.log(req.body.imageURL)
+})
+
 
 router.post(
   "/createChallenge",

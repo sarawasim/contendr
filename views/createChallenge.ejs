@@ -1,7 +1,7 @@
 <h1>Create A Challenge</h1>
 <div>
   <div class="">
-    <form action="/createChallenge" method="POST" enctype="multipart/form-data">
+    <form action="/createChallenge" method="POST" enctype="multipart/form-data" id="challengeForm">
       <div class="shadow sm:rounded-md sm:overflow-hidden">
         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
           <div class="grid grid-cols-3 gap-6">
@@ -9,7 +9,6 @@
                 <label for="searchUser" class="block text-sm font-medium text-gray-700">
                   Select user to challenge
                 </label>
-                <%= followingUsernameList %>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                     Username:
@@ -107,7 +106,8 @@
                 <div class="justify-center flex text-sm text-gray-600">
                   <label for="fileUpload" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
                     <span>Upload a file</span>
-                    <input id="fileUpload" name="fileUpload" type="file" class="sr-only" accept="image/gif, image/png, image/jpeg"
+                    <span id="hiddenURL"></span>
+                    <input id="fileUpload" name="fileUpload" type="file" class="sr-only challengeInput" accept="image/gif, image/png, image/jpeg"
                     onchange="showPreview(event)">
                   </label>
                   <script>
@@ -135,12 +135,12 @@
           </div>
         </div>
         <div class="px-4 py-3 bg-blue-500 text-center sm:px-6 text-white">
-          <button type="submit">
+          <button type="button" id="submitForm">
             Challenge
           </button>
         </div>
       </div>
     </form>
   </div>
-
 </div>
+<script defer src="/scripts/upload.js"></script>
