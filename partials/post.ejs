@@ -97,6 +97,8 @@
   </head>
 
   <body>
+      <h2 class="postTitle-m"><span style="color:#5377FD;">Player1</span>  challanged <span style="color:#FF84DD;">Player2</span> - Dance Off</h2>
+      <h2 class="postTitle-s">ends in 11:34:26</h2>
     <div class="post">
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
@@ -106,19 +108,20 @@
             height="600"
           />
           <div class="bottomright">
-            <img
-              id="displayPicture-playerTwo"
-              src="mockUser2.png"
-              alt="display picture"
-              width="50px"
-              height="auto"
-            />
-          </div>
-          <div class="bottomright-heart">
-            <p class="">player2</p>
+            <div>
+                <img
+                id="displayPicture-playerTwo"
+                src="mockUser2.png"
+                alt="display picture"
+                width="50px"
+                height="auto"
+                />
+            </div>
+            <p class="likes">1212</p>
             <i class="far fa-heart"></i>
           </div>
         </div>
+
         <div class="img-comp-img img-comp-overlay player1-post">
           <img
             src="https://source.unsplash.com/LIEQsu5JuoM"
@@ -126,17 +129,17 @@
             height="600"
           />
           <div class="bottomleft">
-            <img
-              id="displayPicture-playerOne"
-              src="mockUser.png"
-              alt="display picture"
-              width="50px"
-              height="auto"
-            />
-          </div>
-          <div class="bottomleft-heart">
-            <p class="">player1</p>
-            <i class="far fa-heart"></i>
+            <div>
+                <img
+                id="displayPicture-playerOne"
+                src="mockUser.png"
+                alt="display picture"
+                width="50px"
+                height="auto"
+                />
+            </div>
+                <p class="likes">1212</p>
+                <i class="far fa-heart"></i>
           </div>
         </div>
       </div>
@@ -144,8 +147,9 @@
 
     <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
     <br />
+    <h2 class="postTitle-m"><span style="color:#5377FD;"><%= feedPosts[i]["player1"] %></span> challanged <span style="color:#FF84DD;"><%= feedPosts[i]["player2"] %></span> - <%= feedPosts[i]["title"] %></h2>
+    <h2 class="postTitle-s">ends in</h2>
     <div class="post">
-      <h1 class="postTitle"><%= feedPosts[i]["title"] %></h1>
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
           <img
@@ -154,6 +158,7 @@
             height="600"
           />
           <div class="bottomright">
+            <div>
             <img
               id="displayPicture-playerTwo"
               src="mockUser2.png"
@@ -162,11 +167,11 @@
               height="auto"
             />
           </div>
-          <div class="bottomright-heart">
-            <p class=""><%= feedPosts[i]["player2"] %></p>
+            <p class="likes"><%= feedPosts[i]["player2"] %></p>
             <i class="far fa-heart"></i>
+            </div>
           </div>
-        </div>
+       
         <div class="img-comp-img img-comp-overlay player1-post">
           <img
             src="<%= feedPosts[i]['p1Upload']['url'] %>"
@@ -174,6 +179,7 @@
             height="600"
           />
           <div class="bottomleft">
+            <div>
             <img
               id="displayPicture-playerOne"
               src="mockUser.png"
@@ -182,10 +188,9 @@
               height="auto"
             />
           </div>
-          <div class="bottomleft-heart">
-            <p class=""><%= feedPosts[i]["player1"] %></p>
+            <p class="likes"><%= feedPosts[i]["player1"] %></p>
             <i class="far fa-heart"></i>
-          </div>
+        </div>
         </div>
       </div>
     </div>
