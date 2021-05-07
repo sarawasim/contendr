@@ -127,4 +127,8 @@ router.get("/:id/like", (req, res) => {
   likePost(req, res);
 });
 
+router.get("/userProfile", ensureAuthenticated, async (req, res) => {
+  res.render("userProfile", { layout: "layout" });
+});
+
 module.exports = router;
