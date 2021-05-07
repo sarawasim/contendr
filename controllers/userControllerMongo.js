@@ -71,13 +71,32 @@ async function findOrCreate(profile) {
   } else {
     console.log("creating has been reached");
     const userCollection = database.db("Contendr").collection("users");
-    await userCollection.insertOne({
-      id: parseInt(profile.id),
-      email: profile.emails[0].value,
-      username: profile.displayName,
-      posts: [],
-      following: [],
-    });
+    if (!req.body.username) {
+      let splitEmail = req.body.email.split("@");
+      username = splitEmail[0];
+      await userCollection.insertOne({
+        id: uuidv4(),
+        email: req.body.email,
+        username: username,
+        password_salt: passSalt,
+        password_hash: passHash,
+        posts: [],
+        following: [],
+      });
+    } else {
+      let usernameSplit = req.body.username.split(" ");
+      let newUsername = usernameSplit.join("");
+      req.body.username;
+      await userCollection.insertOne({
+        id: uuidv4(),
+        email: req.body.username,
+        username: newUsername,
+        password_salt: passSalt,
+        password_hash: passHash,
+        posts: [],
+        following: [],
+      });
+    }
     user = await userModel.findById(parseInt(profile.id)); //this will find user again after they have been added to DB
     return user;
   }
@@ -143,32 +162,15 @@ async function registerUser(req, res) {
 
       // console.log("register()");
 
-      if (!req.body.username) {
-        let splitEmail = req.body.email.split("@");
-        username = splitEmail[0];
-        await userCollection.insertOne({
-          id: uuidv4(),
-          email: req.body.email,
-          username: username,
-          password_salt: passSalt,
-          password_hash: passHash,
-          posts: [],
-          following: [],
-        });
-      } else {
-        let usernameSplit = req.body.username.split(" ");
-        let newUsername = usernameSplit.join("");
-        req.body.username;
-        await userCollection.insertOne({
-          id: uuidv4(),
-          email: req.body.username,
-          username: newUsername,
-          password_salt: passSalt,
-          password_hash: passHash,
-          posts: [],
-          following: [],
-        });
-      }
+      await userCollection.insertOne({
+        id: uuidv4(),
+        email: req.body.email,
+        username: req.body.username,
+        password_salt: passSalt,
+        password_hash: passHash,
+        posts: [],
+        following: [],
+      });
     } catch (ex) {
       res.render("error", { message: "Error connecting to Mongo" });
       console.log("Error connecting to Mongo");
