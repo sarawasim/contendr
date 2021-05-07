@@ -34,7 +34,7 @@ $(document).ready(function(){
     })
 
     const li = results.map((name) => {
-      return $(`<div class="test" value="${name}">${name}</div>`)
+      return $(`<li class="test justify-center" value="${name}">${name}</li>`)
     })
 
     $("#searchResults").empty()
@@ -43,7 +43,7 @@ $(document).ready(function(){
   })
 
   $("body").on("click", ".test", () => {
-    console.log($(this).innerHTML)
+    console.log($(this).text())
     $($searchInput).val($(this).text()) 
     $("#searchResults").empty()
   })
