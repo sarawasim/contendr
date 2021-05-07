@@ -39,8 +39,8 @@
   /*set the appearance of the slider:*/
   width: 40px;
   height: 40px;
-  background-color: white;
-  opacity: 0.3;
+  background-color: rgb(60, 112, 255);
+  opacity: 0.6;
   border-radius: 50%;
 }
 
