@@ -14,6 +14,7 @@ async function createChallenge(req, res) {
       searchUser: Joi.string().required(),
       timeInput: Joi.string().required(),
       imageURL: Joi.string().required(),
+      followingList: Joi.string(),
     });
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
@@ -27,9 +28,10 @@ async function createChallenge(req, res) {
     console.log("this is req.user");
     console.log(req.user);
 
+    const postID = uuidv4();
     const postCollection = database.db("Contendr").collection("posts");
     await postCollection.insertOne({
-      id: uuidv4(),
+      postId: postID,
       player1: req.user.username,
       player2: req.body.searchUser,
       category: req.body.categoryInput,
@@ -38,12 +40,23 @@ async function createChallenge(req, res) {
       p1Likes: {},
       p2Likes: {},
       createdAt: new Date(),
-      comments: [],
+      comments: 0,
       commentList: [],
       timeLimit: req.body.timeInput,
       p1URL: req.body.imageURL,
       p2URL: "",
     });
+
+    const userCollection = database.db("Contendr").collection("users");
+    await userCollection.updateMany(
+      {
+        $or: [
+          { username: req.user.username },
+          { username: req.body.searchUser },
+        ],
+      },
+      { $push: { posts: { postId: postID } } }
+    );
   } catch (ex) {
     console.log("i'm in the catch");
     res.render("error", { message: "Error connecting to Mongo" });
@@ -53,32 +66,48 @@ async function createChallenge(req, res) {
 }
 
 async function likePost(req, res) {
-  const uploadId = req.params;
+  const postId = req.params.id;
+  const player = req.params.player;
+
+  console.log("UPLOAD ID IS !!!!!!!!!!!!!!!!!!!!!!! " + JSON.stringify(postId));
+
+  const postCollection = database.db("Contendr").collection("posts");
+  const posts = await postCollection.find().toArray();
+
+  const targetPost = posts.find((post) => post.postId === postId);
   console.log(
-    "UPLOAD ID IS !!!!!!!!!!!!!!!!!!!!!!! " + JSON.stringify(uploadId)
+    "TARGETTED UPLOAD in likes function !!!!!!!!!!!!!!!!!!!!!!! " + targetPost
   );
 
-  const uploadCollection = database.db("Contendr").collection("uploads");
-  const uploads = await uploadCollection.find().toArray();
+  if (player === "p1") {
+    const likesObject = targetPost.p1Likes;
 
-  const targetUpload = uploads.find((upload) => upload.id === uploadId.id);
-  console.log(
-    "TARGETTED UPLOAD in likes function !!!!!!!!!!!!!!!!!!!!!!! " + targetUpload
-  );
+    if (likesObject[`${req.user.email}`]) {
+      delete likesObject[`${req.user.email}`];
+    } else {
+      likesObject[`${req.user.email}`] = true;
+    }
 
-  const likesObject = targetUpload.likes;
-
-  if (likesObject[`${req.user.email}`]) {
-    delete likesObject[`${req.user.email}`];
+    await postCollection.updateOne(
+      { postId: postId },
+      { $set: { p1Likes: likesObject } }
+    );
   } else {
-    likesObject[`${req.user.email}`] = true;
+    const likesObject = targetPost.p2Likes;
+
+    if (likesObject[`${req.user.email}`]) {
+      delete likesObject[`${req.user.email}`];
+    } else {
+      likesObject[`${req.user.email}`] = true;
+    }
+
+    await postCollection.updateOne(
+      { postId: postId },
+      { $set: { p2Likes: likesObject } }
+    );
   }
 
-  await uploadCollection.updateOne(
-    { id: uploadId.id },
-    { $set: { likes: likesObject } }
-  );
-  // await uploadCollection.findOneAndUpdate({id:uploadId},{$set: {"likes": }})
+  // await uploadCollection.findOneAndUpdate({id:postId},{$set: {"likes": }})
 
   // database.users.forEach((user) => {
   //   for (let i = 0; i < user.posts.length; i++) {

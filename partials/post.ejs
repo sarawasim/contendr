@@ -157,11 +157,7 @@
     <div class="post">
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
-          <img
-            src="<%= feedPosts[i]['p2Upload']['url'] %>"
-            width="450"
-            height="600"
-          />
+          <img src="<%= feedPosts[i]['p2URL'] %>" width="450" height="600" />
           <div class="bottomright">
             <div>
               <img
@@ -173,20 +169,16 @@
               />
             </div>
             <p class="likes">
-              <%= Object.keys(feedPosts[i]['p2Upload']['likes']).length %>
+              <%= Object.keys(feedPosts[i]['p2Likes']).length %>
             </p>
-            <a href="/<%= feedPosts[i]['p2Upload']['id'] %>/like"
+            <a href="/<%= feedPosts[i]['postId']['id'] %>/p2/ike"
               ><i class="far fa-heart"></i
             ></a>
           </div>
         </div>
 
         <div class="img-comp-img img-comp-overlay player1-post">
-          <img
-            src="<%= feedPosts[i]['p1Upload']['url'] %>"
-            width="450"
-            height="600"
-          />
+          <img src="<%= feedPosts[i]['p1URL'] %>" width="450" height="600" />
           <div class="bottomleft">
             <div class="dp-title">
               <img
@@ -207,10 +199,10 @@
             </div>
             <div class="likes-container">
               <p class="likes">
-                <%= Object.keys(feedPosts[i]['p1Upload']['likes']).length %>
+                <%= Object.keys(feedPosts[i]['p1Likes']).length %>
               </p>
-              <a href="/<%= feedPosts[i]['p1Upload']['id'] %>/like">
-                <% if(feedPosts[i]['p1Upload']['likes'][user.email]===true) { %>
+              <a href="/<%= feedPosts[i]['postId'] %>/p1/like">
+                <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
                 <span style="color: #5377fd">
                   <i class="fas fa-heart"></i>
                 </span>
@@ -225,7 +217,7 @@
         </div>
       </div>
     </div>
-    <% } %>
+    <%= JSON.stringify(feedPosts[i]) %> <% } %>
 
     <script>
       /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
