@@ -4,7 +4,7 @@
 
 .post-gradient {
   position: absolute;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.479));
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.699));
   height: 600px;
   width: 450px;  
   z-index: 5;

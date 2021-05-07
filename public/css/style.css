@@ -72,6 +72,7 @@ footer {
     width: 100%;
     justify-items: center;
     background-color: white;
+    z-index: 10;
 }
 
 .home{
