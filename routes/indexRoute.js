@@ -96,10 +96,10 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   console.log("in the get");
-  let following = await getFollowingUsernames(req.user.following);
-  console.log("console logging array from router.get");
-  console.log(following);
-  res.render("createChallenge", { layout: "layoutB" });
+  let following = await getFollowingUsernames(req.user.following)
+  console.log("console logging array from router.get")
+  console.log(following)
+  res.render("createChallenge", { layout: "layoutB", following: following});
 });
 
 router.post("/createChallenge/searchUsername", (req, res) => {
@@ -120,7 +120,6 @@ router.post(
     let filename = req.file.filename;
     createChallenge(req, res);
     res.render("test", { image: "tempImages/" + filename });
-    // need to add form data and upload url into Mongo DB's "posts" collection
   }
 );
 
