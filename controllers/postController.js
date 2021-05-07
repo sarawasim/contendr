@@ -23,11 +23,7 @@ async function createChallenge(req, res) {
 
       throw validationResult.error;
     }
-    console.log("this is req.body");
-    console.log(req.body);
-    console.log("this is req.user");
-    console.log(req.user);
-
+    
     const postCollection = database.db("Contendr").collection("posts");
     await postCollection.insertOne({
       id: uuidv4(),
