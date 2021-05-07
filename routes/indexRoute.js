@@ -114,11 +114,8 @@ router.post(
   ensureAuthenticated,
   upload.single("fileUpload"),
   (req, res) => {
-    console.log("testing req.body");
-    console.log(req.file.filename);
-    let filename = req.file.filename;
     createChallenge(req, res);
-    res.render("test", { image: "tempImages/" + filename });
+    res.redirect("/");
   }
 );
 

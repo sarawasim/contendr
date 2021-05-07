@@ -11,7 +11,7 @@ async function createChallenge(req, res) {
       searchUser: Joi.string().required(),
       timeInput: Joi.string().required(),
       imageURL: Joi.string().required(),
-      followingList: Joi.string().allow(null).allow('').optional(),
+      followingList: Joi.string().allow(null).allow("").optional(),
     });
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
@@ -50,7 +50,6 @@ async function createChallenge(req, res) {
       },
       { $push: { posts: { postId: postID } } }
     );
-    
   } catch (ex) {
     console.log("i'm in the catch");
     res.render("error", { message: "Error connecting to Mongo" });
