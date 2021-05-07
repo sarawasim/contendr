@@ -94,12 +94,20 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   res.render("index", { feedPosts: feedPostsArray });
 });
 
+// router.get("/createChallenge/username", (req, res) => {
+//   const search = req.query.search.toLowerCase()
+
+//   const filteredNames = names.filter(name => name.toLowerCase().includes(search))
+
+//   res.send({usernames: filteredNames})
+// })
+
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   console.log("in the get");
   let following = await getFollowingUsernames(req.user.following)
   console.log("console logging array from router.get")
   console.log(following)
-  res.render("createChallenge", { layout: "layoutB"});
+  res.render("createChallenge", { layout: "layoutB", following: following});
 });
 
 router.post("/createChallenge/searchUsername", (req, res) => {

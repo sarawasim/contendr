@@ -9,17 +9,15 @@
                 <label for="searchUser" class="block text-sm font-medium text-gray-700">
                   Select user to challenge
                 </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
+                <div class="mt-1 flex rounded-md shadow-sm ">
                   <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                     Username:
                   </span>
                   <input type="text" name="searchUser" id="searchUser" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Tap to search">
-                  
-                  <button type="submit" class="toggleSearch border-white">Search
-                  </button>
-                  <div id="dropSearch" style="display:none;">
-                    test
-                  </div>                 
+                  <input type="hidden" name="followingList" id="followingList" value="<%=following%>"/>
+                </div>
+                <div id="searchResults" class=" bg-blue-500 z-50 absolute">
+
                 </div>
             </div>
           </div>
