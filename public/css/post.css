@@ -34,21 +34,15 @@
     border-radius: 50%;
 }
 
-.postTitle-L{
-    color: #717171;
-    font-size: 25px;
-}
-
-.postTitle-m {
-    padding-left: 10px;
-    color: #717171;
-    font-size: 20px;
+.dp-title{
+    display: flex;
+    line-height: .5;
 }
 
 .postTitle-s {
     padding-left: 10px;
-    color: #717171;
-    font-size: 15px;
+    color: white;
+    font-size: 11px;
 }
 
 .bottomleft {
@@ -59,7 +53,7 @@
     display: flex;
     flex-direction: column;
     color: white;
-    align-items: center;
+    align-items: left;
     font-size: 25px;
 }
 
@@ -73,6 +67,10 @@
     color: white;
     align-items: center;
     font-size: 25px;
+}
+
+.likes-container {
+    padding-left: 10px;
 }
 
 .likes {
