@@ -11,8 +11,7 @@ async function createChallenge(req, res) {
       searchUser: Joi.string().required(),
       timeInput: Joi.string().required(),
       imageURL: Joi.string().required(),
-      followingList: Joi.string(),
-
+      followingList: Joi.string().allow(null).allow('').optional(),
     });
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
@@ -41,18 +40,17 @@ async function createChallenge(req, res) {
       p2URL: "",
     });
 
-    //commented out to trouble shoot creating challenge error on heroku
+    const userCollection = database.db("Contendr").collection("users");
+    await userCollection.updateMany(
+      {
+        $or: [
+          { username: req.user.username },
+          { username: req.body.searchUser },
+        ],
+      },
+      { $push: { posts: { postId: postID } } }
+    );
     
-    // const userCollection = database.db("Contendr").collection("users");
-    // await userCollection.updateMany(
-    //   {
-    //     $or: [
-    //       { username: req.user.username },
-    //       { username: req.body.searchUser },
-    //     ],
-    //   },
-    //   { $push: { posts: { postId: postID } } }
-    // );
   } catch (ex) {
     console.log("i'm in the catch");
     res.render("error", { message: "Error connecting to Mongo" });
