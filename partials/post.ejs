@@ -97,7 +97,6 @@
   </head>
 
   <body>
-      
     <div class="post">
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
@@ -108,13 +107,13 @@
           />
           <div class="bottomright">
             <div>
-                <img
+              <img
                 id="displayPicture-playerTwo"
                 src="mockUser2.png"
                 alt="display picture"
                 width="50px"
                 height="auto"
-                />
+              />
             </div>
             <p class="likes">1212</p>
             <i class="far fa-heart"></i>
@@ -129,23 +128,25 @@
           />
           <div class="bottomleft">
             <div class="dp-title">
-                <img
+              <img
                 id="displayPicture-playerOne"
                 src="mockUser.png"
                 alt="display picture"
                 width="50px"
                 height="50px"
-                />
-                <div class="postTitle">
-                    <p class="postTitle-s"><strong>Player1</strong> challanged <strong>Player2</strong></p>
-                    <p class="postTitle-s">Dance-off</p>
-                    <p class="postTitle-s"><strong>ends in 11:34:26</strong></p>
-                </div>
+              />
+              <div class="postTitle">
+                <p class="postTitle-s">
+                  <strong>Player1</strong> challanged <strong>Player2</strong>
+                </p>
+                <p class="postTitle-s">Dance-off</p>
+                <p class="postTitle-s"><strong>ends in 11:34:26</strong></p>
+              </div>
             </div>
-                <div class="likes-container">
-                    <p class="likes">1212</p>
-                    <i class="far fa-heart"></i>
-                </div>
+            <div class="likes-container">
+              <p class="likes">1212</p>
+              <i class="far fa-heart"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -163,19 +164,23 @@
           />
           <div class="bottomright">
             <div>
-            <img
-              id="displayPicture-playerTwo"
-              src="mockUser2.png"
-              alt="display picture"
-              width="50px"
-              height="50px"
-            />
-          </div>
-            <p class="likes">likes</p>
-            <i class="far fa-heart"></i>
+              <img
+                id="displayPicture-playerTwo"
+                src="mockUser2.png"
+                alt="display picture"
+                width="50px"
+                height="50px"
+              />
             </div>
+            <p class="likes">
+              <%= Object.keys(feedPosts[i]['p2Upload']['likes']).length %>
+            </p>
+            <a href="/<%= feedPosts[i]['p2Upload']['id'] %>/like"
+              ><i class="far fa-heart"></i
+            ></a>
           </div>
-       
+        </div>
+
         <div class="img-comp-img img-comp-overlay player1-post">
           <img
             src="<%= feedPosts[i]['p1Upload']['url'] %>"
@@ -184,24 +189,31 @@
           />
           <div class="bottomleft">
             <div class="dp-title">
-            <img
-              id="displayPicture-playerOne"
-              src="mockUser.png"
-              alt="display picture"
-              width="50px"
-              height="50px"
-            />
-            <div class="postTitle">
-                <p class="postTitle-s"> <%= feedPosts[i]["player1"] %> challanged <%= feedPosts[i]["player2"] %></p>
+              <img
+                id="displayPicture-playerOne"
+                src="mockUser.png"
+                alt="display picture"
+                width="50px"
+                height="50px"
+              />
+              <div class="postTitle">
+                <p class="postTitle-s">
+                  <%= feedPosts[i]["player1"] %> challanged <%=
+                  feedPosts[i]["player2"] %>
+                </p>
                 <p class="postTitle-s"><%= feedPosts[i]["title"] %></p>
                 <p class="postTitle-s"><strong>ends in</strong></p>
-            </div>
+              </div>
             </div>
             <div class="likes-container">
-                <p class="likes">likes</p>
-                <i class="far fa-heart"></i>
+              <p class="likes">
+                <%= Object.keys(feedPosts[i]['p1Upload']['likes']).length %>
+              </p>
+              <a href="/<%= feedPosts[i]['p1Upload']['id'] %>/like"
+                ><i class="far fa-heart"></i
+              ></a>
             </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>
