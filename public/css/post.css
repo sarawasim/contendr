@@ -37,6 +37,7 @@
 .dp-title{
     display: flex;
     line-height: .5;
+    width: 225px;
 }
 
 .postTitle-s {
