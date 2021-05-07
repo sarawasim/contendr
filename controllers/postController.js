@@ -3,10 +3,7 @@ const Joi = require("joi");
 const { v4: uuidv4 } = require("uuid");
 
 async function createChallenge(req, res) {
-  console.log("i'm here!");
   try {
-    console.log;
-    console.log("i'm in the try");
     const schema = await Joi.object({
       descriptionInput: Joi.string().max(150).required(),
       titleInput: Joi.string().max(50).required(),
@@ -15,6 +12,7 @@ async function createChallenge(req, res) {
       timeInput: Joi.string().required(),
       imageURL: Joi.string().required(),
       followingList: Joi.string(),
+
     });
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
@@ -23,10 +21,6 @@ async function createChallenge(req, res) {
 
       throw validationResult.error;
     }
-    console.log("this is req.body");
-    console.log(req.body);
-    console.log("this is req.user");
-    console.log(req.user);
 
     const postID = uuidv4();
     const postCollection = database.db("Contendr").collection("posts");

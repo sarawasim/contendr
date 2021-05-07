@@ -74,3 +74,11 @@ label img {
 /* .catLabel input[type="radio"]:checked+label{
   border: 10px solid hotpink;
 } */
+
+.results {
+  margin-left: 8rem;
+  background-color: white;
+}
+.somebutton {
+  background-image: linear-gradient(#FFA4E5, #FF85DD);
+}
