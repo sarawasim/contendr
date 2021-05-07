@@ -1,99 +1,119 @@
 * {
-     box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .img-comp-container {
-    position: relative;
-    height: 600px;
-    width: 450px;
-    /*should be the same height as the images*/
+  position: relative;
+  height: 600px;
+  width: 450px;
+  /*should be the same height as the images*/
 }
 
 .img-comp-img {
-    position: absolute;
-    width: auto;
-    height: auto;
-    overflow: hidden;
-    border-radius: 10px;
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .img-comp-img img {
-    display: block;
-    vertical-align: middle;
+  display: block;
+  vertical-align: middle;
 }
 
 .img-comp-slider {
-    position: absolute;
-    z-index: 9;
-    cursor: ew-resize;
-    /*set the appearance of the slider:*/
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    opacity: .3;
-    border-radius: 50%;
+  position: absolute;
+  z-index: 9;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  opacity: 0.3;
+  border-radius: 50%;
 }
 
-.dp-title{
-    display: flex;
-    line-height: .5;
-    width: 225px;
+.dp-title {
+  display: flex;
+  line-height: 0.5;
+  width: 225px;
 }
 
 .postTitle-s {
-    padding-left: 10px;
-    color: white;
-    font-size: 11px;
+  padding-left: 10px;
+  color: white;
+  font-size: 11px;
 }
 
 .bottomleft {
-    position: absolute;
-    bottom: 20px;
-    left: 16px;
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    align-items: left;
-    font-size: 25px;
+  position: absolute;
+  bottom: 20px;
+  left: 16px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: left;
+  font-size: 25px;
 }
 
 .bottomright {
-    position: absolute;
-    bottom: 20px;
-    right: 16px;
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    align-items: center;
-    font-size: 25px;
+  position: absolute;
+  bottom: 20px;
+  right: 16px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  align-items: center;
+  font-size: 25px;
 }
 
 .likes-container {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
 .likes {
-    font-size: 15px;
-    color: white;
+  font-size: 15px;
+  color: white;
 }
 
-#displayPicture-playerOne{
-    border: 3px solid #5377FD;
-    border-radius: 100%;
+#displayPicture-playerOne {
+  border: 3px solid #5377fd;
+  border-radius: 100%;
 }
 
-#displayPicture-playerTwo{
-    border: 3px solid #FF84DD;
-    border-radius: 100%;
+#displayPicture-playerTwo {
+  border: 3px solid #ff84dd;
+  border-radius: 100%;
 }
 
+.likes-container a {
+  text-decoration: none;
+  color: #fff;
+}
+.likes-container a:visited {
+  text-decoration: none;
+  color: #fff;
+}
+.likes-container a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+.likes-container a:focus {
+  text-decoration: none;
+  color: #fff;
+}
+.likes-container a:hover,
+.navBtn:active {
+  text-decoration: none;
+  color: #fff;
+}
 
 @media screen and (max-width: 600px) {
   body {
     min-width: fit-content;
     margin: 0px;
   }
-
 }
