@@ -14,7 +14,11 @@ async function createChallenge(req, res) {
       searchUser: Joi.string().required(),
       timeInput: Joi.string().required(),
       imageURL: Joi.string().required(),
+<<<<<<< HEAD
       followingList: Joi.string(),
+=======
+      followingList: Joi.string()
+>>>>>>> cae114b9ecb2a51382cdae6cba3fe8b818a525e9
     });
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
