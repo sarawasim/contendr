@@ -3,7 +3,7 @@ const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
 const { upload } = require("../middleware/upload");
 const { path } = require("path");
-const { createChallenge } = require("../controllers/postController");
+const { createChallenge, likePost } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
@@ -123,5 +123,11 @@ router.post(
     // need to add form data and upload url into Mongo DB's "posts" collection
   }
 );
+
+router.get("/:id/like", (req, res) => {
+  console.log("The likes route is being reached @@@@@@@@@@@@");
+  likePost(req, res);
+  res.redirect("/");
+});
 
 module.exports = router;
