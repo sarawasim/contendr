@@ -21,7 +21,6 @@ const getUserByEmailIdAndPassword = async (email, password) => {
   return null;
 };
 
-
 const getUserById = (id) => {
   let user = userModel.findById(id);
   if (user) {
@@ -31,19 +30,20 @@ const getUserById = (id) => {
 };
 
 const getFollowingUsernames = async (input) => {
-  let userArr = []
-  await Promise.all(input.map(async (id) => {
-    try {
-      let username = await getUserById(id.id)
-      userArr.push(username.username)
-    } catch (error) {
-      console.log(error)
-    }
-  }))
-  console.log(userArr)
+  let userArr = [];
+  await Promise.all(
+    input.map(async (id) => {
+      try {
+        let username = await getUserById(id.id);
+        userArr.push(username.username);
+      } catch (error) {
+        console.log(error);
+      }
+    })
+  );
+  console.log(userArr);
   return userArr;
 };
-
 
 function isUserValid(user, password) {
   const passHash = userModel.hashPassword(password, user.password_salt);
@@ -143,15 +143,32 @@ async function registerUser(req, res) {
 
       // console.log("register()");
 
-      await userCollection.insertOne({
-        id: uuidv4(),
-        email: req.body.email,
-        username: req.body.username,
-        password_salt: passSalt,
-        password_hash: passHash,
-        posts: [],
-        following: [],
-      });
+      if (!req.body.username) {
+        let splitEmail = req.body.email.split("@");
+        username = splitEmail[0];
+        await userCollection.insertOne({
+          id: uuidv4(),
+          email: req.body.email,
+          username: username,
+          password_salt: passSalt,
+          password_hash: passHash,
+          posts: [],
+          following: [],
+        });
+      } else {
+        let usernameSplit = req.body.username.split(" ");
+        let newUsername = usernameSplit.join("");
+        req.body.username;
+        await userCollection.insertOne({
+          id: uuidv4(),
+          email: req.body.username,
+          username: newUsername,
+          password_salt: passSalt,
+          password_hash: passHash,
+          posts: [],
+          following: [],
+        });
+      }
     } catch (ex) {
       res.render("error", { message: "Error connecting to Mongo" });
       console.log("Error connecting to Mongo");
