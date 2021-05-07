@@ -41,16 +41,18 @@ async function createChallenge(req, res) {
       p2URL: "",
     });
 
-    const userCollection = database.db("Contendr").collection("users");
-    await userCollection.updateMany(
-      {
-        $or: [
-          { username: req.user.username },
-          { username: req.body.searchUser },
-        ],
-      },
-      { $push: { posts: { postId: postID } } }
-    );
+    //commented out to trouble shoot creating challenge error on heroku
+    
+    // const userCollection = database.db("Contendr").collection("users");
+    // await userCollection.updateMany(
+    //   {
+    //     $or: [
+    //       { username: req.user.username },
+    //       { username: req.body.searchUser },
+    //     ],
+    //   },
+    //   { $push: { posts: { postId: postID } } }
+    // );
   } catch (ex) {
     console.log("i'm in the catch");
     res.render("error", { message: "Error connecting to Mongo" });
