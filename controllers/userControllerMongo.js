@@ -71,28 +71,24 @@ async function findOrCreate(profile) {
   } else {
     console.log("creating has been reached");
     const userCollection = database.db("Contendr").collection("users");
-    if (!req.body.username) {
-      let splitEmail = req.body.email.split("@");
-      username = splitEmail[0];
+    if (!profile.displayName) {
+      let splitEmail = profile.emails[0].value.split("@");
+      let username = splitEmail[0];
       await userCollection.insertOne({
-        id: uuidv4(),
-        email: req.body.email,
+        id: parseInt(profile.id),
+        email: profile.emails[0].value,
         username: username,
-        password_salt: passSalt,
-        password_hash: passHash,
         posts: [],
         following: [],
       });
     } else {
-      let usernameSplit = req.body.username.split(" ");
+      let usernameSplit = profile.displayName.split(" ");
       let newUsername = usernameSplit.join("");
       req.body.username;
       await userCollection.insertOne({
-        id: uuidv4(),
-        email: req.body.username,
+        id: parseInt(profile.id),
+        email: profile.emails[0].value,
         username: newUsername,
-        password_salt: passSalt,
-        password_hash: passHash,
         posts: [],
         following: [],
       });
