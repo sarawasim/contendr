@@ -209,9 +209,17 @@
               <p class="likes">
                 <%= Object.keys(feedPosts[i]['p1Upload']['likes']).length %>
               </p>
-              <a href="/<%= feedPosts[i]['p1Upload']['id'] %>/like"
-                ><i class="far fa-heart"></i
-              ></a>
+              <a href="/<%= feedPosts[i]['p1Upload']['id'] %>/like">
+                <% if(feedPosts[i]['p1Upload']['likes'][user.email]===true) { %>
+                <span style="color: #5377fd">
+                  <i class="fas fa-heart"></i>
+                </span>
+                <% } else { %>
+                <span style="color: #5377fd">
+                  <i class="far fa-heart"></i>
+                </span>
+                <% } %>
+              </a>
             </div>
           </div>
         </div>
