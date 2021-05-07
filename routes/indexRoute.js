@@ -27,10 +27,10 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
   console.log("POSTS FROM MONGO !@##%$!@#%$!@#$ " + JSON.stringify(posts));
 
-  const uploadCollection = database.db("Contendr").collection("uploads");
-  const uploads = await uploadCollection.find().toArray();
+  // const uploadCollection = database.db("Contendr").collection("uploads");
+  // const uploads = await uploadCollection.find().toArray();
 
-  console.log("UPLOADS FROM MONGO !@##%$!@#%$!@#$ " + JSON.stringify(uploads));
+  // console.log("UPLOADS FROM MONGO !@##%$!@#%$!@#$ " + JSON.stringify(uploads));
 
   const thisUser = users.find((user) => user.email === req.user.email);
   console.log(
@@ -52,7 +52,6 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     follower["posts"].forEach((followerPost) => {
       let alreadyHasPost = feedPostsArray.find((feedPost) => {
         return feedPost.postId === followerPost.postId;
-        console.log("FEED POST POST ~~~~~~~~~~~ " + JSON.stringify(feedPost));
       });
 
       console.log("FOLLOWER POST ~~~~~~~~~~~ " + JSON.stringify(followerPost));
@@ -68,22 +67,22 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     });
   });
 
-  for (i = 0; i < feedPostsArray.length; i++) {
-    console.log(
-      "----------- Feed Posts length ------ " + feedPostsArray.length
-    );
-    for (j = 0; j < uploads.length; j++) {
-      console.log("----------- uploads array length ------ " + uploads.length);
-      if (feedPostsArray[i]) {
-        if (feedPostsArray[i].p1UploadId === uploads[j].id) {
-          feedPostsArray[i]["p1Upload"] = uploads[j];
-        }
-        if (feedPostsArray[i]["p2UploadId"] === uploads[j].id) {
-          feedPostsArray[i]["p2Upload"] = uploads[j];
-        }
-      }
-    }
-  }
+  // for (i = 0; i < feedPostsArray.length; i++) {
+  //   console.log(
+  //     "----------- Feed Posts length ------ " + feedPostsArray.length
+  //   );
+  //   for (j = 0; j < uploads.length; j++) {
+  //     console.log("----------- uploads array length ------ " + uploads.length);
+  //     if (feedPostsArray[i]) {
+  //       if (feedPostsArray[i].p1UploadId === uploads[j].id) {
+  //         feedPostsArray[i]["p1Upload"] = uploads[j];
+  //       }
+  //       if (feedPostsArray[i]["p2UploadId"] === uploads[j].id) {
+  //         feedPostsArray[i]["p2Upload"] = uploads[j];
+  //       }
+  //     }
+  //   }
+  // }
   // Array of posts are passed into the ejs. Creates different divs that // Takes in an arrayOfPosts[] that are associated with the signed in user.
   // contain each post
 
@@ -96,10 +95,10 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   console.log("in the get");
-  let following = await getFollowingUsernames(req.user.following)
-  console.log("console logging array from router.get")
-  console.log(following)
-  res.render("createChallenge", { layout: "layoutB", following: following});
+  let following = await getFollowingUsernames(req.user.following);
+  console.log("console logging array from router.get");
+  console.log(following);
+  res.render("createChallenge", { layout: "layoutB", following: following });
 });
 
 router.post("/createChallenge/searchUsername", (req, res) => {
@@ -123,7 +122,7 @@ router.post(
   }
 );
 
-router.get("/:id/like", (req, res) => {
+router.get("/:id/:player/like", (req, res) => {
   likePost(req, res);
 });
 
