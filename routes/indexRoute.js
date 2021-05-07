@@ -7,7 +7,7 @@ const { createChallenge } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
-const {getFollowingUsernames} = require("../controllers/userControllerMongo");
+const { getFollowingUsernames } = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
   const userCollection = database.db("Contendr").collection("users");
@@ -50,10 +50,10 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
   userFollowersArray.forEach((follower) => {
     follower["posts"].forEach((followerPost) => {
-      let alreadyHasPost = feedPostsArray.some((feedPost) => {
-        feedPost.postId === followerPost.postId;
+      let alreadyHasPost = feedPostsArray.find((feedPost) => {
+        return feedPost.postId === followerPost.postId;
+        console.log("FEED POST POST ~~~~~~~~~~~ " + JSON.stringify(feedPost));
       });
-      console.log("FOLLOWER POST ~~~~~~~~~~~ " + JSON.stringify(followerPost));
 
       console.log("FOLLOWER POST ~~~~~~~~~~~ " + JSON.stringify(followerPost));
 
@@ -96,10 +96,10 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   console.log("in the get");
-  let following = await getFollowingUsernames(req.user.following)
-  console.log("console logging array from router.get")
-  console.log(following)
-  res.render("createChallenge", { layout: "layoutB"});
+  let following = await getFollowingUsernames(req.user.following);
+  console.log("console logging array from router.get");
+  console.log(following);
+  res.render("createChallenge", { layout: "layoutB" });
 });
 
 router.post("/createChallenge/searchUsername", (req, res) => {
