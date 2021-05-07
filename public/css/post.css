@@ -34,33 +34,48 @@
     border-radius: 50%;
 }
 
-.bottomleft {
-    position: absolute;
-    bottom: 80px;
-    left: 16px;
-    font-size: 18px;
+.dp-title{
+    display: flex;
+    line-height: .5;
+    width: 225px;
 }
 
-.bottomleft-heart {
-    position: absolute;
-    bottom: 15px;
-    left: 30px;
-    font-size: 25px;
+.postTitle-s {
+    padding-left: 10px;
     color: white;
+    font-size: 11px;
+}
+
+.bottomleft {
+    position: absolute;
+    bottom: 20px;
+    left: 16px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: left;
+    font-size: 25px;
 }
 
 .bottomright {
     position: absolute;
-    bottom: 80px;
+    bottom: 20px;
     right: 16px;
     font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    font-size: 25px;
 }
 
-.bottomright-heart {
-    position: absolute;
-    bottom: 15px;
-    right: 30px;
-    font-size: 25px;
+.likes-container {
+    padding-left: 10px;
+}
+
+.likes {
+    font-size: 15px;
     color: white;
 }
 

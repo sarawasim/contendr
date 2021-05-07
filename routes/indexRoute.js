@@ -3,11 +3,11 @@ const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
 const { upload } = require("../middleware/upload");
 const { path } = require("path");
-const { createChallenge } = require("../controllers/postController");
+const { createChallenge, likePost } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
-const {getFollowingUsernames} = require("../controllers/userControllerMongo");
+const { getFollowingUsernames } = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
   const userCollection = database.db("Contendr").collection("users");
@@ -50,10 +50,10 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
   userFollowersArray.forEach((follower) => {
     follower["posts"].forEach((followerPost) => {
-      let alreadyHasPost = feedPostsArray.some((feedPost) => {
-        feedPost.postId === followerPost.postId;
+      let alreadyHasPost = feedPostsArray.find((feedPost) => {
+        return feedPost.postId === followerPost.postId;
+        console.log("FEED POST POST ~~~~~~~~~~~ " + JSON.stringify(feedPost));
       });
-      console.log("FOLLOWER POST ~~~~~~~~~~~ " + JSON.stringify(followerPost));
 
       console.log("FOLLOWER POST ~~~~~~~~~~~ " + JSON.stringify(followerPost));
 
@@ -94,14 +94,6 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   res.render("index", { feedPosts: feedPostsArray });
 });
 
-// router.get("/createChallenge/username", (req, res) => {
-//   const search = req.query.search.toLowerCase()
-
-//   const filteredNames = names.filter(name => name.toLowerCase().includes(search))
-
-//   res.send({usernames: filteredNames})
-// })
-
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   console.log("in the get");
   let following = await getFollowingUsernames(req.user.following)
@@ -128,8 +120,13 @@ router.post(
     let filename = req.file.filename;
     createChallenge(req, res);
     res.render("test", { image: "tempImages/" + filename });
-    // need to add form data and upload url into Mongo DB's "posts" collection
   }
 );
+
+router.get("/:id/like", (req, res) => {
+  console.log("The likes route is being reached @@@@@@@@@@@@");
+  likePost(req, res);
+  res.redirect("/");
+});
 
 module.exports = router;
