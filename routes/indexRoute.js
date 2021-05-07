@@ -91,7 +91,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     "----------------- Feed Posts ------ " + JSON.stringify(feedPostsArray)
   );
   // Each post contains urls to each video. display the urls in the ejs page.
-  res.render("index", { feedPosts: feedPostsArray });
+  res.render("index", { feedPosts: feedPostsArray, user: req.user });
 });
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
@@ -124,9 +124,7 @@ router.post(
 );
 
 router.get("/:id/like", (req, res) => {
-  console.log("The likes route is being reached @@@@@@@@@@@@");
   likePost(req, res);
-  res.redirect("/");
 });
 
 module.exports = router;
