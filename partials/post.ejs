@@ -97,8 +97,7 @@
   </head>
 
   <body>
-      <h2 class="postTitle-m"><span style="color:#5377FD;">Player1</span>  challanged <span style="color:#FF84DD;">Player2</span> - Dance Off</h2>
-      <h2 class="postTitle-s">ends in 11:34:26</h2>
+      
     <div class="post">
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
@@ -129,17 +128,24 @@
             height="600"
           />
           <div class="bottomleft">
-            <div>
+            <div class="dp-title">
                 <img
                 id="displayPicture-playerOne"
                 src="mockUser.png"
                 alt="display picture"
                 width="50px"
-                height="auto"
+                height="50px"
                 />
+                <div class="postTitle">
+                    <p class="postTitle-s"><strong>Player1</strong> challanged <strong>Player2</strong></p>
+                    <p class="postTitle-s">Dance-off</p>
+                    <p class="postTitle-s"><strong>ends in 11:34:26</strong></p>
+                </div>
             </div>
-                <p class="likes">1212</p>
-                <i class="far fa-heart"></i>
+                <div class="likes-container">
+                    <p class="likes">1212</p>
+                    <i class="far fa-heart"></i>
+                </div>
           </div>
         </div>
       </div>
@@ -147,8 +153,6 @@
 
     <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
     <br />
-    <h2 class="postTitle-m"><span style="color:#5377FD;"><%= feedPosts[i]["player1"] %></span> challanged <span style="color:#FF84DD;"><%= feedPosts[i]["player2"] %></span> - <%= feedPosts[i]["title"] %></h2>
-    <h2 class="postTitle-s">ends in</h2>
     <div class="post">
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
@@ -164,10 +168,10 @@
               src="mockUser2.png"
               alt="display picture"
               width="50px"
-              height="auto"
+              height="50px"
             />
           </div>
-            <p class="likes"><%= feedPosts[i]["player2"] %></p>
+            <p class="likes">likes</p>
             <i class="far fa-heart"></i>
             </div>
           </div>
@@ -179,17 +183,24 @@
             height="600"
           />
           <div class="bottomleft">
-            <div>
+            <div class="dp-title">
             <img
               id="displayPicture-playerOne"
               src="mockUser.png"
               alt="display picture"
               width="50px"
-              height="auto"
+              height="50px"
             />
-          </div>
-            <p class="likes"><%= feedPosts[i]["player1"] %></p>
-            <i class="far fa-heart"></i>
+            <div class="postTitle">
+                <p class="postTitle-s"> <%= feedPosts[i]["player1"] %> challanged <%= feedPosts[i]["player2"] %></p>
+                <p class="postTitle-s"><%= feedPosts[i]["title"] %></p>
+                <p class="postTitle-s"><strong>ends in</strong></p>
+            </div>
+            </div>
+            <div class="likes-container">
+                <p class="likes">likes</p>
+                <i class="far fa-heart"></i>
+            </div>
         </div>
         </div>
       </div>
