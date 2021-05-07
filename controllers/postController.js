@@ -12,6 +12,7 @@ async function createChallenge(req, res) {
       timeInput: Joi.string().required(),
       imageURL: Joi.string().required(),
       followingList: Joi.string(),
+
     });
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
