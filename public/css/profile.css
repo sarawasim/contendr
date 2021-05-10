@@ -1,9 +1,10 @@
 .container-profile{
-    padding: 10px;
+    margin: 0px;
     display: flex;
     flex-direction: column;
     color: #717171;
     align-items: center;
+    width: 450px;
 }
 
 .circle-crop {
@@ -45,6 +46,13 @@
     justify-content: space-between;
 }
 
+.fa-cog{
+    font-size: 25px;
+    padding-top: 20px;
+    margin-right: 20px;
+    color: #717171;
+}
+
 #follow-btn {
     background-image: linear-gradient(#FFA4E5, #FF85DD);
     border: none;
@@ -67,18 +75,13 @@
     font-size: 14px;
 }
 
-.fa-cog{
-    font-size: 25px;
-    margin-top: 30px;
-    color: #FF85DD;
-}
 
 .bold {
     font-weight: bold;
 }
 
 @media screen and (max-width: 800px) {
-  body {
+  .container-profile{
     min-width: fit-content;
   }
-}
+} 

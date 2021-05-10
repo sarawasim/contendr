@@ -40,11 +40,12 @@ input {
 }
 
 #login{
-    background-image: linear-gradient(#55C2FF, #5177FF); 
+    background-image: linear-gradient(#FFA4E5, #FF85DD);
+
 }
 
 #github{
-    background-image: linear-gradient(#a3a3a3, #3f3f3f); 
+    background-image: linear-gradient(#d1cfcf, #858585); 
 }
 
 a {
