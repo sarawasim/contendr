@@ -46,7 +46,6 @@
 
 .dp-title {
   display: flex;
-  line-height: 0.5;
   width: 225px;
 }
 
@@ -54,6 +53,7 @@
   padding-left: 10px;
   color: white;
   font-size: 11px;
+  margin: 0;
 }
 
 .bottomleft {
