@@ -42,7 +42,7 @@ $(document).ready(function(){
     console.log(li)
   })
 
-  $("body").on("click", ".results", () => {
+  $("body").on("click", ".results", function () {
     console.log($(this).text())
     $($searchInput).val($(this).text()) 
     $("#searchResults").empty()
