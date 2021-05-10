@@ -82,3 +82,14 @@ label img {
 .somebutton {
   background-image: linear-gradient(#FFA4E5, #FF85DD);
 }
+
+@media screen and (max-width: 600px) {
+  label img {
+    height: 150px;
+    width: 150px
+  }
+
+  .categoryContainer {
+    width:330px;
+  }
+}
