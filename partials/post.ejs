@@ -7,6 +7,7 @@
       src="https://kit.fontawesome.com/761d42c757.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script>
       function initComparisons() {
@@ -170,20 +171,22 @@
                 height="50px"
               />
             </div>
-            <p class="likes">
-              <%= Object.keys(feedPosts[i]['p2Likes']).length %>
-            </p>
-            <a href="/<%= feedPosts[i]['postId'] %>/p2/like">
-              <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
-              <span style="color: #ff84dd">
-                <i class="fas fa-heart"></i>
-              </span>
-              <% } else { %>
-              <span style="color: #ff84dd">
-                <i class="far fa-heart"></i>
-              </span>
-              <% } %>
-            </a>
+            <div class="likes-container">
+              <p class="likes">
+                <%= Object.keys(feedPosts[i]['p2Likes']).length %>
+              </p>
+              <a href="/<%= feedPosts[i]['postId'] %>/p2/like">
+                <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
+                <span style="color: #ff84dd">
+                  <i class="fas fa-heart"></i>
+                </span>
+                <% } else { %>
+                <span style="color: #ff84dd">
+                  <i class="far fa-heart"></i>
+                </span>
+                <% } %>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -234,4 +237,5 @@
       initComparisons();
     </script>
   </body>
+  <script defer src="/scripts/post.js"></script>
 </html>

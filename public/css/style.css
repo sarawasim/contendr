@@ -91,7 +91,7 @@ footer {
     outline: none;
 }
 
-#challengeButton {
+#challengeButton, #submitForm {
   background-image: linear-gradient(#55C2FF, #5177FF);
   border: none;
   color: white;
@@ -108,6 +108,10 @@ footer {
   width: 150px;
   border-radius: 20px;
   box-sizing: unset;
+}
+
+#submitForm {
+  background-image: linear-gradient(#FFA4E5, #FF85DD);
 }
 
 #notifications{

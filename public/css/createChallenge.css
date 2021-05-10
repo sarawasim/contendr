@@ -1,15 +1,61 @@
+.challenge-container {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    color: #717171;
+    align-items: center;
+    width: 450px;
+    /* padding-top: 1rem; */
+    text-align: center;
+}
+
+input, textarea {
+   border: 1px solid #5177FF;
+    height: 35px;
+    width: 100%;
+    border-radius: 20px;
+    text-align: center;
+    color: #5177FF;
+
+}
+
+textarea {
+  height: 10rem;
+  resize: none;
+  text-align: left;
+  width: 97%;
+  padding: .5rem;
+}
+
+#previewImage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fileUpload{
+  background-image: linear-gradient(#55C2FF, #5177FF);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  height: 20px;
+  width: 350px;
+  border-radius: 20px;
+  box-sizing: unset;
+}
 
 
 .categoryContainer {
-  width:500px;
-  display: grid;
-  grid-template-rows: 3;
-  justify-content: center;
-
-  /* width:500px;
-  height: 250px;
-  overflow: auto;
-  white-space: nowrap; */  
+  width:100%;
+  display: flex;
+  flex-direction: column;
 }
 .categoryContainer1{
   grid-row: 1;
@@ -28,18 +74,12 @@
 .catLabel{
   height: 100%;
   width: 100%;
-  margin: 5px;
-
-  
-   /* display: inline-block;
-   color: white;
-   text-align: center;
-   padding: 10px;
-   text-decoration: none; */
+  margin: 11px;
 }
+
 label img {
-  height: 200px;
-  width: 200px;
+  height: 11.5rem;
+  width: 11.5rem;
 }
 
 .timeContainer{
@@ -84,12 +124,20 @@ label img {
 }
 
 @media screen and (max-width: 600px) {
-  label img {
-    height: 150px;
-    width: 150px
+
+  .challenge-container {
+    min-width: fit-content;
   }
 
-  .categoryContainer {
-    width:330px;
-  }
+  /* label img {
+  height: 150px;
+  width: 150px;
+} */
+
+.catLabel{
+  height: 100%;
+  width: 100%;
+  margin: 15px;
 }
+
+} 
