@@ -1,0 +1,16 @@
+.searchResultContainer{
+    padding-top: 1rem;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    color: #717171;
+    align-items: center;
+    width: 450px;
+}
+
+
+@media screen and (max-width: 800px) {
+  .earchResultContainer{
+    min-width: fit-content;
+  }
+} 
