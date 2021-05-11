@@ -29,6 +29,21 @@ const getUserById = (id) => {
   return null;
 };
 
+const getUserByUsername = (username) => {
+  let user = userModel.findByUsername(username);
+  if (user) {
+    return user;
+  }
+  return null;
+}
+
+const findUsernames = async (input) => {
+    console.log(`passed into the input is: ${input}`)
+    let list = await userModel.searchUsernames(input)
+  
+  return list;
+}
+
 const getFollowingUsernames = async (input) => {
   let userArr = [];
   await Promise.all(
@@ -181,4 +196,6 @@ module.exports = {
   findOrCreate,
   registerUser,
   getFollowingUsernames,
+  findUsernames,
+  getUserByUsername,
 };
