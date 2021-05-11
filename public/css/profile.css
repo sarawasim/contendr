@@ -80,6 +80,23 @@
     font-weight: bold;
 }
 
+.userPosts-Profile {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+}
+
+.profilePost {
+    padding: .5rem;
+}
+
+#postImage {
+    border-radius: 1rem;
+    width: 130px;
+    height: 200px;
+    object-fit: cover
+}
+
 @media screen and (max-width: 800px) {
   .container-profile{
     min-width: fit-content;
