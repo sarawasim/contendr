@@ -132,7 +132,34 @@ router.get("/:id/:player/like", (req, res) => {
 });
 
 router.get("/userProfile", ensureAuthenticated, async (req, res) => {
-  res.render("userProfile", { layout: "layout", user: req.user });
+
+  const userCollection = database.db("Contendr").collection("users");
+  const users = await userCollection
+    .find()
+    .project({
+      id: 1,
+      email: 1,
+      username: 1,
+      posts: 1,
+      following: 1,
+    })
+    .toArray();
+
+  const postCollection = database.db("Contendr").collection("posts");
+  const posts = await postCollection.find().toArray();
+
+  console.log("POSTS FROM MONGO !@##%$!@#%$!@#$ " + JSON.stringify(posts));
+
+  const thisUser = users.find((user) => user.email === req.user.email);
+
+  let postsArray = [];
+  thisUser["posts"].forEach((userPost) => {
+    let userPostData = posts.find((post) => post.postId === userPost.postId);
+    postsArray.push(userPostData);
+  });
+
+  res.render("userProfile", { layout: "layout", user: req.user, posts: postsArray });
+
 });
 
 router.get("/profile", async (req, res) => {
