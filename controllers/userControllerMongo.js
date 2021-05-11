@@ -60,6 +60,47 @@ const getFollowingUsernames = async (input) => {
   return userArr;
 };
 
+const checkFollowing = (followingList, otherId) => {
+  const checkFollowing = followingList.find((id) => id.id === otherId )
+  let isFollowing = false
+  if (!checkFollowing) {
+    return isFollowing
+  } else return isFollowing = true
+}
+
+const followUser = async (req) => {
+    const userCollection = database.db("Contendr").collection("users");
+    const usernameToFollow = req.params.username;
+    const userToFollow = await userModel.findByUsername(usernameToFollow);
+      let check = await checkFollowing(req.user.following, userToFollow.id)
+      const user = req.user.id;
+      if (!check) {
+        await userCollection.updateMany(
+          { id: user },
+          { $push: { following: { id: userToFollow.id } } }
+        );
+        await userCollection.updateMany(
+          { id: userToFollow.id },
+          { $push: { followers: { id: user } } }
+        );
+        console.log("following this stupid person now")
+      } else (
+        console.log("already following this bitch")
+      )
+}
+
+const unfollowUser = async (req) => {
+  const usernameToUnfollow = req.params.username;
+  const userToUnfollow = await userModel.findByUsername(usernameToUnfollow);
+  const userCollection = database.db("Contendr").collection("users");
+  await userCollection.deleteOne(
+    
+  )
+
+
+
+}
+
 function isUserValid(user, password) {
   const passHash = userModel.hashPassword(password, user.password_salt);
 
@@ -95,6 +136,7 @@ async function findOrCreate(profile) {
         username: username,
         posts: [],
         following: [],
+        followers: [],
       });
     } else {
       let usernameSplit = profile.displayName.split(" ");
@@ -106,6 +148,7 @@ async function findOrCreate(profile) {
         username: newUsername,
         posts: [],
         following: [],
+        followers: [],
       });
     }
     user = await userModel.findById(parseInt(profile.id)); //this will find user again after they have been added to DB
@@ -181,6 +224,7 @@ async function registerUser(req, res) {
         password_hash: passHash,
         posts: [],
         following: [],
+        followers: [],
       });
     } catch (ex) {
       res.render("error", { message: "Error connecting to Mongo" });
@@ -198,4 +242,7 @@ module.exports = {
   getFollowingUsernames,
   findUsernames,
   getUserByUsername,
+  followUser,
+  checkFollowing,
+  unfollowUser,
 };

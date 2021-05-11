@@ -15,6 +15,7 @@ const userModel = {
         username: 1,
         posts: 1,
         following: 1,
+        followers: 1,
       })
       .toArray();
     console.log("user model users-------------- " + JSON.stringify(users));
@@ -33,6 +34,7 @@ const userModel = {
       .project({
         username: 1,
         following: 1,
+        followers: 1,
         posts: 1,
       })
       .toArray();
@@ -53,6 +55,7 @@ const userModel = {
         username: 1,
         posts: 1,
         following: 1,
+        followers: 1,
         password: 1,
         password_salt: 1,
         password_hash: 1,
@@ -77,6 +80,7 @@ const userModel = {
         username: 1,
         posts: 1,
         following: 1,
+        followers: 1,
       })
       .toArray();
     console.log("user model users-------------- " + JSON.stringify(users));
