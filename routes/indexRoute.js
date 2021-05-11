@@ -7,7 +7,7 @@ const { createChallenge, likePost } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
-const { getFollowingUsernames, findUsernames, getUserByUsername } = require("../controllers/userControllerMongo");
+const { getFollowingUsernames, findUsernames, getUserByUsername, followUser, checkFollowing, unfollowUser } = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
   const userCollection = database.db("Contendr").collection("users");
@@ -131,6 +131,15 @@ router.get("/:id/:player/like", (req, res) => {
   likePost(req, res);
 });
 
+router.get("/:username/follow", async (req, res) => {
+  followUser(req);
+  res.redirect("back")
+})
+router.get("/:username/unfollow", async (req, res) => {
+  unfollowUser(req);
+  res.redirect("back")
+})
+
 router.get("/userProfile", ensureAuthenticated, async (req, res) => {
   res.render("userProfile", { layout: "layout", user: req.user });
 });
@@ -138,8 +147,11 @@ router.get("/userProfile", ensureAuthenticated, async (req, res) => {
 router.get("/profile", async (req, res) => {
   let username = req.query.username
   let user = await getUserByUsername(username)
-  
-  res.render("profile", { layout: "layout", user })
+  let isFollowing = await checkFollowing(req.user.following, user.id)
+  if (req.query.username === req.user.username) {
+    res.redirect("userProfile")
+  } 
+  res.render("profile", { layout: "layout", user, isFollowing })
 })
 
 module.exports = router;
