@@ -15,7 +15,6 @@ const userModel = {
         username: 1,
         posts: 1,
         following: 1,
-        password: 1,
       })
       .toArray();
     console.log("user model users-------------- " + JSON.stringify(users));
@@ -26,6 +25,23 @@ const userModel = {
       return user;
     }
     throw new Error(`Couldn't find user with username: ${username}`);
+  },
+  searchUsernames: async (input) => {
+    const userCollection = database.db("Contendr").collection("users");
+    const results = await userCollection
+      .find({"username" : {$regex : `.*${input}.*`}})
+      .project({
+        username: 1,
+        following: 1,
+        posts: 1,
+      })
+      .toArray();
+    if (results) {
+      console.log("the search results are ---------------------- " + JSON.stringify(results));
+
+      return results;
+    }
+    throw new Error(`Couldn't find any users with username: ${input}`);
   },
   findOne: async (email) => {
     const userCollection = database.db("Contendr").collection("users");

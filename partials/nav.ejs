@@ -2,7 +2,10 @@
         <a href="/">
             <img class="logo" src="logo.png" alt="contendr logo"></a>
 
-        <a href="search" class="search"><i class="fas fa-search"></i></a>
+            <form action="/search" method="GET">
+                <input type="search" name="searchInput" id="searchInput" placeholder="Search..">
+                <button class="search"><i class="fas fa-search"></i></button>
+            </form>
 
         <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn"><img class="dropbtn" id="displayPicture" src="../assets/dp-placeholder.png"

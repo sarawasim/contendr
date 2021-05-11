@@ -7,7 +7,7 @@ const { createChallenge, likePost } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
-const { getFollowingUsernames } = require("../controllers/userControllerMongo");
+const { getFollowingUsernames, findUsernames, getUserByUsername } = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
   const userCollection = database.db("Contendr").collection("users");
@@ -109,6 +109,14 @@ router.post("/createChallenge/searchUsername", (req, res) => {
   } else console.log("failed");
 });
 
+router.get("/search", async (req, res) => {
+  let input = req.query.searchInput;
+  console.log(`from the get, the input is ${input}`)
+  const results = await findUsernames(input);
+  console.log(`the results are: ${results}`)
+  res.render("searchResults", {results});
+})
+
 router.post(
   "/createChallenge",
   ensureAuthenticated,
@@ -126,5 +134,12 @@ router.get("/:id/:player/like", (req, res) => {
 router.get("/userProfile", ensureAuthenticated, async (req, res) => {
   res.render("userProfile", { layout: "layout", user: req.user });
 });
+
+router.get("/:username/profile", async (req, res) => {
+  let username = req.params.username
+  let user = await getUserByUsername(username)
+  
+  res.render("profile", { layout: "layout", user })
+})
 
 module.exports = router;
