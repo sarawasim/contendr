@@ -30,7 +30,7 @@ body {
 section.background {
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 65vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,14 +43,14 @@ section.background {
 section.sec2 {
   position: relative;
   width: 100%;
-  height: 40vh;
+  height: 35vh;
   background: fff;
   z-index: 1;
 }
 
 .wave {
   position: absolute;
-  bottom: 26vh;
+  bottom: 32vh;
   left: 0;
   width: 100%;
   z-index: 2;
