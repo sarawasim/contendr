@@ -3,7 +3,9 @@
 <% results.forEach((user) => { %>
   <div class="searchResult"> 
     
-    <a href="/<%= user.username %>/profile"> <%= user.username %> </a>
+    <!-- <a href="/<%= user.username %>/profile"> <%= user.username %> </a> -->
+    <a href="/profile?username=<%= user.username %>"> <%= user.username %> </a>
+
     
   </div>
 
