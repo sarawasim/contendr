@@ -1,15 +1,92 @@
 body {
-    background-image: linear-gradient(#55C2FF, #5177FF);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 86vh;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
 }
 
-.small-text{
-  font-size: .8rem;
+.container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  min-width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.wrapper {
+  align-self: start;
+}
+
+section.background {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px;
+  box-sizing: border-box;
+  background: linear-gradient(#55c2ff, #5177ff);
+  z-index: 0;
+}
+
+section.sec2 {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  background: fff;
+  z-index: 1;
+}
+
+.wave {
+  position: absolute;
+  bottom: 26vh;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.button {
+  max-width: 300px;
+}
+
+input {
+  max-width: 340px;
+}
+
+.login-fields {
+  justify-self: center;
+}
+
+.login-buttons {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.small-text {
+  font-size: 0.8rem;
+  color: black;
+}
+
+.small-text a {
+  color: black;
+}
+
+#signup-text {
+  color: black;
 }
 
 .button {
@@ -31,25 +108,24 @@ body {
 }
 
 input {
-    border: none;
-    height: 35px;
-    width: 390px;
-    border-radius: 20px;
-    text-align: center;
-    color: #5177FF;
+  border: none;
+  height: 35px;
+  width: 390px;
+  border-radius: 20px;
+  text-align: center;
+  color: #5177ff;
 }
 
-#login{
-    background-image: linear-gradient(#FFA4E5, #FF85DD);
-
+#login {
+  background-image: linear-gradient(#55c2ff, #5177ff);
 }
 
-#github{
-    background-image: linear-gradient(#d1cfcf, #858585); 
+#github {
+  background-image: linear-gradient(#d1cfcf, #858585);
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:link {
@@ -60,46 +136,110 @@ a:visited {
   color: white;
 }
 
-a:hover {
-  color: #FF85DD;
+a:hover,
+#signup-text:hover {
+  color: #ff85dd;
 }
 
 a:active {
   color: white;
 }
 
-.wave{
-  position: absolute;
-  bottom: 12vh;
-  left: 0;
-  width: 100%;
-  z-index: -1000;
-}
-
-footer{
-    position: fixed;
+@media screen and (min-width: 600px) {
+  .wave {
+    position: absolute;
+    top: 37vh;
     left: 0;
-    bottom: 0;
-    min-height: 14vh;
     width: 100%;
-    background-color: white;
-    z-index: -1000;
-}
-
-@media screen and (max-width: 600px) {
-  body {
-    min-width: fit-content;
+    z-index: 2;
+  }
+  section.background {
+    height: 65vh;
   }
 
-    .button {
-  max-width: 300px;
+  section.sec2 {
+    height: 35vh;
+  }
 }
 
-input {
-    max-width: 340px;
+@media screen and (min-width: 800px) {
+  .wave {
+    top: 35vh;
+  }
+
+  section.background {
+    height: 65vh;
+  }
+
+  section.sec2 {
+    height: 35vh;
+  }
 }
 
-.wave{
-  width:100%;
+@media screen and (min-width: 900px) {
+  .wave {
+    top: 30vh;
+  }
+
+  section.background {
+    height: 80vh;
+  }
+
+  section.sec2 {
+    height: 20vh;
+  }
 }
+
+@media screen and (min-width: 1100px) {
+  .wave {
+    top: 25vh;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .wave {
+    top: 25vh;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .wave {
+    top: 20vh;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .wave {
+    top: 15vh;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .wave {
+    top: 10vh;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .wave {
+    top: 5vh;
+  }
+}
+
+@media screen and (min-width: 2100px) {
+  .wave {
+    top: 0;
+  }
+}
+
+@media screen and (min-width: 2300px) {
+  .wave {
+    top: -5vh;
+  }
+}
+
+@media screen and (min-width: 2500px) {
+  .wave {
+    top: -10vh;
+  }
 }

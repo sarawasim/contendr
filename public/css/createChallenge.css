@@ -1,23 +1,23 @@
 .challenge-container {
-    margin: 0px;
-    padding: 0px;
-    display: flex;
-    flex-direction: column;
-    color: #717171;
-    align-items: center;
-    width: 450px;
-    /* padding-top: 1rem; */
-    text-align: center;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  color: #717171;
+  align-items: center;
+  width: 450px;
+  /* padding-top: 1rem; */
+  text-align: center;
 }
 
-input, textarea {
-   border: 1px solid #5177FF;
-    height: 35px;
-    width: 100%;
-    border-radius: 20px;
-    text-align: center;
-    color: #5177FF;
-
+input,
+textarea {
+  border: 1px solid #5177ff;
+  height: 35px;
+  width: 100%;
+  border-radius: 20px;
+  text-align: center;
+  color: #5177ff;
 }
 
 textarea {
@@ -25,7 +25,7 @@ textarea {
   resize: none;
   text-align: left;
   width: 97%;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 #previewImage {
@@ -34,8 +34,8 @@ textarea {
   margin-right: auto;
 }
 
-.fileUpload{
-  background-image: linear-gradient(#55C2FF, #5177FF);
+.fileUpload {
+  background-image: linear-gradient(#55c2ff, #5177ff);
   border: none;
   color: white;
   padding: 10px 20px;
@@ -51,27 +51,24 @@ textarea {
   box-sizing: unset;
 }
 
-
 .categoryContainer {
-  width:100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
-.categoryContainer1{
+.categoryContainer1 {
   grid-row: 1;
   display: inline-flex;
 }
-.categoryContainer2{
+.categoryContainer2 {
   grid-row: 2;
   display: inline-flex;
-
 }
-.categoryContainer3{
+.categoryContainer3 {
   grid-row: 3;
   display: inline-flex;
-
 }
-.catLabel{
+.catLabel {
   height: 100%;
   width: 100%;
   margin: 11px;
@@ -82,18 +79,17 @@ label img {
   width: 11.5rem;
 }
 
-.timeContainer{
+.timeContainer {
   display: grid;
   justify-content: center;
 }
 
-.timeLabel{
+.timeLabel {
   font-size: 12px;
   grid-row: 1;
-
 }
 /* HIDE RADIO */
-.catLabel [type=radio] { 
+.catLabel [type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -101,14 +97,14 @@ label img {
 }
 
 /* IMAGE STYLES */
-[type=radio] + img {
+[type="radio"] + img {
   cursor: pointer;
 }
 
 /* CHECKED STYLES */
-[type=radio]:checked + img {
+[type="radio"]:checked + img {
   transform: scale(1.2);
-  border:1px solid hotpink;
+  border: 1px solid hotpink;
   border-radius: 5%;
 }
 /* .catLabel input[type="radio"]:checked+label{
@@ -116,15 +112,28 @@ label img {
 } */
 
 .results {
-  margin-left: 8rem;
   background-color: white;
 }
 .somebutton {
-  background-image: linear-gradient(#FFA4E5, #FF85DD);
+  background-image: linear-gradient(#ffa4e5, #ff85dd);
+}
+
+/* search results--------------- */
+#searchResults {
+  list-style-type: none;
+  margin: 0px;
+}
+
+#searchResults li {
+  height: 1rem;
+  width: 400px;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: absolute;
+  margin-left: -2.5rem;
 }
 
 @media screen and (max-width: 600px) {
-
   .challenge-container {
     min-width: fit-content;
   }
@@ -134,10 +143,9 @@ label img {
   width: 150px;
 } */
 
-.catLabel{
-  height: 100%;
-  width: 100%;
-  margin: 15px;
+  .catLabel {
+    height: 100%;
+    width: 100%;
+    margin: 15px;
+  }
 }
-
-} 
