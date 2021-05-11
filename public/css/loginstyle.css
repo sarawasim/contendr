@@ -30,7 +30,7 @@ body {
 section.background {
   position: relative;
   width: 100%;
-  height: 65vh;
+  height: 60vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,19 +43,21 @@ section.background {
 section.sec2 {
   position: relative;
   width: 100%;
-  height: 35vh;
+  height: 40vh;
   background: fff;
   z-index: 1;
 }
 
 .wave {
   position: absolute;
-  bottom: 32vh;
+  top: 45vh;
   left: 0;
   width: 100%;
   z-index: 2;
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
+  display: block;
+  margin: auto;
 }
 
 .button {
@@ -71,7 +73,7 @@ input {
 }
 
 .login-buttons {
-  margin-top: 4rem;
+  margin-top: 7rem;
   display: flex;
   flex-direction: column;
 }
@@ -148,7 +150,7 @@ a:active {
 @media screen and (min-width: 600px) {
   .wave {
     position: absolute;
-    top: 37vh;
+    bottom: 30vh;
     left: 0;
     width: 100%;
     z-index: 2;
@@ -162,35 +164,19 @@ a:active {
   }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 700) {
   .wave {
-    top: 35vh;
-  }
-
-  section.background {
-    height: 65vh;
-  }
-
-  section.sec2 {
-    height: 35vh;
+    bottom: 10vh;
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 800) {
   .wave {
-    top: 30vh;
-  }
-
-  section.background {
-    height: 80vh;
-  }
-
-  section.sec2 {
-    height: 20vh;
+    bottom: 20vh;
   }
 }
 
-@media screen and (min-width: 1100px) {
+/* @media screen and (min-width: 1100px) {
   .wave {
     top: 25vh;
   }
@@ -242,4 +228,4 @@ a:active {
   .wave {
     top: -10vh;
   }
-}
+} */
