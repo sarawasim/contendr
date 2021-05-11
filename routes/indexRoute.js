@@ -135,8 +135,8 @@ router.get("/userProfile", ensureAuthenticated, async (req, res) => {
   res.render("userProfile", { layout: "layout", user: req.user });
 });
 
-router.get("/:username/profile", async (req, res) => {
-  let username = req.params.username
+router.get("/profile", async (req, res) => {
+  let username = req.query.username
   let user = await getUserByUsername(username)
   
   res.render("profile", { layout: "layout", user })
