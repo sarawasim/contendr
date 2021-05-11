@@ -16,52 +16,6 @@ body {
 }
 
 nav {
-<<<<<<< HEAD
-  display: grid;
-  grid-template-columns: 2fr 2fr 1fr 1fr;
-  position: fixed;
-  top: 0px;
-  min-height: 50px;
-  width: 100%;
-  justify-items: center;
-  background-color: white;
-  padding: 5px 0px 5px 0px;
-  z-index: 100;
-}
-
-.logo {
-  place-self: center;
-  width: auto;
-  height: 35px;
-}
-
-.search {
-  background-color: transparent;
-  border: 0;
-  color: #717171;
-  cursor: pointer;
-  font-size: 25px;
-  grid-row: 1;
-  grid-column: 4/5;
-  place-self: center;
-  padding-bottom: 5px;
-}
-
-.search:focus {
-  outline: none;
-}
-
-#displayPicture {
-  grid-row: 1;
-  grid-column: 5/6;
-  /* padding-right: 20px; */
-  place-self: center;
-  box-sizing: unset;
-  display: inline;
-  margin: 0 auto;
-  height: 100%;
-  width: auto;
-=======
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     position: fixed;
@@ -129,7 +83,6 @@ input[type=search] {
     margin: 0 auto;
     height: 100%;
     width: auto;
->>>>>>> a6cba8a696524e602d35f7c7c941cbc90330a2b8
 }
 
 footer {
