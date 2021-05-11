@@ -92,7 +92,10 @@ const followUser = async (req) => {
 const unfollowUser = async (req) => {
   const usernameToUnfollow = req.params.username;
   const userToUnfollow = await userModel.findByUsername(usernameToUnfollow);
-
+  const userCollection = database.db("Contendr").collection("users");
+  await userCollection.deleteOne(
+    
+  )
 
 
 
