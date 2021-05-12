@@ -19,9 +19,10 @@
                 <p class="bio">Bio</p>
             </div>
             <div class="follow">
-                <%if (!isFollowing) { %><a href="/<%=user.username%>/follow" id="follow-btn">Follow</a>
-                <% } else { %> <a href="/<%=user.username%>/unfollow" id="follow-btn">Unfollow</a>
-                <% } %>
+               <a href="/<%=user.username%>/toggleFollow" id="follow-btn">
+                <%if (!isFollowing) { %> Follow 
+                <% } else { %> Unfollow
+                <% } %> </a>
             </div>
         </div>
 

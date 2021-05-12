@@ -1,26 +1,4 @@
-// function toggleSearch() {
-//   let ele = document.getElementById("dropSearch");
-//   if (ele.style.display == 'block') {
-//     ele.style.display = 'none';
-//   } else {
-//     ele.style.display = 'block';
-//   }
-// }
-// import {getUsername} from '../../controllers/userControllerMongo'
-
 $(document).ready(function () {
-  $(".toggleSearch").click(function () {
-    let search = $(this).prev().val();
-    // console.log(search)
-    // let results = test.getUsername(search)
-    // console.log(results)
-    $("#dropSearch").toggle();
-  });
-
-  // function searchUsername(name) {
-  //   const result = await $.get(`/createChallenge/username?search=${name}`)
-  //   console.log(result)
-  // }
 
   const $searchInput = $("#searchUser");
   $searchInput.on("input", () => {

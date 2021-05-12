@@ -57,15 +57,13 @@ textarea {
   flex-direction: column;
 }
 .categoryContainer1 {
-  grid-row: 1;
+  margin-top: 1rem;
   display: inline-flex;
 }
 .categoryContainer2 {
-  grid-row: 2;
   display: inline-flex;
 }
 .categoryContainer3 {
-  grid-row: 3;
   display: inline-flex;
 }
 .catLabel {
@@ -107,15 +105,9 @@ label img {
   border: 1px solid hotpink;
   border-radius: 5%;
 }
-/* .catLabel input[type="radio"]:checked+label{
-  border: 10px solid hotpink;
-} */
 
 .results {
   background-color: white;
-}
-.somebutton {
-  background-image: linear-gradient(#ffa4e5, #ff85dd);
 }
 
 /* search results--------------- */
@@ -125,7 +117,7 @@ label img {
 }
 
 #searchResults li {
-  height: 1rem;
+  height: auto;
   width: 400px;
   cursor: pointer;
   padding: 0.5rem;
