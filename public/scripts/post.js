@@ -2,8 +2,6 @@ $(document).ready(() => {
   $(".likes-container")
     .find("a")
     .on("click", function (e) {
-      e.preventDefault();
-
       if ($(this).find("i").hasClass("fas")) {
         $(this).find("i").removeClass("fas");
         $(this).find("i").addClass("far");

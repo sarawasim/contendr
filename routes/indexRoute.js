@@ -7,6 +7,7 @@ const { createChallenge, likePost } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
+
 const { getFollowingUsernames, findUsernames, getUserByUsername, toggleFollowUser, checkFollowing } = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
@@ -26,11 +27,6 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   const posts = await postCollection.find().toArray();
 
   console.log("POSTS FROM MONGO !@##%$!@#%$!@#$ " + JSON.stringify(posts));
-
-  // const uploadCollection = database.db("Contendr").collection("uploads");
-  // const uploads = await uploadCollection.find().toArray();
-
-  // console.log("UPLOADS FROM MONGO !@##%$!@#%$!@#$ " + JSON.stringify(uploads));
 
   const thisUser = users.find((user) => user.email === req.user.email);
   console.log(
@@ -111,11 +107,11 @@ router.post("/createChallenge/searchUsername", (req, res) => {
 
 router.get("/search", async (req, res) => {
   let input = req.query.searchInput;
-  console.log(`from the get, the input is ${input}`)
+  console.log(`from the get, the input is ${input}`);
   const results = await findUsernames(input);
-  console.log(`the results are: ${results}`)
-  res.render("searchResults", {results});
-})
+  console.log(`the results are: ${results}`);
+  res.render("searchResults", { results });
+});
 
 router.post(
   "/createChallenge",
@@ -131,72 +127,37 @@ router.get("/:id/:player/like", (req, res) => {
   likePost(req, res);
 });
 
+
 router.get("/:username/toggleFollow", async (req, res) => {
   toggleFollowUser(req);
   res.redirect("back")
 })
 
 router.get("/userProfile", ensureAuthenticated, async (req, res) => {
-
-  const userCollection = database.db("Contendr").collection("users");
-  const users = await userCollection
-    .find()
-    .project({
-      id: 1,
-      email: 1,
-      username: 1,
-      posts: 1,
-      following: 1,
-    })
-    .toArray();
-
-  const postCollection = database.db("Contendr").collection("posts");
-  const posts = await postCollection.find().toArray();
-
-  const thisUser = users.find((user) => user.email === req.user.email);
-
-  let postsArray = [];
-  thisUser["posts"].forEach((userPost) => {
-    let userPostData = posts.find((post) => post.postId === userPost.postId);
-    postsArray.push(userPostData);
-  });
-
-  res.render("userProfile", { layout: "layout", user: req.user, posts: postsArray });
-
+  res.render("userProfile", { layout: "layout", user: req.user });
 });
 
 router.get("/profile", async (req, res) => {
+  let username = req.query.username;
+  let user = await getUserByUsername(username);
 
-  const userCollection = database.db("Contendr").collection("users");
-  const users = await userCollection
-    .find()
-    .project({
-      id: 1,
-      email: 1,
-      username: 1,
-      posts: 1,
-      following: 1,
-    })
-    .toArray();
+  res.render("profile", { layout: "layout", user });
+});
+
+router.get("/p", async (req, res) => {
+  // router to Individual post
+  const postId = req.query.postId;
 
   const postCollection = database.db("Contendr").collection("posts");
   const posts = await postCollection.find().toArray();
 
-  const thisUser = users.find((user) => user.email === req.user.email);
+  const post = posts.find((post) => post.postId === postId);
 
-  let postsArray = [];
-  thisUser["posts"].forEach((userPost) => {
-    let userPostData = posts.find((post) => post.postId === userPost.postId);
-    postsArray.push(userPostData);
-  });
+  console.log(" !@!@!@!@!@!@!@!@ ");
+  console.log("INDIV POST !@!@!@!@!@!@!@!@ " + JSON.stringify(post));
+  console.log(" !@!@!@!@!@!@!@!@ ");
 
-  let username = req.query.username
-  let user = await getUserByUsername(username)
-  let isFollowing = await checkFollowing(req.user.following, user.id)
-  if (req.query.username === req.user.username) {
-    res.redirect("userProfile")
-  } 
-  res.render("profile", { layout: "layout", user, isFollowing, posts: postsArray })
-})
+  res.render("post", { layout: "layout", post, user: req.user });
+});
 
 module.exports = router;
