@@ -3,12 +3,21 @@ const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
 const { upload } = require("../middleware/upload");
 const { path } = require("path");
-const { createChallenge, likePost } = require("../controllers/postController");
+const {
+  createChallenge,
+  likePost,
+  deletePost,
+} = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
-
-const { getFollowingUsernames, findUsernames, getUserByUsername, toggleFollowUser, checkFollowing } = require("../controllers/userControllerMongo");
+const {
+  getFollowingUsernames,
+  findUsernames,
+  getUserByUsername,
+  toggleFollowUser,
+  checkFollowing,
+} = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
   const userCollection = database.db("Contendr").collection("users");
@@ -124,46 +133,20 @@ router.post(
 );
 
 router.get("/:id/:player/like", (req, res) => {
-  likePost(req, res);
+  likePost(req);
 });
 
+router.get("/:id/deletePost", async (req, res) => {
+  deletePost(req);
+  res.redirect("/");
+});
 
 router.get("/:username/toggleFollow", async (req, res) => {
   toggleFollowUser(req);
-  res.redirect("back")
-})
-
-router.get("/userProfile", ensureAuthenticated, async (req, res) => {
-
-  const userCollection = database.db("Contendr").collection("users");
-  const users = await userCollection
-    .find()
-    .project({
-      id: 1,
-      email: 1,
-      username: 1,
-      posts: 1,
-      following: 1,
-    })
-    .toArray();
-
-  const postCollection = database.db("Contendr").collection("posts");
-  const posts = await postCollection.find().toArray();
-
-  const thisUser = users.find((user) => user.email === req.user.email);
-
-  let postsArray = [];
-  thisUser["posts"].forEach((userPost) => {
-    let userPostData = posts.find((post) => post.postId === userPost.postId);
-    postsArray.push(userPostData);
-  });
-
-  res.render("userProfile", { layout: "layout", user: req.user, posts: postsArray });
-
+  res.redirect("back");
 });
 
-router.get("/profile", async (req, res) => {
-
+router.get("/userProfile", ensureAuthenticated, async (req, res) => {
   const userCollection = database.db("Contendr").collection("users");
   const users = await userCollection
     .find()
@@ -187,16 +170,52 @@ router.get("/profile", async (req, res) => {
     postsArray.push(userPostData);
   });
 
-  let username = req.query.username
-  let user = await getUserByUsername(username)
-  let isFollowing = await checkFollowing(req.user.following, user.id)
-  if (req.query.username === req.user.username) {
-    res.redirect("userProfile")
-  }
-  res.render("profile", { layout: "layout", user, isFollowing, posts: postsArray })
-})
+  res.render("userProfile", {
+    layout: "layout",
+    user: req.user,
+    posts: postsArray,
+  });
+});
 
-router.get("/p", async (req, res) => {
+router.get("/profile", ensureAuthenticated, async (req, res) => {
+  const userCollection = database.db("Contendr").collection("users");
+  const users = await userCollection
+    .find()
+    .project({
+      id: 1,
+      email: 1,
+      username: 1,
+      posts: 1,
+      following: 1,
+    })
+    .toArray();
+
+  const postCollection = database.db("Contendr").collection("posts");
+  const posts = await postCollection.find().toArray();
+
+  const thisUser = users.find((user) => user.email === req.user.email);
+
+  let postsArray = [];
+  thisUser["posts"].forEach((userPost) => {
+    let userPostData = posts.find((post) => post.postId === userPost.postId);
+    postsArray.push(userPostData);
+  });
+
+  let username = req.query.username;
+  let user = await getUserByUsername(username);
+  let isFollowing = await checkFollowing(req.user.following, user.id);
+  if (req.query.username === req.user.username) {
+    res.redirect("userProfile");
+  }
+  res.render("profile", {
+    layout: "layout",
+    user,
+    isFollowing,
+    posts: postsArray,
+  });
+});
+
+router.get("/p", ensureAuthenticated, async (req, res) => {
   // router to Individual post
   const postId = req.query.postId;
 

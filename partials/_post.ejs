@@ -2,7 +2,10 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width" />
+
     <link rel="stylesheet" href="css/post.css" />
+    <link rel="stylesheet" href="css/indivPost.css" />
+
     <script
       src="https://kit.fontawesome.com/761d42c757.js"
       crossorigin="anonymous"
@@ -99,7 +102,6 @@
 
   <body>
     <div class="post">
-      <div class="post-gradient"></div>
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
           <img
@@ -151,13 +153,6 @@
                 width="50px"
                 height="50px"
               />
-              <div class="postTitle">
-                <p class="postTitle-s">
-                  <%= post["player1"] %> challanged <%= post["player2"] %>
-                </p>
-                <p class="postTitle-s"><%= post["title"] %></p>
-                <p class="postTitle-s"><strong>ends in</strong></p>
-              </div>
             </div>
             <div class="likes-container">
               <p class="likes"><%= Object.keys(post['p1Likes']).length %></p>
@@ -176,6 +171,16 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="post-info">
+      <div class="title">
+        <p class="title-s">
+          <%= post["player1"] %> challanged <%= post["player2"] %>
+        </p>
+        <p class="title-s"><%= post["title"] %></p>
+        <p class="title-s"><strong>ends in</strong></p>
+      </div>
+      <a href="/<%= post['postId'] %>/deletePost">Delete post for everyone</a>
     </div>
 
     <script>

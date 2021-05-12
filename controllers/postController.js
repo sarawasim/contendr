@@ -58,7 +58,7 @@ async function createChallenge(req, res) {
   }
 }
 
-async function likePost(req, res) {
+async function likePost(req) {
   const postId = req.params.id;
   const player = req.params.player;
 
@@ -99,22 +99,22 @@ async function likePost(req, res) {
       { $set: { p2Likes: likesObject } }
     );
   }
-
-  // await uploadCollection.findOneAndUpdate({id:postId},{$set: {"likes": }})
-
-  // database.users.forEach((user) => {
-  //   for (let i = 0; i < user.posts.length; i++) {
-  //     if (user.posts[i]) {
-  //       if (user.posts[i].postId === postId.toString()) {
-  //         if (user.posts[i].likes[username]) {
-  //           delete user.posts[i].likes[username];
-  //           return;
-  //         }
-  //         user.posts[i].likes[username] = true;
-  //       }
-  //     }
-  //   }
-  // });
 }
 
-module.exports = { createChallenge, likePost };
+async function deletePost(req, res) {
+  const postId = req.params.id;
+
+  console.log("UPLOAD ID IS !!!!!!!!!!!!!!!!!!!!!!! " + JSON.stringify(postId));
+
+  const postCollection = database.db("Contendr").collection("posts");
+  await postCollection.deleteOne({ postId: postId });
+
+  const userCollection = database.db("Contendr").collection("users");
+  await userCollection.update(
+    {},
+    { $pull: { posts: { postId: postId } } },
+    { multi: true }
+  );
+}
+
+module.exports = { createChallenge, likePost, deletePost };
