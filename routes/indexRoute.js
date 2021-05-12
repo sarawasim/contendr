@@ -7,7 +7,7 @@ const { createChallenge, likePost } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
 
-const { getFollowingUsernames, findUsernames, getUserByUsername, followUser, checkFollowing, unfollowUser } = require("../controllers/userControllerMongo");
+const { getFollowingUsernames, findUsernames, getUserByUsername, toggleFollowUser, checkFollowing } = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
   const userCollection = database.db("Contendr").collection("users");
@@ -131,12 +131,8 @@ router.get("/:id/:player/like", (req, res) => {
   likePost(req, res);
 });
 
-router.get("/:username/follow", async (req, res) => {
-  followUser(req);
-  res.redirect("back")
-})
-router.get("/:username/unfollow", async (req, res) => {
-  unfollowUser(req);
+router.get("/:username/toggleFollow", async (req, res) => {
+  toggleFollowUser(req);
   res.redirect("back")
 })
 
