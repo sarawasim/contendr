@@ -68,38 +68,52 @@ const checkFollowing = (followingList, otherId) => {
   } else return isFollowing = true
 }
 
-const followUser = async (req) => {
+const toggleFollowUser = async (req) => {
     const userCollection = database.db("Contendr").collection("users");
     const usernameToFollow = req.params.username;
     const userToFollow = await userModel.findByUsername(usernameToFollow);
       let check = await checkFollowing(req.user.following, userToFollow.id)
-      const user = req.user.id;
+      const userId = req.user.id;
       if (!check) {
-        await userCollection.updateMany(
-          { id: user },
+        await userCollection.updateOne(
+          { id: userId },
           { $push: { following: { id: userToFollow.id } } }
         );
-        await userCollection.updateMany(
+        await userCollection.updateOne(
           { id: userToFollow.id },
-          { $push: { followers: { id: user } } }
+          { $push: { followers: { id: userId } } }
         );
         console.log("following this stupid person now")
-      } else (
-        console.log("already following this bitch")
-      )
+      } else {
+        await userCollection.updateOne(
+          { id: userId },
+          { $pull: { following: { id: userToFollow.id }}}
+        )
+        await userCollection.updateOne(
+          { id: userToFollow.id},
+          { $pull: { followers: { id: userId }}}
+        )
+      }
 }
 
-const unfollowUser = async (req) => {
-  const usernameToUnfollow = req.params.username;
-  const userToUnfollow = await userModel.findByUsername(usernameToUnfollow);
-  const userCollection = database.db("Contendr").collection("users");
-  await userCollection.deleteOne(
-    
-  )
-
-
-
-}
+// const unfollowUser = async (req) => {
+//   const usernameToUnfollow = req.params.username;
+//   console.log(`gonna unfollow this user: ${usernameToUnfollow}`)
+//   const userToUnfollow = await userModel.findByUsername(usernameToUnfollow);
+//   console.log(`gonna unfollow this user: ${JSON.stringify(userToUnfollow)}`)
+//   const userCollection = database.db("Contendr").collection("users");
+//   const userId = req.user.id
+//   console.log(`this is req.user.id: ${userId}`)
+//   await userCollection.updateOne(
+//     { id: userId },
+//     { $pull: { following: { id: userToUnfollow }}}
+//   );
+//   await userCollection.updateOne(
+//     { id: userToUnfollow},
+//     { $pull: { followers: { id: userId }}}
+//   );
+//   console.log("end of unfollow function")
+// }
 
 function isUserValid(user, password) {
   const passHash = userModel.hashPassword(password, user.password_salt);
@@ -242,7 +256,6 @@ module.exports = {
   getFollowingUsernames,
   findUsernames,
   getUserByUsername,
-  followUser,
+  toggleFollowUser,
   checkFollowing,
-  unfollowUser,
 };
