@@ -123,6 +123,29 @@
   color: #fff;
 }
 
+#acceptBtn, #rejectBtn {
+  background-image: linear-gradient(#ffc8f0, #ff85dd);
+  border: none;
+  color: white;
+  padding: 8px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2rem;
+  cursor: pointer;
+  grid-row: 1;
+  grid-column: 3/4;
+  height: 20px;
+  width: 150px;
+  border-radius: 20px;
+  box-sizing: unset;
+}
+
+#rejectBtn {
+  background-image: linear-gradient(#d8d8d8, #5e5e5e);
+}
+
 @media screen and (max-width: 600px) {
   body {
     min-width: fit-content;
