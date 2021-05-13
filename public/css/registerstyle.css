@@ -1,3 +1,50 @@
 #register {
   background-image: linear-gradient(#55c2ff, #5177ff);
+  margin-top: 5rem;
+}
+
+.small-text {
+  font-size: 0.8rem;
+  color: black;
+}
+
+.small-text a {
+  color: black;
+}
+
+#login-text {
+  color: black;
+}
+
+a:hover,
+#login-text:hover {
+  color: #ff85dd;
+}
+
+.wave {
+  top: 50vh;
+}
+section.background {
+  height: 70vh;
+}
+
+section.sec2 {
+  height: 30vh;
+}
+@media screen and (min-width: 600px) {
+  .wave {
+    bottom: 25vh;
+  }
+}
+
+@media screen and (min-width: 700) {
+  .wave {
+    bottom: 5vh;
+  }
+}
+
+@media screen and (min-width: 800) {
+  .wave {
+    bottom: 15vh;
+  }
 }
