@@ -1,61 +1,69 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="css/profile.css" />
-    <script src="https://kit.fontawesome.com/761d42c757.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/761d42c757.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="container-profile">
-        <div class="user-profile">
-            <div class="circle-crop">
-                <img src="../assets/dp-placeholder.png" alt="display picture" id="displayPic-profile">
-            </div>
-            <div class="userInfo">
-                <h1 class="username-profile"><%=user.username%></h1>
-                <p class="bio">Bio</p>
-            </div>
-            <div class="follow">
-               <a href="/<%=user.username%>/toggleFollow" id="follow-btn">
-                <%if (!isFollowing) { %> Follow 
-                <% } else { %> Unfollow
-                <% } %> </a>
-            </div>
+      <div class="user-profile">
+        <div class="circle-crop">
+          <img
+            src="../assets/dp-placeholder.png"
+            alt="display picture"
+            id="displayPic-profile"
+          />
         </div>
-
-        <div class="userInfo-Profile">
-            <div class="followers">
-                <p>Followers</p>
-                <p class="bold"><%= user.followers.length %></p>
-            </div>
-            <div class="following">
-                <p>Following</p>
-                <p class="bold"><%= user.following.length %></p>
-            </div>
-            <div class="challenges-won">
-                <p>Challenges Won</p>
-                <p class="bold">111</p>
-            </div>
+        <div class="userInfo">
+          <h1 class="username-profile"><%=user.username%></h1>
+          <p class="bio">Bio</p>
         </div>
+        <div class="follow">
+          <a href="/<%=user.username%>/toggleFollow" id="follow-btn">
+            <%if (!isFollowing) { %> Follow <% } else { %> Unfollow <% } %>
+          </a>
+        </div>
+      </div>
 
-        <div class="userPosts-Profile">
-<% let i=0; %>
-    <% for(i=0; i < posts.length; i++) { if (posts[i].player1==user.username) { console.log("*************" +
+      <div class="userInfo-Profile">
+        <div class="followers">
+          <p>Followers</p>
+          <p class="bold"><%= user.followers.length %></p>
+        </div>
+        <div class="following">
+          <p>Following</p>
+          <p class="bold"><%= user.following.length %></p>
+        </div>
+        <div class="challenges-won">
+          <p>Challenges Won</p>
+          <p class="bold">111</p>
+        </div>
+      </div>
+
+      <div class="userPosts-Profile">
+        <% let i=0; %> <% for(i=0; i < posts.length; i++) { if
+        (posts[i].player1==user.username) { console.log("*************" +
         posts[i].player1) %>
         <div class="profilePost">
-            <img src="<%= posts[i]['p1URL'] %>" id="postImage">
+          <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
+            <img src="<%= posts[i]['p1URL'] %>" id="postImage" />
+          </a>
         </div>
-        <% } if (posts[i].player2==user.username) { console.log("+++++++++++++" + posts[i].player2)%>
-            <div class="profilePost">
-                <img src="<%= posts[i]['p2URL'] %>" id="postImage">
-            </div>
-            <% } }%>
+        <% } if (posts[i].player2==user.username) { console.log("+++++++++++++"
+        + posts[i].player2)%>
+        <div class="profilePost">
+          <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
+            <img src="<%= posts[i]['p2URL'] %>" id="postImage" />
+          </a>
         </div>
+        <% } }%>
+      </div>
     </div>
-</body>
-<script defer src="/scripts/profile.js"></script>
-
+  </body>
+  <script defer src="/scripts/profile.js"></script>
 </html>
