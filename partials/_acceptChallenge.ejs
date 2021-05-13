@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/createChallenge.css" />
+    <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
+    <script src="https://kit.fontawesome.com/761d42c757.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="challenge-container">
+            <form action="/updateP2URL" method="POST" enctype="multipart/form-data" id="updateP2URL">
+                <div class="shadow sm:rounded-md sm:overflow-hidden">
+                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+    
+                        <div>
+                            <div
+                                class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div class="space-y-1 text-center">
+                                    <input type="hidden" name="postId" value="<%= post.postId %>">
+                                    <div class="justify-center flex text-sm text-gray-600">
+                                        <label for="fileUpload"
+                                            class="fileUpload">
+                                            <span>Upload a file</span>
+                                            <span id="hiddenURL"></span>
+                                            <input id="fileUpload" name="fileUpload" type="file"
+                                                class="sr-only p2Input" accept="image/gif, image/png, image/jpeg"
+                                                onchange="showPreview(event)">
+                                        </label>
+                                        <p class="text-xs text-gray-500">
+                                            PNG, JPG, or GIF up to 10MB
+                                        </p>
+                                        <script>
+                                            //generates img src for previewing file upload
+                                            function showPreview(event) {
+                                                if (event.target.files.length > 0) {
+                                                    let src = URL.createObjectURL(event.target.files[0]);
+                                                    let preview = document.getElementById("previewImage")
+                                                    preview.src = src;
+                                                    preview.style.height = "400px";
+                                                    preview.style.width = "auto";
+                                                    preview.style.display = "block";
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                    <div id="preview">
+                                        <img id="previewImage">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-500 px-4 py-3 text-center sm:px-6 text-white">
+                        
+                    </div>
+                </div>
+            </form>
+    </div>
+    <script defer src="/scripts/accept.js"></script>
+
+</body>
+
+</html>
