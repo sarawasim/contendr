@@ -86,7 +86,7 @@ router.post("/createChallenge/searchUsername", (req, res) => {
 });
 
 router.get("/search", async (req, res) => {
-  let input = req.query.searchInput;
+  let input = req.query.searchInput.toLowerCase();
   const results = await findUsernames(input);
   res.render("searchResults", { results, user: req.user });
 });

@@ -30,7 +30,7 @@ const userModel = {
   searchUsernames: async (input) => {
     const userCollection = database.db("Contendr").collection("users");
     const results = await userCollection
-      .find({"username" : {$regex : `.*${input}.*`}})
+      .find({"username" : {$regex : `.*${input}.*`, $options: "i"}})
       .project({
         username: 1,
         following: 1,
