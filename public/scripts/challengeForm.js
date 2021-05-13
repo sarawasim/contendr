@@ -7,7 +7,7 @@ $(document).ready(function () {
     let newList = list.split(",");
 
     const results = $.grep(newList, (name) => {
-      return name.includes(input);
+      return name.match(new RegExp(`${input}`, "i"));
     });
 
     const li = results.map((name) => {
