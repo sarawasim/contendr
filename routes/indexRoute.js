@@ -7,6 +7,7 @@ const {
   createChallenge,
   likePost,
   deletePost,
+  uploadP2URL,
 } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
@@ -230,5 +231,73 @@ router.get("/p", ensureAuthenticated, async (req, res) => {
 
   res.render("post", { layout: "layout", post, user: req.user });
 });
+
+router.get("/notifications", ensureAuthenticated, async (req, res) => {
+  const userCollection = database.db("Contendr").collection("users");
+  const users = await userCollection
+    .find()
+    .project({
+      id: 1,
+      email: 1,
+      username: 1,
+      posts: 1,
+      following: 1,
+    })
+    .toArray();
+
+  const postCollection = database.db("Contendr").collection("posts");
+  const posts = await postCollection.find().toArray();
+
+  const thisUser = users.find((user) => user.email === req.user.email);
+
+  let userFollowersArray = [];
+  thisUser["following"].forEach((userFollower) => {
+    let followerProfile = users.find((user) => user.id === userFollower.id);
+    userFollowersArray.push(followerProfile);
+  });
+
+  let feedPostsArray = [];
+  thisUser["posts"].forEach((userPost) => {
+    let userPostData = posts.find((post) => post.postId === userPost.postId);
+    feedPostsArray.push(userPostData);
+  });
+
+  userFollowersArray.forEach((follower) => {
+    follower["posts"].forEach((followerPost) => {
+      let alreadyHasPost = feedPostsArray.find((feedPost) => {
+        return feedPost.postId === followerPost.postId;
+      });
+
+      if (!alreadyHasPost) {
+        let followerPostData = posts.find((post) => {
+          return post.postId === followerPost.postId;
+        });
+        feedPostsArray.push(followerPostData);
+      }
+    });
+  });
+  res.render("notifications", { feedPosts: feedPostsArray, user: req.user })
+})
+
+router.get("/accept", ensureAuthenticated, async (req,res) => {
+  const postId = req.query.postId;
+
+  const postCollection = database.db("Contendr").collection("posts");
+  const posts = await postCollection.find().toArray();
+
+  const post = posts.find((post) => post.postId === postId);
+
+  console.log(" !@!@!@!@!@!@!@!@ ");
+  console.log("INDIV POST !@!@!@!@!@!@!@!@ " + JSON.stringify(post));
+  console.log(" !@!@!@!@!@!@!@!@ ");
+
+  res.render("acceptChallenge", { layout: "layoutC", post, user: req.user });
+})
+
+router.post("/updateP2URL", upload.single("fileUpload"),
+ (req, res) => {
+  uploadP2URL(req);
+  res.redirect("/");
+})
 
 module.exports = router;

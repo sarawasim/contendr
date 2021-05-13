@@ -2,6 +2,16 @@ const database = include("databaseConnection/databaseConnection");
 const Joi = require("joi");
 const { v4: uuidv4 } = require("uuid");
 
+async function uploadP2URL(req) {
+  const postCollection = database.db("Contendr").collection("posts");
+  console.log(`this is req.body.imageURL ${req.body.imageURL}` )
+  console.log(`this is postId ${req.body.postId}`)
+  await postCollection.updateOne(
+    { postId: req.body.postId },
+    { $set: { p2URL: req.body.imageURL, isAccepted: true } }
+    )
+}
+
 async function createChallenge(req, res) {
   try {
     const schema = await Joi.object({
@@ -38,6 +48,7 @@ async function createChallenge(req, res) {
       timeLimit: req.body.timeInput,
       p1URL: req.body.imageURL,
       p2URL: "",
+      isAccepted: false
     });
 
     const userCollection = database.db("Contendr").collection("users");
@@ -117,4 +128,4 @@ async function deletePost(req, res) {
   );
 }
 
-module.exports = { createChallenge, likePost, deletePost };
+module.exports = { createChallenge, likePost, deletePost, uploadP2URL };

@@ -121,7 +121,7 @@ label img {
   width: 400px;
   cursor: pointer;
   padding: 0.5rem;
-  position: absolute;
+  /* position: absolute; */
   margin-left: -2.5rem;
 }
 
