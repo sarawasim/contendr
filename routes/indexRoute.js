@@ -34,14 +34,12 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     .toArray();
 
   const postCollection = database.db("Contendr").collection("posts");
-  const posts = await postCollection.find().toArray();
-
-  console.log("POSTS FROM MONGO !@##%$!@#%$!@#$ " + JSON.stringify(posts));
+  const posts = await postCollection
+    .find()
+    .toArray();
 
   const thisUser = users.find((user) => user.email === req.user.email);
-  console.log(
-    "THIS USER +++++++++++++++++============= " + JSON.stringify(thisUser)
-  );
+
   let userFollowersArray = [];
   thisUser["following"].forEach((userFollower) => {
     let followerProfile = users.find((user) => user.id === userFollower.id);
@@ -50,7 +48,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
   let feedPostsArray = [];
   thisUser["posts"].forEach((userPost) => {
-    let userPostData = posts.find((post) => post.postId === userPost.postId);
+    let userPostData = posts.find((post) => post.postId === userPost.postId );
     feedPostsArray.push(userPostData);
   });
 
@@ -59,10 +57,6 @@ router.get("/", ensureAuthenticated, async (req, res) => {
       let alreadyHasPost = feedPostsArray.find((feedPost) => {
         return feedPost.postId === followerPost.postId;
       });
-
-      console.log("FOLLOWER POST ~~~~~~~~~~~ " + JSON.stringify(followerPost));
-
-      console.log("ALREADY HAS ~~~~~~~~~~~ " + JSON.stringify(alreadyHasPost));
 
       if (!alreadyHasPost) {
         let followerPostData = posts.find((post) => {
@@ -73,54 +67,28 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     });
   });
 
-  // for (i = 0; i < feedPostsArray.length; i++) {
-  //   console.log(
-  //     "----------- Feed Posts length ------ " + feedPostsArray.length
-  //   );
-  //   for (j = 0; j < uploads.length; j++) {
-  //     console.log("----------- uploads array length ------ " + uploads.length);
-  //     if (feedPostsArray[i]) {
-  //       if (feedPostsArray[i].p1UploadId === uploads[j].id) {
-  //         feedPostsArray[i]["p1Upload"] = uploads[j];
-  //       }
-  //       if (feedPostsArray[i]["p2UploadId"] === uploads[j].id) {
-  //         feedPostsArray[i]["p2Upload"] = uploads[j];
-  //       }
-  //     }
-  //   }
-  // }
-  // Array of posts are passed into the ejs. Creates different divs that // Takes in an arrayOfPosts[] that are associated with the signed in user.
-  // contain each post
+  let filteredPostArray = feedPostsArray.filter((post) => post.isAccepted === true)
 
-  console.log(
-    "----------------- Feed Posts ------ " + JSON.stringify(feedPostsArray)
-  );
   // Each post contains urls to each video. display the urls in the ejs page.
-  res.render("index", { feedPosts: feedPostsArray, user: req.user });
+  res.render("index", { feedPosts: filteredPostArray, user: req.user });
 });
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
-  console.log("in the get");
   let following = await getFollowingUsernames(req.user.following);
-  console.log("console logging array from router.get");
-  console.log(following);
   res.render("createChallenge", { layout: "layoutB", following: following });
 });
 
 router.post("/createChallenge/searchUsername", (req, res) => {
   let user = getUsername(req.body.searchUser);
   if (user) {
-    console.log("sucess");
     res.render("/createChallenge", { user });
   } else console.log("failed");
 });
 
 router.get("/search", async (req, res) => {
   let input = req.query.searchInput;
-  console.log(`from the get, the input is ${input}`);
   const results = await findUsernames(input);
-  console.log(`the results are: ${results}`);
-  res.render("searchResults", { results });
+  res.render("searchResults", { results, user: req.user });
 });
 
 router.post(
@@ -224,10 +192,6 @@ router.get("/p", ensureAuthenticated, async (req, res) => {
   const posts = await postCollection.find().toArray();
 
   const post = posts.find((post) => post.postId === postId);
-
-  console.log(" !@!@!@!@!@!@!@!@ ");
-  console.log("INDIV POST !@!@!@!@!@!@!@!@ " + JSON.stringify(post));
-  console.log(" !@!@!@!@!@!@!@!@ ");
 
   res.render("post", { layout: "layout", post, user: req.user });
 });
