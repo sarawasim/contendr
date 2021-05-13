@@ -20,11 +20,11 @@
           />
         </div>
         <div class="userInfo">
-          <h1 class="username-profile"><%=user.username%></h1>
+          <h1 class="username-profile"><%=searchedUser.username%></h1>
           <p class="bio">Bio</p>
         </div>
         <div class="follow">
-          <a href="/<%=user.username%>/toggleFollow" id="follow-btn">
+          <a href="/<%=searchedUser.username%>/toggleFollow" id="follow-btn">
             <%if (!isFollowing) { %> Follow <% } else { %> Unfollow <% } %>
           </a>
         </div>
@@ -33,11 +33,11 @@
       <div class="userInfo-Profile">
         <div class="followers">
           <p>Followers</p>
-          <p class="bold"><%= user.followers.length %></p>
+          <p class="bold"><%= searchedUser.followers.length %></p>
         </div>
         <div class="following">
           <p>Following</p>
-          <p class="bold"><%= user.following.length %></p>
+          <p class="bold"><%= searchedUser.following.length %></p>
         </div>
         <div class="challenges-won">
           <p>Challenges Won</p>
@@ -47,14 +47,14 @@
 
       <div class="userPosts-Profile">
         <% let i=0; %> <% for(i=0; i < posts.length; i++) { if
-        (posts[i].player1==user.username) { console.log("*************" +
+        (posts[i].player1==searchedUser.username) { console.log("*************" +
         posts[i].player1) %>
         <div class="profilePost">
           <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
             <img src="<%= posts[i]['p1URL'] %>" id="postImage" />
           </a>
         </div>
-        <% } if (posts[i].player2==user.username) { console.log("+++++++++++++"
+        <% } if (posts[i].player2==searchedUser.username) { console.log("+++++++++++++"
         + posts[i].player2)%>
         <div class="profilePost">
           <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">

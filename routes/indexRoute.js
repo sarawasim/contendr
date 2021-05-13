@@ -147,38 +147,26 @@ router.get("/userProfile", ensureAuthenticated, async (req, res) => {
 });
 
 router.get("/profile", ensureAuthenticated, async (req, res) => {
-  const userCollection = database.db("Contendr").collection("users");
-  const users = await userCollection
-    .find()
-    .project({
-      id: 1,
-      email: 1,
-      username: 1,
-      posts: 1,
-      following: 1,
-    })
-    .toArray();
-
   const postCollection = database.db("Contendr").collection("posts");
   const posts = await postCollection.find().toArray();
 
-  const thisUser = users.find((user) => user.email === req.user.email);
+  let username = req.query.username;
+  let searchedUser = await getUserByUsername(username);
 
   let postsArray = [];
-  thisUser["posts"].forEach((userPost) => {
+  searchedUser["posts"].forEach((userPost) => {
     let userPostData = posts.find((post) => post.postId === userPost.postId);
     postsArray.push(userPostData);
   });
 
-  let username = req.query.username;
-  let user = await getUserByUsername(username);
-  let isFollowing = await checkFollowing(req.user.following, user.id);
+  let isFollowing = await checkFollowing(req.user.following, searchedUser.id);
   if (req.query.username === req.user.username) {
     res.redirect("userProfile");
   }
   res.render("profile", {
     layout: "layout",
-    user,
+    searchedUser,
+    user: req.user,
     isFollowing,
     posts: postsArray,
   });
