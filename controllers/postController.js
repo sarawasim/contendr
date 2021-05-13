@@ -47,7 +47,7 @@ async function createChallenge(req, res) {
       commentList: [],
       timeLimit: req.body.timeInput,
       p1URL: req.body.imageURL,
-      p2URL: "",
+      p2URL: "/assets/waiting-for-response.jpg",
       isAccepted: false
     });
 
