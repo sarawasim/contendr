@@ -221,7 +221,7 @@ router.get("/accept", ensureAuthenticated, async (req,res) => {
 router.post("/updateP2URL", upload.single("fileUpload"),
  (req, res) => {
   uploadP2URL(req);
-  res.redirect("/");
+  res.redirect(`/p?postId=${req.body.postId}`);
 })
 
 module.exports = router;
