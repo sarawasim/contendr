@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
 
-    <link rel="stylesheet" href="css/post.css" />
+    <!-- <link rel="stylesheet" href="css/post.css" /> -->
     <link rel="stylesheet" href="css/indivPost.css" />
 
     <script
@@ -102,9 +102,11 @@
 
   <body>
     <div class="post">
-      <% if (post.player1 == user.username || post.player2 == user.username) { %>
-        <a href="/<%= post['postId'] %>/deletePost">Delete post for everyone</a>
-      <% } %>
+      <div class="post-head">
+        <% if (post.player1 == user.username || post.player2 == user.username) { %>
+          <a href="/<%= post['postId'] %>/deletePost" id="delete-btn">Delete post for everyone</a>
+          <% } %>
+      </div>
 
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
@@ -114,31 +116,7 @@
             height="600"
             style="object-fit: cover"
           />
-          <div class="bottomright">
-            <div>
-              <img
-                id="displayPicture-playerTwo"
-                src="mockUser2.png"
-                alt="display picture"
-                width="50px"
-                height="50px"
-              />
-            </div>
-            <div class="likes-container">
-              <p class="likes"><%= Object.keys(post['p2Likes']).length %></p>
-              <a href="/<%= post['postId'] %>/p2/like">
-                <% if(post['p2Likes'][user.email]===true) { %>
-                <span style="color: #ff84dd">
-                  <i class="fas fa-heart"></i>
-                </span>
-                <% } else { %>
-                <span style="color: #ff84dd">
-                  <i class="far fa-heart"></i>
-                </span>
-                <% } %>
-              </a>
-            </div>
-          </div>
+          
         </div>
 
         <div class="img-comp-img img-comp-overlay player1-post">
@@ -148,51 +126,82 @@
             height="600"
             style="object-fit: cover"
           />
-          <div class="bottomleft">
-            <div class="dp-title">
-              <img
-                id="displayPicture-playerOne"
-                src="mockUser.png"
-                alt="display picture"
-                width="50px"
-                height="50px"
-              />
-            </div>
-            <div class="likes-container">
-              <p class="likes"><%= Object.keys(post['p1Likes']).length %></p>
-              <a href="/<%= post['postId'] %>/p1/like">
-                <% if(post['p1Likes'][user.email]===true) { %>
-                <span style="color: #5377fd">
-                  <i class="fas fa-heart"></i>
-                </span>
-                <% } else { %>
-                <span style="color: #5377fd">
-                  <i class="far fa-heart"></i>
-                </span>
-                <% } %>
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-    <div class="post-info">
-      <div class="title">
-        <p class="title-s">
-          <strong> <a href="/profile?username=<%=post['player1']%>"><%= post["player1"] %></a> </strong>  challenged <strong> <a href="/profile?username=<%=post['player2']%>"><%= post["player2"] %></a></strong> to <%= post["category"] %>!
+
+    <div class="players">
+    <div class="bottomleft">
+      <div class="dp-likes">
+        <img id="displayPicture-playerOne" src="mockUser.png" alt="display picture" width="50px" height="50px" />
+      
+      <div class="likes-container">
+        <p class="likes">
+          <%= Object.keys(post['p1Likes']).length %>
         </p>
-        <p class="title-s"><%= post["createdAt"] %></p>
-        <p class="title-s"><%= post["title"] %></p>
-        <p class="title-s"><%= post["description"] %></p>
-
-        <p class="title-s"><strong>ends in</strong></p>
+        <a href="/<%= post['postId'] %>/p1/like">
+          <% if(post['p1Likes'][user.email]===true) { %>
+            <span style="color: #5377fd">
+              <i class="fas fa-heart"></i>
+            </span>
+            <% } else { %>
+              <span style="color: #5377fd">
+                <i class="far fa-heart"></i>
+              </span>
+              <% } %>
+        </a>
+        </div>
       </div>
-      <div> Comments
+    </div>
+
+<div class="title">
+  <p class="text-m">
+    <strong> <a href="/profile?username=<%=post['player1']%>">
+        <%= post["player1"] %>
+      </a> </strong> challenged <strong> <a href="/profile?username=<%=post['player2']%>">
+        <%= post["player2"] %>
+      </a></strong> to <%= post["category"] %>!
+  </p>
+  <p class="text-s">Created: <%= post["createdAt"] %>
+  </p>
+  <p class="text-s">Title: <%= post["title"] %>
+  </p>
+  <p class="text-s">Description: <%= post["description"] %>
+  </p>
+
+  <p class="text-s">Ends in: </p>
+</div>
+    
+    <div class="bottomright">
+      <div class="dp-likes">
+        <img id="displayPicture-playerTwo" src="mockUser2.png" alt="display picture" width="50px" height="50px" />
+      <div class="likes-container">
+        <p class="likes">
+          <%= Object.keys(post['p2Likes']).length %>
+        </p>
+        <a href="/<%= post['postId'] %>/p2/like">
+          <% if(post['p2Likes'][user.email]===true) { %>
+            <span style="color: #ff84dd">
+              <i class="fas fa-heart"></i>
+            </span>
+            <% } else { %>
+              <span style="color: #ff84dd">
+                <i class="far fa-heart"></i>
+              </span>
+              <% } %>
+        </a>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="post-info">
+      
+      <hr>
+      <div> <p class="text-m"> Comments </p> 
         <% let i=0; %> <% for(i=0; i < post.commentList.length; i++) { %>
-          <div> <strong><a href="/profile?username=<%=post.commentList[i].username%>"><%= post.commentList[i].username %></a></strong></div>
+          <div> <strong> <p class="text-comments"> <a href="/profile?username=<%=post.commentList[i].username%>"><%= post.commentList[i].username %>: </a></strong><%= post.commentList[i].comment %></p></div>
 
-
-          <div> <%= post.commentList[i].comment %></div>
           <% } %>
 
       </div>
@@ -200,10 +209,8 @@
         <form action="/post/<%= post.postId %>/comment" method="POST">
           <label for="commentInput">
           </label>
-          <input type="text" name="commentInput" id="commentInput">
-          <button type="submit">Send</button>
-
-
+          <input type="text" name="commentInput" id="commentInput" autocomplete="off" >
+          <button type="submit" id="sendMessage-btn"><i class="far fa-paper-plane"></i></button>
         </form>
       </div>
     </div>

@@ -185,16 +185,17 @@
         </div>
       </div>
     </div>
-  </div>
     <div class="acceptReject-btns">
-
+  
       <a href="accept?postId=<%= feedPosts[i]['postId'] %>" id="acceptBtn">Accept</a>
   
       <a href="/<%= feedPosts[i]['postId'] %>/deletePost" id="rejectBtn">Reject</a>
-      <% } %>
-
     </div>
-    <script>
+      <% } %>
+  </div>
+    
+
+      <script>
       /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
       initComparisons();
     </script>
