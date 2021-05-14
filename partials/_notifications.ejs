@@ -157,11 +157,11 @@
                 height="50px"
               />
               <div class="postTitle">
-                <p class="postTitle-s">
-                  <%= feedPosts[i]["player1"] %> challanged <%=
-                  feedPosts[i]["player2"] %>
-                </p>
+                <p class="postTitle-s"> <a href="/profile?username=<%=feedPosts[i].player1%>"> <%= feedPosts[i]["player1"] %> </a> challenged
+                   you</a> to <%= feedPosts[i].category %>!</p>
+
                 <p class="postTitle-s"><%= feedPosts[i]["title"] %></p>
+                <p class="postTitle-s"><%= feedPosts[i]["descriptions"] %></p>
                 <p class="postTitle-s"><strong>ends in</strong></p>
               </div>
             </div>
