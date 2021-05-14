@@ -179,7 +179,7 @@
     <div class="post-info">
       <div class="title">
         <p class="title-s">
-          <strong> <%= post["player1"] %> </strong>  challenged <strong> <%= post["player2"] %> </strong> to <%= post["category"] %>!
+          <strong> <a href="/profile?username=<%=post['player1']%>"><%= post["player1"] %></a> </strong>  challenged <strong> <a href="/profile?username=<%=post['player2']%>"><%= post["player2"] %></a></strong> to <%= post["category"] %>!
         </p>
         <p class="title-s"><%= post["title"] %></p>
         <p class="title-s"><%= post["description"] %></p>
@@ -188,7 +188,7 @@
       </div>
       <div> Comments
         <% let i=0; %> <% for(i=0; i < post.commentList.length; i++) { %>
-          <div> <strong><%= post.commentList[i].username %></strong></div>
+          <div> <strong><a href="/profile?username=<%=post.commentList[i].username%>"><%= post.commentList[i].username %></a></strong></div>
 
 
           <div> <%= post.commentList[i].comment %></div>
