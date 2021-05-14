@@ -71,6 +71,7 @@ a:active {
   background-color: rgb(60, 112, 255);
   opacity: 0.6;
   border-radius: 50%;
+  border: solid 4px rgb(255, 98, 221);
 }
 
 .dp-title {

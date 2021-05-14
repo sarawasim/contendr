@@ -10,6 +10,10 @@
   border-radius: 10px;
 }
 
+.title{
+  width: 340px
+}
+
 .text-s {
   font-size: 11px;
   margin: 0.5rem;

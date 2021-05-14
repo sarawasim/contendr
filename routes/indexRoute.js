@@ -104,6 +104,7 @@ router.post(
 
 router.get("/:id/:player/like", (req, res) => {
   likePost(req);
+  res.redirect("back");
 });
 
 router.get("/:id/deletePost", async (req, res) => {
