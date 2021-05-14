@@ -76,7 +76,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   let following = await getFollowingUsernames(req.user.following);
-  res.render("createChallenge", { layout: "layoutB", following: following });
+  res.render("createChallenge", { layout: "layoutB", following: following, user: req.user});
 });
 
 router.post("/createChallenge/searchUsername", (req, res) => {
