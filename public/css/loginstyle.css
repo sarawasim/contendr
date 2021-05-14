@@ -110,6 +110,10 @@ input {
   box-sizing: unset;
 }
 
+input:focus{
+  outline: none;
+}
+
 input {
   border: none;
   height: 35px;
