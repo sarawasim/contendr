@@ -8,6 +8,33 @@
     width: 450px;
 }
 
+.searchResult {
+  padding: 0.5rem;
+}
+
+.searchResult a {
+  text-decoration: none;
+  margin: 10px;
+}
+
+.searchResult a:link {
+  color: rgb(60, 112, 255);
+}
+
+
+.searchResult a:visited {
+  color: rgb(60, 112, 255);
+}
+
+
+.searchResult a:hover {
+  color: #ff84dd;
+}
+
+
+.searchResult a:active {
+  color: #ff84dd;
+}
 
 @media screen and (max-width: 800px) {
   .earchResultContainer{

@@ -52,6 +52,7 @@ textarea {
 }
 
 .categoryContainer {
+  padding-top: 1rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -108,6 +109,7 @@ label img {
 
 .results {
   background-color: white;
+  color: #5377fd;
 }
 
 /* search results--------------- */
