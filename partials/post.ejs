@@ -157,6 +157,8 @@
     <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
     <br />
     <div class="post">
+      <p> <%= feedPosts[i]["player1"] %> challenged <%=
+      feedPosts[i]["player2"] %> to <%= feedPosts[i].category %>!</p>
       <a href="/p?postId=<%= feedPosts[i]['postId'] %>" class="post-gradient"></a>
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
