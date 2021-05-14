@@ -4,12 +4,21 @@ const { v4: uuidv4 } = require("uuid");
 
 async function uploadP2URL(req) {
   const postCollection = database.db("Contendr").collection("posts");
-  console.log(`this is req.body.imageURL ${req.body.imageURL}` )
-  console.log(`this is postId ${req.body.postId}`)
   await postCollection.updateOne(
     { postId: req.body.postId },
     { $set: { p2URL: req.body.imageURL, isAccepted: true } }
     )
+}
+
+async function addComment(req) {
+  const postCollection = database.db("Contendr").collection("posts");
+  await postCollection.updateOne(
+    { 
+      postId: req.params.id
+    },
+    {
+      $push: { commentList: { commentId: uuidv4(), comment: req.body.commentInput, username: req.user.username, userId: req.user.id, createdAt: new Date().toLocaleString() } }
+    })
 }
 
 async function createChallenge(req, res) {
@@ -62,7 +71,6 @@ async function createChallenge(req, res) {
       { $push: { posts: { postId: postID } } }
     );
   } catch (ex) {
-    console.log("i'm in the catch");
     res.render("error", { message: "Error connecting to Mongo" });
     console.log("Error connecting to Mongo");
     console.log(ex);
@@ -72,16 +80,10 @@ async function createChallenge(req, res) {
 async function likePost(req) {
   const postId = req.params.id;
   const player = req.params.player;
-
-  console.log("UPLOAD ID IS !!!!!!!!!!!!!!!!!!!!!!! " + JSON.stringify(postId));
-
   const postCollection = database.db("Contendr").collection("posts");
   const posts = await postCollection.find().toArray();
 
   const targetPost = posts.find((post) => post.postId === postId);
-  console.log(
-    "TARGETTED UPLOAD in likes function !!!!!!!!!!!!!!!!!!!!!!! " + targetPost
-  );
 
   if (player === "p1") {
     const likesObject = targetPost.p1Likes;
@@ -115,8 +117,6 @@ async function likePost(req) {
 async function deletePost(req, res) {
   const postId = req.params.id;
 
-  console.log("UPLOAD ID IS !!!!!!!!!!!!!!!!!!!!!!! " + JSON.stringify(postId));
-
   const postCollection = database.db("Contendr").collection("posts");
   await postCollection.deleteOne({ postId: postId });
 
@@ -128,4 +128,4 @@ async function deletePost(req, res) {
   );
 }
 
-module.exports = { createChallenge, likePost, deletePost, uploadP2URL };
+module.exports = { createChallenge, likePost, deletePost, uploadP2URL, addComment };

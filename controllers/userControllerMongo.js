@@ -9,10 +9,7 @@ const crypto = require("crypto");
 
 const getUserByEmailIdAndPassword = async (email, password) => {
   let user = await userModel.findOne(email);
-  console.log("getUserByEmailIdAndPassword ---------- PASSWORD " + password);
-  console.log("getUserByEmailIdAndPassword ---------- PASSWORD " + password);
 
-  console.log("getUserByEmailIdAndPassword --- user: " + JSON.stringify(user));
   if (user) {
     if (await isUserValid(user, password)) {
       return user;
@@ -38,8 +35,7 @@ const getUserByUsername = (username) => {
 }
 
 const findUsernames = async (input) => {
-    console.log(`passed into the input is: ${input}`)
-    let list = await userModel.searchUsernames(input)
+  let list = await userModel.searchUsernames(input);
   
   return list;
 }
@@ -56,7 +52,6 @@ const getFollowingUsernames = async (input) => {
       }
     })
   );
-  console.log(userArr);
   return userArr;
 };
 
@@ -83,7 +78,6 @@ const toggleFollowUser = async (req) => {
           { id: userToFollow.id },
           { $push: { followers: { id: userId } } }
         );
-        console.log("following this stupid person now")
       } else {
         await userCollection.updateOne(
           { id: userId },
@@ -96,50 +90,19 @@ const toggleFollowUser = async (req) => {
       }
 }
 
-// const unfollowUser = async (req) => {
-//   const usernameToUnfollow = req.params.username;
-//   console.log(`gonna unfollow this user: ${usernameToUnfollow}`)
-//   const userToUnfollow = await userModel.findByUsername(usernameToUnfollow);
-//   console.log(`gonna unfollow this user: ${JSON.stringify(userToUnfollow)}`)
-//   const userCollection = database.db("Contendr").collection("users");
-//   const userId = req.user.id
-//   console.log(`this is req.user.id: ${userId}`)
-//   await userCollection.updateOne(
-//     { id: userId },
-//     { $pull: { following: { id: userToUnfollow }}}
-//   );
-//   await userCollection.updateOne(
-//     { id: userToUnfollow},
-//     { $pull: { followers: { id: userId }}}
-//   );
-//   console.log("end of unfollow function")
-// }
-
 function isUserValid(user, password) {
   const passHash = userModel.hashPassword(password, user.password_salt);
-
-  console.log(
-    "isUserValid --- user password is " +
-      user.password_hash +
-      " , and inputed password is " +
-      passHash
-  );
-
   return user.password_hash === passHash;
 }
 
 async function findOrCreate(profile) {
-  console.log("find or create has been reached +++++++++++++++");
 
   //will first find if user is in DB, and if not then user will be added to DB
-  // console.log(
-  //   "\nthe name of profile is --------- " + JSON.stringify(profile._json.name)
-  // );
+
   let user = await userModel.findById(parseInt(profile.id));
   if (user) {
     return user;
   } else {
-    console.log("creating has been reached");
     const userCollection = database.db("Contendr").collection("users");
     if (!profile.displayName) {
       let splitEmail = profile.emails[0].value.split("@");
@@ -155,7 +118,6 @@ async function findOrCreate(profile) {
     } else {
       let usernameSplit = profile.displayName.split(" ");
       let newUsername = usernameSplit.join("");
-      req.body.username;
       await userCollection.insertOne({
         id: parseInt(profile.id),
         email: profile.emails[0].value,
@@ -177,22 +139,10 @@ async function registerUser(req, res) {
   } catch {
     user = null;
   }
-  console.log("register user function user ------ " + JSON.stringify(user));
   if (user) {
-    console.log(`User with email ${user.email} already exists.`);
     return new Error(`User with email ${user.email} already exists.`);
   } else {
     try {
-      console.log("form submit");
-      console.log(req.body);
-
-      // const schema = await Joi.string().max(15).required();
-      // const validationResult = await schema.validate(req.body.first_name);
-      // if (validationResult.error != null) {
-      //   console.log(validationResult.error);
-      //   throw validationResult.error;
-      // }
-
       const schema = await Joi.object({
         email: Joi.string().min(5).max(40).required(),
         password: Joi.string().pattern(
@@ -218,17 +168,7 @@ async function registerUser(req, res) {
 
       const passHash = userModel.hashPassword(req.body.password, passSalt);
 
-      // hash is not being stored correctly.
-      //every register gets the same password hash no matter what
-
       const userCollection = database.db("Contendr").collection("users");
-      // console.log("register()");
-      // console.log(req.body);
-      // console.log("salt ======= " + password_salt);
-
-      // console.log("hash === " + passHash);
-
-      // console.log("register()");
 
       await userCollection.insertOne({
         id: uuidv4(),
