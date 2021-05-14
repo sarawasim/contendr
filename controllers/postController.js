@@ -51,7 +51,7 @@ async function createChallenge(req, res) {
       description: req.body.descriptionInput,
       p1Likes: {},
       p2Likes: {},
-      createdAt: new Date(),
+      createdAt: new Date().toLocaleString(),
       comments: 0,
       commentList: [],
       timeLimit: req.body.timeInput,
