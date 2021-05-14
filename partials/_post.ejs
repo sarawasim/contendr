@@ -102,7 +102,9 @@
 
   <body>
     <div class="post">
-      <a href="/<%= post['postId'] %>/deletePost">Delete post for everyone</a>
+      <% if (post.player1 == user.username || post.player2 == user.username) { %>
+        <a href="/<%= post['postId'] %>/deletePost">Delete post for everyone</a>
+      <% } %>
 
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">

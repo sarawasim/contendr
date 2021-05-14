@@ -98,7 +98,7 @@ router.post(
   upload.single("fileUpload"),
   (req, res) => {
     createChallenge(req, res);
-    res.redirect("/");
+    res.redirect("/userProfile");
   }
 );
 
@@ -108,7 +108,7 @@ router.get("/:id/:player/like", (req, res) => {
 
 router.get("/:id/deletePost", async (req, res) => {
   deletePost(req);
-  res.redirect("/");
+  res.redirect("/userProfile");
 });
 
 router.get("/:username/toggleFollow", async (req, res) => {
@@ -162,15 +162,16 @@ router.get("/profile", ensureAuthenticated, async (req, res) => {
 
   let isFollowing = await checkFollowing(req.user.following, searchedUser.id);
   if (req.query.username === req.user.username) {
-    res.redirect("userProfile");
+    res.redirect("/userProfile");
+  } else {
+    res.render("profile", {
+      layout: "layout",
+      searchedUser,
+      user: req.user,
+      isFollowing,
+      posts: postsArray,
+    });
   }
-  res.render("profile", {
-    layout: "layout",
-    searchedUser,
-    user: req.user,
-    isFollowing,
-    posts: postsArray,
-  });
 });
 
 router.get("/p", ensureAuthenticated, async (req, res) => {
