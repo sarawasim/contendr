@@ -102,6 +102,8 @@
 
   <body>
     <div class="post">
+      <a href="/<%= post['postId'] %>/deletePost">Delete post for everyone</a>
+
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
           <img
@@ -175,12 +177,30 @@
     <div class="post-info">
       <div class="title">
         <p class="title-s">
-          <%= post["player1"] %> challanged <%= post["player2"] %>
+          <%= post["player1"] %> challenged <%= post["player2"] %>
         </p>
         <p class="title-s"><%= post["title"] %></p>
         <p class="title-s"><strong>ends in</strong></p>
       </div>
-      <a href="/<%= post['postId'] %>/deletePost">Delete post for everyone</a>
+      <div> Comments
+        <% let i=0; %> <% for(i=0; i < post.commentList.length; i++) { %>
+          <div> <strong><%= post.commentList[i].username %></strong></div>
+
+
+          <div> <%= post.commentList[i].comment %></div>
+          <% } %>
+
+      </div>
+      <div>
+        <form action="/post/<%= post.postId %>/comment" method="POST">
+          <label for="commentInput">
+          </label>
+          <input type="text" name="commentInput" id="commentInput">
+          <button type="submit">Send</button>
+
+
+        </form>
+      </div>
     </div>
 
     <script>

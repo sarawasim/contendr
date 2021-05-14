@@ -8,6 +8,7 @@ const {
   likePost,
   deletePost,
   uploadP2URL,
+  addComment,
 } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
@@ -183,6 +184,12 @@ router.get("/p", ensureAuthenticated, async (req, res) => {
 
   res.render("post", { layout: "layout", post, user: req.user });
 });
+
+router.post("/post/:id/comment", (req, res) => {
+  addComment(req);
+  res.redirect(`/p?postId=${req.params.id}#commentInput`);
+
+})
 
 router.get("/notifications", ensureAuthenticated, async (req, res) => {
   const feedPostsArray = await database
