@@ -35,9 +35,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     .toArray();
 
   const postCollection = database.db("Contendr").collection("posts");
-  const posts = await postCollection
-    .find()
-    .toArray();
+  const posts = await postCollection.find().toArray();
 
   const thisUser = users.find((user) => user.email === req.user.email);
 
@@ -49,7 +47,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
   let feedPostsArray = [];
   thisUser["posts"].forEach((userPost) => {
-    let userPostData = posts.find((post) => post.postId === userPost.postId );
+    let userPostData = posts.find((post) => post.postId === userPost.postId);
     feedPostsArray.push(userPostData);
   });
 
@@ -68,7 +66,9 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     });
   });
 
-  let filteredPostArray = feedPostsArray.filter((post) => post.isAccepted === true)
+  let filteredPostArray = feedPostsArray.filter(
+    (post) => post.isAccepted === true
+  );
 
   // Each post contains urls to each video. display the urls in the ejs page.
   res.render("index", { feedPosts: filteredPostArray, user: req.user });
@@ -76,7 +76,11 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   let following = await getFollowingUsernames(req.user.following);
-  res.render("createChallenge", { layout: "layoutB", following: following, user: req.user});
+  res.render("createChallenge", {
+    layout: "layoutB",
+    following: following,
+    user: req.user,
+  });
 });
 
 router.post("/createChallenge/searchUsername", (req, res) => {
@@ -104,7 +108,7 @@ router.post(
 
 router.get("/:id/:player/like", (req, res) => {
   likePost(req);
-  res.redirect("back");
+  res.status(200);
 });
 
 router.get("/:id/deletePost", async (req, res) => {
@@ -190,25 +194,22 @@ router.get("/p", ensureAuthenticated, async (req, res) => {
 router.post("/post/:id/comment", (req, res) => {
   addComment(req);
   res.redirect(`/p?postId=${req.params.id}#commentInput`);
-
-})
+});
 
 router.get("/notifications", ensureAuthenticated, async (req, res) => {
   const feedPostsArray = await database
     .db("Contendr")
     .collection("posts")
-    .find(
-      {
-        player2: req.user.username,
-        isAccepted: false
-      }
-    )
+    .find({
+      player2: req.user.username,
+      isAccepted: false,
+    })
     .toArray();
 
-  res.render("notifications", { feedPosts: feedPostsArray, user: req.user })
-})
+  res.render("notifications", { feedPosts: feedPostsArray, user: req.user });
+});
 
-router.get("/accept", ensureAuthenticated, async (req,res) => {
+router.get("/accept", ensureAuthenticated, async (req, res) => {
   const postId = req.query.postId;
 
   const postCollection = database.db("Contendr").collection("posts");
@@ -217,12 +218,11 @@ router.get("/accept", ensureAuthenticated, async (req,res) => {
   const post = posts.find((post) => post.postId === postId);
 
   res.render("acceptChallenge", { layout: "layoutC", post, user: req.user });
-})
+});
 
-router.post("/updateP2URL", upload.single("fileUpload"),
- (req, res) => {
+router.post("/updateP2URL", upload.single("fileUpload"), (req, res) => {
   uploadP2URL(req);
   res.redirect(`/p?postId=${req.body.postId}`);
-})
+});
 
 module.exports = router;
