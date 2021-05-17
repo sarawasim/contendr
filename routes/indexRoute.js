@@ -108,7 +108,7 @@ router.post(
 
 router.get("/:id/:player/like", (req, res) => {
   likePost(req);
-  res.status(200);
+  res.status(204).send();
 });
 
 router.get("/:id/deletePost", async (req, res) => {
