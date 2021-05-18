@@ -2,27 +2,11 @@ const database = include("databaseConnection/databaseConnection");
 const Joi = require("joi");
 const { v4: uuidv4 } = require("uuid");
 
-async function uploadP2URL(req) {
-  const postCollection = database.db("Contendr").collection("posts");
-  await postCollection.updateOne(
-    { postId: req.body.postId },
-    { $set: { p2URL: req.body.imageURL, isAccepted: true } }
-    )
-}
-
-async function addComment(req) {
-  const postCollection = database.db("Contendr").collection("posts");
-  await postCollection.updateOne(
-    { 
-      postId: req.params.id
-    },
-    {
-      $push: { commentList: { commentId: uuidv4(), comment: req.body.commentInput, username: req.user.username, userId: req.user.id, createdAt: new Date().toLocaleString() } }
-    })
-}
-
 async function createChallenge(req, res) {
+  console.log("i'm here!");
   try {
+    console.log;
+    console.log("i'm in the try");
     const schema = await Joi.object({
       descriptionInput: Joi.string().max(150).required(),
       titleInput: Joi.string().max(50).required(),
@@ -30,7 +14,6 @@ async function createChallenge(req, res) {
       searchUser: Joi.string().required(),
       timeInput: Joi.string().required(),
       imageURL: Joi.string().required(),
-      followingList: Joi.string().allow(null).allow("").optional(),
     });
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
@@ -39,11 +22,14 @@ async function createChallenge(req, res) {
 
       throw validationResult.error;
     }
+    console.log("this is req.body");
+    console.log(req.body);
+    console.log("this is req.user");
+    console.log(req.user);
 
-    const postID = uuidv4();
     const postCollection = database.db("Contendr").collection("posts");
     await postCollection.insertOne({
-      postId: postID,
+      id: uuidv4(),
       player1: req.user.username,
       player2: req.body.searchUser,
       category: req.body.categoryInput,
@@ -52,80 +38,65 @@ async function createChallenge(req, res) {
       p1Likes: {},
       p2Likes: {},
       createdAt: new Date().toLocaleString(),
+<<<<<<< HEAD
       comments: 0,
+=======
+      comments: [],
+>>>>>>> 0c6fed76bf9f90a2a63789e3b6af72210025a85e
       commentList: [],
       timeLimit: req.body.timeInput,
       p1URL: req.body.imageURL,
-      p2URL: "/assets/waiting-for-response.jpg",
-      isAccepted: false
+      p2URL: "",
     });
-
-    const userCollection = database.db("Contendr").collection("users");
-    await userCollection.updateMany(
-      {
-        $or: [
-          { username: req.user.username },
-          { username: req.body.searchUser },
-        ],
-      },
-      { $push: { posts: { postId: postID } } }
-    );
   } catch (ex) {
+    console.log("i'm in the catch");
     res.render("error", { message: "Error connecting to Mongo" });
     console.log("Error connecting to Mongo");
     console.log(ex);
   }
 }
 
-async function likePost(req) {
-  const postId = req.params.id;
-  const player = req.params.player;
-  const postCollection = database.db("Contendr").collection("posts");
-  const posts = await postCollection.find().toArray();
-
-  const targetPost = posts.find((post) => post.postId === postId);
-
-  if (player === "p1") {
-    const likesObject = targetPost.p1Likes;
-
-    if (likesObject[`${req.user.email}`]) {
-      delete likesObject[`${req.user.email}`];
-    } else {
-      likesObject[`${req.user.email}`] = true;
-    }
-
-    await postCollection.updateOne(
-      { postId: postId },
-      { $set: { p1Likes: likesObject } }
-    );
-  } else {
-    const likesObject = targetPost.p2Likes;
-
-    if (likesObject[`${req.user.email}`]) {
-      delete likesObject[`${req.user.email}`];
-    } else {
-      likesObject[`${req.user.email}`] = true;
-    }
-
-    await postCollection.updateOne(
-      { postId: postId },
-      { $set: { p2Likes: likesObject } }
-    );
-  }
-}
-
-async function deletePost(req, res) {
-  const postId = req.params.id;
-
-  const postCollection = database.db("Contendr").collection("posts");
-  await postCollection.deleteOne({ postId: postId });
-
-  const userCollection = database.db("Contendr").collection("users");
-  await userCollection.update(
-    {},
-    { $pull: { posts: { postId: postId } } },
-    { multi: true }
+async function likePost(req, res) {
+  const uploadId = req.params;
+  console.log(
+    "UPLOAD ID IS !!!!!!!!!!!!!!!!!!!!!!! " + JSON.stringify(uploadId)
   );
+
+  const uploadCollection = database.db("Contendr").collection("uploads");
+  const uploads = await uploadCollection.find().toArray();
+
+  const targetUpload = uploads.find((upload) => upload.id === uploadId.id);
+  console.log(
+    "TARGETTED UPLOAD in likes function !!!!!!!!!!!!!!!!!!!!!!! " + targetUpload
+  );
+
+  const likesObject = targetUpload.likes;
+
+  if (likesObject[`${req.user.email}`]) {
+    delete likesObject[`${req.user.email}`];
+  } else {
+    likesObject[`${req.user.email}`] = true;
+  }
+
+  await uploadCollection.updateOne(
+    { id: uploadId.id },
+    { $set: { likes: likesObject } }
+  );
+  // await uploadCollection.findOneAndUpdate({id:uploadId},{$set: {"likes": }})
+
+  // database.users.forEach((user) => {
+  //   for (let i = 0; i < user.posts.length; i++) {
+  //     if (user.posts[i]) {
+  //       if (user.posts[i].postId === postId.toString()) {
+  //         if (user.posts[i].likes[username]) {
+  //           delete user.posts[i].likes[username];
+  //           return;
+  //         }
+  //         user.posts[i].likes[username] = true;
+  //       }
+  //     }
+  //   }
+  // });
 }
 
-module.exports = { createChallenge, likePost, deletePost, uploadP2URL, addComment };
+module.exports = { createChallenge, likePost };
