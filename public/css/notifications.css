@@ -42,9 +42,3 @@ h2 {
 #rejectBtn {
   background-image: linear-gradient(#d8d8d8, #5e5e5e);
 }
-
-@media screen and (max-width: 600px) {
-  .notification {
-    margin: 1rem;
-  }
-}
