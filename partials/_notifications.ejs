@@ -13,40 +13,45 @@
   </head>
 
   <body>
+    <% if(feedPosts.length==0) { %>
+    <h1 class="text-XL">You challenges to respond to :(</h1>
+    <p class="text-m">
+      Taunt some of your followers so that they want to challenge you
+    </p>
+    <% } else { %>
     <h2>Incomming Challenges</h2>
     <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
     <div class="notification">
       <div class="title">
-      <p class="text-m-b">
-      <a href="/profile?username=<%=feedPosts[i]['player1']%>">
+        <p class="text-m-b">
+          <a href="/profile?username=<%=feedPosts[i]['player1']%>">
             <%= feedPosts[i]["player1"] %>
-          </a> challenged you to <%= feedPosts[i]["category"] %>!
-      </p>
-      <p class="text-s">Created: <%= feedPosts[i]["createdAt"] %>
-      </p>
-      <p class="text-s">Title: <%= feedPosts[i]["title"] %>
-      </p>
-      <p class="text-s">Description: <%= feedPosts[i]["description"] %>
-      </p>
-    
-      <p class="text-s">Ends in: </p>
-    </div>
-    <div class="acceptReject-btns">
-  
-      <a href="accept?postId=<%= feedPosts[i]['postId'] %>" id="acceptBtn">Accept</a>
-  
-      <a href="/<%= feedPosts[i]['postId'] %>/deletePost" id="rejectBtn">Reject</a>
-    </div>
-    <br />
-  </div>
-      <% } %>
-    
+          </a>
+          challenged you to <%= feedPosts[i]["category"] %>!
+        </p>
+        <p class="text-s">Created: <%= feedPosts[i]["createdAt"] %></p>
+        <p class="text-s">Title: <%= feedPosts[i]["title"] %></p>
+        <p class="text-s">Description: <%= feedPosts[i]["description"] %></p>
 
-      <script>
+        <p class="text-s">Ends in:</p>
+      </div>
+      <div class="acceptReject-btns">
+        <a href="accept?postId=<%= feedPosts[i]['postId'] %>" id="acceptBtn"
+          >Accept</a
+        >
+
+        <a href="/<%= feedPosts[i]['postId'] %>/deletePost" id="rejectBtn"
+          >Reject</a
+        >
+      </div>
+      <br />
+    </div>
+    <% }} %>
+
+    <script>
       /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
       initComparisons();
     </script>
-
   </body>
   <script defer src="/scripts/post.js"></script>
 </html>
