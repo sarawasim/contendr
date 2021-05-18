@@ -12,23 +12,21 @@
 </head>
 <body>
     <div class="challenge-container">
+        <h2 class="text-XL">Challenge your Friend</h2>
+        <br>
             <form action="/createChallenge" name="challengeForm" method="POST" enctype="multipart/form-data" id="challengeForm">
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                     <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                         <div class="grid grid-cols-3 gap-6">
                             <div class="col-span-3 sm:col-span-2">
                                 <label for="searchUser" class="inputLabel">
-                                    <p>User</p>
+                                    <p class="text-L">Search Username</p>
                                 </label>
                                    
                                 <div class="mt-1 flex rounded-md shadow-sm ">
-                                    <!-- <span
-                                        class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                                        Username:
-                                    </span> -->
                                     <input type="text" name="searchUser" id="searchUser"
                                         class=""
-                                        placeholder="Search User" autocomplete="off">
+                                        placeholder="Search" autocomplete="off">
                                     <input type="hidden" name="followingList" id="followingList" value="<%=following%>" />
                                 </div>
                                 <div>
@@ -36,10 +34,10 @@
                                 </div>
                             </div>
                         </div>
-    
+                        <br>
                         <div class="text-sm font-medium text-gray-700">
-                            <div class="categoryContainer">
-                                Category
+                            <div class="categoryContainer" >
+                                <p class="text-L">Select a Category</p>
                                 <div class="categoryContainer1 gap-6 mt-4">
                                     <label for="cat1" class="catLabel focus:border-blue-500">
                                         <input type="radio" id="cat1" name="categoryInput" value="dance"> </input>
@@ -81,37 +79,39 @@
                   <option value="misc">Misc</option>
                 </select> -->
                         </div>
+                        <br>
     
                         <div>
                             <label for="timeInput" class="inputLabel">
-                                <p>Time Limit</p>
+                                <p class="text-L">Set a Time Limit</p>
                             </label>
                             <div class="mt-1 inline-flex font-small text-gray-600 gap-6 timeContainer">
                                 <label for="time43200s" class="timeLabel">
-                                    12 hours
+                                   <p class="text-m"> 12 hours </p>
                                     <input type="radio" id="time43200s" name="timeInput" value="43200"
                                         class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">
                                 </label>
                                 <label for="time86400s" class="timeLabel">
-                                    24 hours
+                                    <p class="text-m"> 24 hours </p>
                                     <input type="radio" id="time86400s" name="timeInput" value="86400"
                                         class="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">
                                 </label>
     
                             </div>
                         </div>
+                        <br>
                         <div>
                             <label for="titleInput" class="block text-sm font-medium text-gray-700">
-                                <p>Title</p>
+                                <p class="text-L">Create a Title</p>
                             </label>
                             <div class="mt-1">
                                 <input id="titleInput" name="titleInput" placeholder="Tap to enter">
                             </div>
                         </div>
-    
+                        <br>
                         <div>
                             <label for="descriptionInput">
-                                <p>Description</p>
+                                <p class="text-L">Add a Description</p>
                             </label>
                             <div class="mt-1">
                                 <textarea id="descriptionInput" name="descriptionInput" rows="3"
@@ -121,7 +121,7 @@
                                 
                             </p>
                         </div>
-    
+                        <br>
                         <div>
                             <div
                                 class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
@@ -138,6 +138,7 @@
                                         <p class="text-xs text-gray-500">
                                             PNG, JPG, or GIF up to 10MB
                                         </p>
+                                        <br>
                                         <script>
                                             //generates img src for previewing file upload
                                             function showPreview(event) {

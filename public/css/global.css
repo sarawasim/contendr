@@ -3,37 +3,37 @@
 .text-s {
   font-size: 12px;
   margin: 0.5rem;
-  color: rgb(92, 92, 92);
+  color: #717171;
 }
 
 .text-m {
   font-size: 16px;
   margin: 0.5rem;
-  color: rgb(92, 92, 92);
+  color: #717171;
 }
 
 .text-L {
   font-size: 20px;
   margin: 0.5rem;
-  color: rgb(92, 92, 92);
+  color: #717171;
 }
 
 .text-XL {
   font-size: 25px;
   margin: 0.5rem;
-  color: rgb(92, 92, 92);
+  color: #717171;
 }
 
 .text-m-b {
   font-size: 16px;
-  color: rgb(92, 92, 92);
+  color: #717171;
   font-weight: bold;
 }
 
 .text-comments {
   font-size: 14px;
   margin: 0.5rem;
-  color: rgb(92, 92, 92);
+  color: #717171;
   padding-left: 15px;
 }
 

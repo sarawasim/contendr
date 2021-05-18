@@ -58,7 +58,6 @@ textarea {
   flex-direction: column;
 }
 .categoryContainer1 {
-  margin-top: 1rem;
   display: inline-flex;
 }
 .categoryContainer2 {
@@ -81,6 +80,7 @@ label img {
 .timeContainer {
   display: grid;
   justify-content: center;
+  grid-gap: 3rem;
 }
 
 .timeLabel {
