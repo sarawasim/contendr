@@ -7,18 +7,27 @@ async function uploadP2URL(req) {
   await postCollection.updateOne(
     { postId: req.body.postId },
     { $set: { p2URL: req.body.imageURL, isAccepted: true } }
-    )
+  );
 }
 
 async function addComment(req) {
   const postCollection = database.db("Contendr").collection("posts");
   await postCollection.updateOne(
-    { 
-      postId: req.params.id
+    {
+      postId: req.params.id,
     },
     {
-      $push: { commentList: { commentId: uuidv4(), comment: req.body.commentInput, username: req.user.username, userId: req.user.id, createdAt: new Date().toLocaleString() } }
-    })
+      $push: {
+        commentList: {
+          commentId: uuidv4(),
+          comment: req.body.commentInput,
+          username: req.user.username,
+          userId: req.user.id,
+          createdAt: new Date().toLocaleString(),
+        },
+      },
+    }
+  );
 }
 
 async function createChallenge(req, res) {
@@ -57,7 +66,7 @@ async function createChallenge(req, res) {
       timeLimit: req.body.timeInput,
       p1URL: req.body.imageURL,
       p2URL: "/assets/waiting-for-response.jpg",
-      isAccepted: false
+      isAccepted: false,
     });
 
     const userCollection = database.db("Contendr").collection("users");
@@ -128,11 +137,24 @@ async function deletePost(req, res) {
   );
 }
 
-async function getPostByCat(input) {
-  const postCollection = database.db("Contendr").collection("posts");
-  const posts = await postCollection.find().toArray();
-  const targetPost = posts.find((post) => post.postId === postId);
-
+async function getPostByCat(category) {
+  const results = await database
+    .db("Contendr")
+    .collection("posts")
+    .find({
+      category: category
+    })
+    .toArray();
+    console.log("i am results from getpostbycat")
+    console.log(JSON.stringify(results))
+    return results;
 }
 
-module.exports = { createChallenge, likePost, deletePost, uploadP2URL, addComment };
+module.exports = {
+  createChallenge,
+  likePost,
+  deletePost,
+  uploadP2URL,
+  addComment,
+  getPostByCat,
+};

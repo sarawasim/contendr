@@ -3,6 +3,8 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="css/post.css" />
+    <link rel="stylesheet" href="css/notifications.css" />
+
     <script
       src="https://kit.fontawesome.com/761d42c757.js"
       crossorigin="anonymous"
@@ -11,11 +13,11 @@
   </head>
 
   <body>
-
+    <h2>Incomming Challenges</h2>
     <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
-    <br />
-    <div class="title">
-      <p class="text-m">
+    <div class="notification">
+      <div class="title">
+      <p class="text-m-b">
         <strong> <a href="/profile?username=<%=feedPosts[i]['player1']%>">
             <%= feedPosts[i]["player1"] %>
           </a> </strong> challenged <strong> <a href="/profile?username=<%=feedPosts[i]['player2']%>">
@@ -37,8 +39,9 @@
   
       <a href="/<%= feedPosts[i]['postId'] %>/deletePost" id="rejectBtn">Reject</a>
     </div>
-      <% } %>
+    <br />
   </div>
+      <% } %>
     
 
       <script>
