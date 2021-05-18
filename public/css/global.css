@@ -18,6 +18,12 @@
   color: rgb(92, 92, 92);
 }
 
+.text-XL {
+  font-size: 25px;
+  margin: 0.5rem;
+  color: rgb(92, 92, 92);
+}
+
 .text-m-b {
   font-size: 16px;
   color: rgb(92, 92, 92);
