@@ -154,12 +154,33 @@
       </div>
     </div> -->
 
-    <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
+    <% if(feedPosts.length==0) { %>
+    <h1>Awww. Nothing to show :(</h1>
+    <p>Search users to follow to see their posts or challenge them</p>
+    <% } else { %>
+    <span style="color: #5377fd">
+      <i class="far fa-heart"></i>
+    </span>
+    <% } %> <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
     <br />
     <div class="post">
-      <p class="text-m"> <strong><a href="/profile?username=<%=feedPosts[i].player1%>"> <%= feedPosts[i]["player1"] %> </a> </strong> challenged
-        <strong><a href="/profile?username=<%=feedPosts[i].player2%>"> <%= feedPosts[i]["player2"] %> </a> </strong>to <%= feedPosts[i].category %>!</p>
-      <a href="/p?postId=<%= feedPosts[i]['postId'] %>" class="post-gradient"></a>
+      <p class="text-m">
+        <strong
+          ><a href="/profile?username=<%=feedPosts[i].player1%>">
+            <%= feedPosts[i]["player1"] %>
+          </a>
+        </strong>
+        challenged
+        <strong
+          ><a href="/profile?username=<%=feedPosts[i].player2%>">
+            <%= feedPosts[i]["player2"] %>
+          </a> </strong
+        >to <%= feedPosts[i].category %>!
+      </p>
+      <a
+        href="/p?postId=<%= feedPosts[i]['postId'] %>"
+        class="post-gradient"
+      ></a>
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
           <img
