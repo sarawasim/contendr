@@ -2,32 +2,6 @@
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-}
-
-a:link {
-  color: rgb(92, 92, 92);
-}
-
-a:visited {
-  color: rgb(92, 92, 92);
-}
-
-a:hover {
-  color: #ff84dd;
-}
-
-a:active {
-  color: rgb(92, 92, 92);
-}
-
-.text-m {
-  font-size: 16px;
-  margin: 0.5rem;
-  color: rgb(92, 92, 92);
-}
-
 .post-gradient {
   position: absolute;
   background-image: linear-gradient(
@@ -40,39 +14,6 @@ a:active {
   width: 450px;
   z-index: 5;
   border-radius: 10px;
-}
-
-.img-comp-container {
-  position: relative;
-  height: 600px;
-  width: 450px;
-  /*should be the same height as the images*/
-}
-
-.img-comp-img {
-  position: absolute;
-  width: auto;
-  height: auto;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.img-comp-img img {
-  display: block;
-  vertical-align: middle;
-}
-
-.img-comp-slider {
-  position: absolute;
-  z-index: 9;
-  cursor: ew-resize;
-  /*set the appearance of the slider:*/
-  width: 40px;
-  height: 40px;
-  background-color: rgb(60, 112, 255);
-  opacity: 0.6;
-  border-radius: 50%;
-  border: solid 4px rgb(255, 98, 221);
 }
 
 .dp-title {
@@ -98,8 +39,8 @@ a:active {
   align-items: left;
   font-size: 25px;
   z-index: 6;
-  /* background-image: linear-gradient(to left, rgba(255, 255, 255, 0.089), rgba(0, 0, 0, 0.274), rgba(255, 255, 255, 0.089)); */
 }
+
 .bottomright {
   position: absolute;
   bottom: 20px;
@@ -120,42 +61,6 @@ a:active {
 .likes {
   font-size: 15px;
   color: white;
-}
-
-#displayPicture-playerOne {
-  border: 3px solid #5377fd;
-  border-radius: 100%;
-}
-
-#displayPicture-playerTwo {
-  border: 3px solid #ff84dd;
-  border-radius: 100%;
-}
-
-.likes-container a {
-  text-decoration: none;
-  color: #fff;
-}
-.likes-container a:visited {
-  text-decoration: none;
-  color: #fff;
-}
-.likes-container a:hover {
-  text-decoration: none;
-  color: #fff;
-}
-.likes-container a:focus {
-  text-decoration: none;
-  color: #fff;
-}
-.likes-container a:hover,
-.navBtn:active {
-  text-decoration: none;
-  color: #fff;
-}
-
-#previewImage {
-  object-fit: cover;
 }
 
 @media screen and (max-width: 600px) {
