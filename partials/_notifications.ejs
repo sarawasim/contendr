@@ -18,11 +18,9 @@
     <div class="notification">
       <div class="title">
       <p class="text-m-b">
-        <strong> <a href="/profile?username=<%=feedPosts[i]['player1']%>">
+      <a href="/profile?username=<%=feedPosts[i]['player1']%>">
             <%= feedPosts[i]["player1"] %>
-          </a> </strong> challenged <strong> <a href="/profile?username=<%=feedPosts[i]['player2']%>">
-            <%= feedPosts[i]["player2"] %>
-          </a></strong> to <%= feedPosts[i]["category"] %>!
+          </a> challenged you to <%= feedPosts[i]["category"] %>!
       </p>
       <p class="text-s">Created: <%= feedPosts[i]["createdAt"] %>
       </p>
