@@ -101,6 +101,7 @@
   </head>
 
   <body>
+    <div class="post-container">
     <div class="post">
       <div class="post-head">
         <% if (post.player1 == user.username || post.player2 == user.username) { %>
@@ -214,7 +215,7 @@
         </form>
       </div>
     </div>
-
+  </div>
     <script>
       /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
       initComparisons();

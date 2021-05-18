@@ -1,10 +1,10 @@
-.container-profile{
-    margin: 0px;
-    display: flex;
-    flex-direction: column;
-    color: #717171;
-    align-items: center;
-    width: 450px;
+.container-profile {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  color: #717171;
+  align-items: center;
+  width: 450px;
 }
 
 .circle-crop {
@@ -17,20 +17,19 @@
 }
 
 .userInfo {
-    margin-right: 50px;
+  margin-right: 50px;
 }
 
 .follow {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
-.followers{
-    margin-right: 60px;
+.followers {
+  margin-right: 60px;
 }
 
-.following{
-    margin-right: 60px;
-
+.following {
+  margin-right: 60px;
 }
 
 #displayPic-profile {
@@ -41,64 +40,63 @@
 }
 
 .user-profile {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.fa-cog{
-    font-size: 25px;
-    padding-top: 20px;
-    margin-right: 20px;
-    color: #717171;
+.fa-cog {
+  font-size: 25px;
+  padding-top: 20px;
+  margin-right: 20px;
+  color: #717171;
 }
 
 #follow-btn {
-    background-image: linear-gradient(#FFA4E5, #FF85DD);
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    height: 20px;
-    width: 60px;
-    border-radius: 20px;
-    box-sizing: unset;
+  background-image: linear-gradient(#ffa4e5, #ff85dd);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  height: 20px;
+  width: 60px;
+  border-radius: 20px;
+  box-sizing: unset;
 }
 
 .userInfo-Profile {
-    display: flex;
-    font-size: 14px;
+  display: flex;
+  font-size: 14px;
 }
 
-
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .userPosts-Profile {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
 }
 
 .profilePost {
-    padding: .5rem;
+  padding: 0.5rem;
 }
 
 #postImage {
-    border-radius: 1rem;
-    width: 130px;
-    height: 200px;
-    object-fit: cover
+  border-radius: 1rem;
+  width: 130px;
+  height: 200px;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 800px) {
-  .container-profile{
+  .container-profile {
     min-width: fit-content;
   }
-} 
+}
