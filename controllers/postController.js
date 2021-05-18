@@ -128,4 +128,11 @@ async function deletePost(req, res) {
   );
 }
 
+async function getPostByCat(input) {
+  const postCollection = database.db("Contendr").collection("posts");
+  const posts = await postCollection.find().toArray();
+  const targetPost = posts.find((post) => post.postId === postId);
+
+}
+
 module.exports = { createChallenge, likePost, deletePost, uploadP2URL, addComment };

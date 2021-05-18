@@ -220,6 +220,16 @@ router.get("/accept", ensureAuthenticated, async (req, res) => {
   res.render("acceptChallenge", { layout: "layoutC", post, user: req.user });
 });
 
+router.get("/explore", (req, res) => {
+
+  res.render("explore", { user: req.user });
+})
+
+router.get("/show", (req, res) => {
+  let feedPosts = getPostByCat(req.query.category)
+  res.render("show", { feedPosts: something, user: req.user })
+})
+
 router.post("/updateP2URL", upload.single("fileUpload"), (req, res) => {
   uploadP2URL(req);
   res.redirect(`/p?postId=${req.body.postId}`);
