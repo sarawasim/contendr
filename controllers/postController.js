@@ -96,29 +96,36 @@ async function likePost(req) {
 
   if (player === "p1") {
     const likesObject = targetPost.p1Likes;
-
+    const unlikeObject = targetPost.p2Likes;
     if (likesObject[`${req.user.email}`]) {
       delete likesObject[`${req.user.email}`];
     } else {
       likesObject[`${req.user.email}`] = true;
+      if (unlikeObject[`${req.user.email}`]) {
+        delete unlikeObject[`${req.user.email}`];
+      }
     }
 
     await postCollection.updateOne(
       { postId: postId },
-      { $set: { p1Likes: likesObject } }
+      { $set: { p1Likes: likesObject, p2Likes: unlikeObject } }
     );
   } else {
     const likesObject = targetPost.p2Likes;
+    const unlikeObject = targetPost.p1Likes;
 
     if (likesObject[`${req.user.email}`]) {
       delete likesObject[`${req.user.email}`];
     } else {
       likesObject[`${req.user.email}`] = true;
+      if (unlikeObject[`${req.user.email}`]) {
+        delete unlikeObject[`${req.user.email}`];
+      }
     }
 
     await postCollection.updateOne(
       { postId: postId },
-      { $set: { p2Likes: likesObject } }
+      { $set: { p2Likes: likesObject, p1Likes: unlikeObject } }
     );
   }
 }

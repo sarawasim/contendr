@@ -20,7 +20,12 @@ $(document).ready(() => {
           .find("p.likes")
           .text(`${parseInt(likesNum) + 1}`);
         console.log($(this).parent().find("p.likes").text());
+
+        const otherLike = $(this).closest(".img-comp-img");
+        if (otherLike.find("i").hasClass("fas")) {
+          otherLike.find("i").removeClass("fas");
+          otherLike.find("i").addClass("far");
+        }
       }
-      console.log("the likes button was pressed");
     });
 });
