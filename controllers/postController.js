@@ -137,10 +137,24 @@ async function deletePost(req, res) {
   );
 }
 
+async function getPostByCat(category) {
+  const results = await database
+    .db("Contendr")
+    .collection("posts")
+    .find({
+      category: category
+    })
+    .toArray();
+    console.log("i am results from getpostbycat")
+    console.log(JSON.stringify(results))
+    return results;
+}
+
 module.exports = {
   createChallenge,
   likePost,
   deletePost,
   uploadP2URL,
   addComment,
+  getPostByCat,
 };

@@ -9,6 +9,7 @@ const {
   deletePost,
   uploadP2URL,
   addComment,
+  getPostByCat,
 } = require("../controllers/postController");
 
 const database = include("databaseConnection/databaseConnection");
@@ -220,7 +221,17 @@ router.get("/accept", ensureAuthenticated, async (req, res) => {
   res.render("acceptChallenge", { layout: "layoutC", post, user: req.user });
 });
 
-router.post("/updateP2URL", upload.single("fileUpload"), (req, res) => {
+router.get("/explore", ensureAuthenticated, (req, res) => {
+
+  res.render("explore", { user: req.user });
+})
+
+router.get("/show", ensureAuthenticated, async (req, res) => {
+  let feedPosts = await getPostByCat(req.query.category)
+  res.render("show", {layout: "layout", feedPosts, user: req.user, cat: req.query.category })
+})
+
+router.post("/updateP2URL", ensureAuthenticated, upload.single("fileUpload"), (req, res) => {
   uploadP2URL(req);
   res.redirect(`/p?postId=${req.body.postId}`);
 });
