@@ -77,7 +77,15 @@ function missingInputs() {
     return "Please fill out entire form and upload a photo/GIF";
   } else if (fileUpload == "") {
     return "Please upload a photo/GIF";
-  } else {
+  } else if (
+    searchUser == "" ||
+    !catValue ||
+    !timeValue ||
+    title == "" ||
+    description == ""
+  ) {
     return "Please fill out entire form";
+  } else {
+    return null;
   }
 }
