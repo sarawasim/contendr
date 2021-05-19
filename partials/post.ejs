@@ -246,19 +246,29 @@
               style="object-fit: cover"
             />
           <% } %>
-          <div class="bottomleft">
-            <div class="dp-title">
-              <img
-                id="displayPicture-playerOne"
-                src="mockUser.png"
-                alt="display picture"
-                width="50px"
-                height="50px"
-              />
-              <div class="postTitle">
-                <p class="postTitle-s">
-                  <%= feedPosts[i]["player1"] %> challenged <%=
-                  feedPosts[i]["player2"] %>
+
+            <div class="bottomleft">
+              <div class="dp-title">
+                <img
+                  id="displayPicture-playerOne"
+                  src="mockUser.png"
+                  alt="display picture"
+                  width="50px"
+                  height="50px"
+                />
+                <div class="postTitle">
+                  <p class="postTitle-s">
+                    <%= feedPosts[i]["player1"] %> challenged <%=
+                    feedPosts[i]["player2"] %>
+                  </p>
+                  <p class="postTitle-s"><%= feedPosts[i]["title"] %></p>
+                  <p class="postTitle-s"><%= feedPosts[i]["descriptions"] %></p>
+                  <p class="postTitle-s"><strong>ends in</strong></p>
+                </div>
+              </div>
+              <div class="likes-container p1">
+                <p class="likes">
+                  <%= Object.keys(feedPosts[i]['p1Likes']).length %>
                 </p>
                 <a href="/<%= feedPosts[i]['postId'] %>/p1/like">
                   <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
