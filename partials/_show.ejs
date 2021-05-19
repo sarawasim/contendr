@@ -101,6 +101,7 @@
   <body>
     <h1 class="text-XL-blue"> Explore <%= cat %> </h1>
     <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
+      <div class="post-container">
     <div class="post">
       <p class="text-m">
         <strong
@@ -217,6 +218,7 @@
         </div>
       </div>
     </div>
+  </div>
         <br />
     <!-- <a href="/p?postId=<%= feedPosts[i]['postId'] %>"
       >^^^ Individual Post page</a
@@ -227,6 +229,7 @@
       /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
       initComparisons();
     </script>
+
   </body>
   <script defer src="/scripts/post.js"></script>
 </html>
