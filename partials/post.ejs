@@ -226,7 +226,7 @@
           </div>
 
         <div class="img-comp-img img-comp-overlay player1-post">
-          <% if (feedPosts[i]["p1FileType"] === "video/mp4") { %> 
+          <% if (feedPosts[i]["p1FileType"] === "video/mp4" || feedPosts[i]["p1FileType"] === "video/quicktime") { %> 
 
             <video 
               src="<%= feedPosts[i]['p1URL'] %>"
