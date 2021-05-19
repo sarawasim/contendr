@@ -206,18 +206,18 @@
                   height="50px"
                 />
               </div>
-              <div class="likes-container p2">
+              <div class="likes-container">
                 <p class="likes">
                   <%= Object.keys(feedPosts[i]['p2Likes']).length %>
                 </p>
                 <a href="/<%= feedPosts[i]['postId'] %>/p2/like">
                   <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
                   <span style="color: #ff84dd">
-                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-heart p2heart"></i>
                   </span>
                   <% } else { %>
                   <span style="color: #ff84dd">
-                    <i class="far fa-heart"></i>
+                    <i class="far fa-heart p2heart"></i>
                   </span>
                   <% } %>
                 </a>
@@ -251,18 +251,18 @@
                   <p class="postTitle-s"><strong>ends in</strong></p>
                 </div>
               </div>
-              <div class="likes-container p1">
+              <div class="likes-container">
                 <p class="likes">
                   <%= Object.keys(feedPosts[i]['p1Likes']).length %>
                 </p>
                 <a href="/<%= feedPosts[i]['postId'] %>/p1/like">
                   <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
                   <span style="color: #5377fd">
-                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-heart p1heart"></i>
                   </span>
                   <% } else { %>
                   <span style="color: #5377fd">
-                    <i class="far fa-heart"></i>
+                    <i class="far fa-heart p1heart"></i>
                   </span>
                   <% } %>
                 </a>
