@@ -54,9 +54,6 @@
 
               <video 
                 src="<%= posts[i]['p1URL'] %>"
-                width="450"
-                height="600"
-                style="object-fit: cover"
                 muted
                 loop
                 id="postImage"
@@ -65,9 +62,6 @@
             <% } else { %>
               <img
                 src="<%= posts[i]['p1URL'] %>"
-                width="450"
-                height="600"
-                style="object-fit: cover"
                 id="postImage"
               />
             <% } %>
@@ -76,8 +70,22 @@
         <% } if (posts[i].player2 == user.username) {
         console.log("+++++++++++++" + posts[i].player2)%>
         <div class="profilePost">
-          <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
-            <img src="<%= posts[i]['p2URL'] %>" id="postImage" />
+            <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
+              <% if (posts[i]["p2FileType"] === "video/mp4" || posts[i]["p2FileType"] === "video/quicktime") { %> 
+  
+                <video 
+                  src="<%= posts[i]['p2URL'] %>"
+                  muted
+                  loop
+                  id="postImage"
+                ></video>
+      
+              <% } else { %>
+                <img
+                  src="<%= posts[i]['p2URL'] %>"
+                  id="postImage"
+                />
+              <% } %>
           </a>
         </div>
         <% } }%>

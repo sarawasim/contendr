@@ -190,12 +190,27 @@
         ></a>
         <div class="img-comp-container">
           <div class="img-comp-img player2-post">
-            <img
-              src="<%= feedPosts[i]['p2URL'] %>"
-              width="450"
-              height="600"
-              style="object-fit: cover"
-            />
+            <% if (feedPosts[i]["p2FileType"] === "video/mp4" || feedPosts[i]["p2FileType"] === "video/quicktime") { %> 
+
+              <video 
+                src="<%= feedPosts[i]['p2URL'] %>"
+                type="video/mp4"
+                width="450"
+                height="600"
+                style="object-fit: cover"
+                controls
+                muted
+                loop
+              ></video>
+  
+            <% } else { %>
+              <img
+                src="<%= feedPosts[i]['p2URL'] %>"
+                width="450"
+                height="600"
+                style="object-fit: cover"
+              />
+            <% } %>
             <div class="bottomright">
               <div>
                 <img
