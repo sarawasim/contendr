@@ -50,7 +50,7 @@
         == user.username) { console.log("*************" + posts[i].player1) %>
         <div class="profilePost">
           <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
-            <% if (posts[i]["p1FileType"] === "video/mp4") { %> 
+            <% if (posts[i]["p1FileType"] === "video/mp4" || posts[i]["p1FileType"] === "video/quicktime") { %> 
 
               <video 
                 src="<%= posts[i]['p1URL'] %>"
