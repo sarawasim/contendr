@@ -1,7 +1,10 @@
-$(document).ready(() => {
+$(document).ready(function () {
   $(".likes-container")
     .find("a")
-    .on("click", function (e) {
+    .on("click", function () {
+      console.log(
+        "$THIS IS " + JSON.stringify($(this).find("i").attr("class"))
+      );
       if ($(this).find("i").hasClass("fas")) {
         $(this).find("i").removeClass("fas");
         $(this).find("i").addClass("far");
@@ -20,7 +23,26 @@ $(document).ready(() => {
           .find("p.likes")
           .text(`${parseInt(likesNum) + 1}`);
         console.log($(this).parent().find("p.likes").text());
+
+        // const otherLike = $(this).parent(".img-comp-img");
+        // console.log(
+        //   "$THIS SIBLING IS " + $(this).closest(".post-container").attr("class")
+        // );
+        let otherLike;
+        if ($(this).find("i").hasClass("p1heart")) {
+          otherLike = $(this).closest(".post-container").find(".p2heart");
+        } else {
+          otherLike = $(this).closest(".post-container").find(".p1heart");
+        }
+        console.log("THIS OTHER LIKE HAS " + otherLike.attr("class"));
+        if (otherLike.hasClass("fas")) {
+          otherLike.removeClass("fas");
+          otherLike.addClass("far");
+          otherLike
+            .closest(".likes-container")
+            .find("p.likes")
+            .text(`${parseInt(likesNum)}`);
+        }
       }
-      console.log("the likes button was pressed");
     });
 });
