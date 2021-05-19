@@ -99,14 +99,8 @@
   </head>
 
   <body>
-    
-    <a href="/"> Main feed </a>
-    <!-- explore is blue -->
-    <a href="/explore"> Explore </a>
-
-    SHOWING <%= cat %> POSTS RIGHT NOW
+    <h1 class="text-XL-blue"> Explore <%= cat %> </h1>
     <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
-    <br />
     <div class="post">
       <p class="text-m">
         <strong
@@ -208,6 +202,7 @@
         </div>
       </div>
     </div>
+        <br />
     <!-- <a href="/p?postId=<%= feedPosts[i]['postId'] %>"
       >^^^ Individual Post page</a
     > -->

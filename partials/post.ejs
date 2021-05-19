@@ -156,8 +156,10 @@
     </div> -->
 
     <!-- main feed is blue -->
-    <a href="/"> Main Feed </a>
-    <a href="/explore"> Explore </a>
+    <div class="tabs">
+      <a href="/" id="active-btn"> Main Feed </a>
+      <a href="/explore" id="explore-btn"> Explore </a>
+    </div>
 
     <% if(feedPosts.length==0) { %>
     <h1 class="text-XL">Awww. Nothing to show :(</h1>
