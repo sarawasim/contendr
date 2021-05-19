@@ -131,10 +131,24 @@ footer {
   background-image: linear-gradient(#ffa4e5, #ff85dd);
 }
 
-#notifications {
+.notifications-btn {
   grid-row: 1;
   grid-column: 4/5;
   place-self: center;
+  display: flex;
+  padding-top: 0.5rem;
+}
+
+.notificationNum {
+  background-color: #ff85dd;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 12px;
+  position: relative;
+  z-index: 9;
+  bottom: 20px;
 }
 
 /* drop down menu ------------------------------------------------------ */
