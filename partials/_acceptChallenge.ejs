@@ -110,7 +110,7 @@
                           name="fileUpload"
                           type="file"
                           class="sr-only p2Input"
-                          accept="image/gif, image/png, image/jpeg"
+                          accept="image/gif, image/png, image/jpeg, video/mp4, video/mov"
                           onchange="showPreview(event)"
                         />
                       </label>
@@ -127,7 +127,7 @@
                             console.log(event.target.files[0].type)
                             let src = URL.createObjectURL(event.target.files[0]);
                             let node;
-                            if(event.target.files[0].type == "video/mp4") {
+                            if(event.target.files[0].type == "video/mp4" || event.target.files[0].type == "video/mov" ) {
                                 node = document.createElement("video")
                             } else {
                                 node = document.createElement("img")
