@@ -1,9 +1,8 @@
     <footer>
         <a href="/" class="home"><i class="fas fa-home"></i></a>
         <a href="createChallenge" id="challengeButton">Start a Challenge</a>
-        <div>
+        <div class="notifications-btn">
             <a href="notifications"id="notifications"><img  src="notifications.png" alt="notifications" width="25px" height="auto" /></a>
-            <p> <% if(user.pending !== 0) { %> <%= user.pending %> <% } %> </p>
-
+            <% if(user.pending !== 0) { %> <p class="notificationNum"> <%= user.pending %> </p> <% } %> 
         </div>
     </footer>
