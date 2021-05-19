@@ -122,12 +122,26 @@
         </div>
 
         <div class="img-comp-img img-comp-overlay player1-post">
-          <img
-            src="<%= post['p1URL'] %>"
-            width="450"
-            height="600"
-            style="object-fit: cover"
-          />
+          <% if (post["p1FileType"] === "video/mp4") { %> 
+
+            <video 
+              src="<%= post['p1URL'] %>"
+              width="450"
+              height="600"
+              style="object-fit: cover"
+              controls
+              muted
+              loop
+            ></video>
+  
+          <% } else { %>
+            <img
+              src="<%= post['p1URL'] %>"
+              width="450"
+              height="600"
+              style="object-fit: cover"
+            />
+          <% } %>
         </div>
       </div>
     </div>

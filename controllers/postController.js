@@ -6,7 +6,7 @@ async function uploadP2URL(req) {
   const postCollection = database.db("Contendr").collection("posts");
   await postCollection.updateOne(
     { postId: req.body.postId },
-    { $set: { p2URL: req.body.imageURL, isAccepted: true } }
+    { $set: { p2URL: req.body.imageURL, isAccepted: true, p2FileType: req.body.fileTypeInput } }
   );
 }
 

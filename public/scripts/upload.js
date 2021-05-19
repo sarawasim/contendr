@@ -41,7 +41,6 @@ submitForm.addEventListener("click", async (event) => {
     fileInput.setAttribute("name", "fileTypeInput");
     let hiddenInput = document.getElementById("fileType");
     hiddenInput.appendChild(fileInput)
-    console.log(fileInput)
     // submit form
     challengeForm.submit();
   }

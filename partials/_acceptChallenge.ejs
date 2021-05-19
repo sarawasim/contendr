@@ -103,6 +103,8 @@
                       <label for="fileUpload" class="fileUpload">
                         <span>Upload a file</span>
                         <span id="hiddenURL"></span>
+                        <span id="fileType"></span>
+
                         <input
                           id="fileUpload"
                           name="fileUpload"
@@ -119,21 +121,34 @@
                         //generates img src for previewing file upload
                         function showPreview(event) {
                           if (event.target.files.length > 0) {
-                            let src = URL.createObjectURL(
-                              event.target.files[0]
-                            );
-                            let preview =
-                              document.getElementById("previewImage");
+                            if (document.getElementById("previewImage")) {
+                                document.getElementById("previewImage").remove()
+                            }
+                            console.log(event.target.files[0].type)
+                            let src = URL.createObjectURL(event.target.files[0]);
+                            let node;
+                            if(event.target.files[0].type == "video/mp4") {
+                                node = document.createElement("video")
+                            } else {
+                                node = document.createElement("img")
+                            }
+                            node.setAttribute("id", "previewImage")
+                            let previewDiv = document.getElementById("preview")
+                            previewDiv.appendChild(node)
+                            let preview = document.getElementById("previewImage")
                             preview.src = src;
                             preview.style.height = "600px";
                             preview.style.width = "450px";
                             preview.style.display = "block";
-                          }
+                            preview.style.objectFit = "cover"
+                            preview.controls = "controls"
+                            preview.muted = "muted"
+                            preview.autoplay = "autoplay"
+                            preview.loop = "loop"
                         }
                       </script>
                     </div>
                     <div id="preview">
-                      <img id="previewImage" />
                     </div>
                   </div>
                 </div>
