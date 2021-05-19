@@ -39,7 +39,15 @@
       <button type="button" id="submitForm">
         Challenge
       </button>
-      <a href="notifications"id="notifications"><img  src="notifications.png" alt="notifications" width="25px" height="auto" /></a>
+      <div class="notifications-btn">
+        <a href="notifications" id="notifications"><img src="notifications.png" alt="notifications" width="25px"
+            height="auto" /></a>
+        <% if(user.pending !==0) { %>
+          <p class="notificationNum">
+            <%= user.pending %>
+          </p>
+          <% } %>
+      </div>
     </footer>
   </body>
   <script type="module" src="./scripts/challengeForm.js"></script>
