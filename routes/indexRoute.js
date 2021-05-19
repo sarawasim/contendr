@@ -20,6 +20,7 @@ const {
   getUserByUsername,
   toggleFollowUser,
   checkFollowing,
+  getList,
 } = require("../controllers/userControllerMongo");
 
 router.get("/", ensureAuthenticated, async (req, res) => {
@@ -71,13 +72,14 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   let filteredPostArray = feedPostsArray.filter(
     (post) => post.isAccepted === true
   );
-
+    
   // Each post contains urls to each video. display the urls in the ejs page.
   res.render("index", { feedPosts: filteredPostArray, user: req.user });
 });
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   let following = await getFollowingUsernames(req.user.following);
+  console.log(`following from createChallenge route ${following}`)
   res.render("createChallenge", {
     layout: "layoutB",
     following: following,
@@ -97,6 +99,14 @@ router.get("/search", async (req, res) => {
   const results = await findUsernames(input);
   res.render("searchResults", { results, user: req.user });
 });
+
+router.get("/showFollowing", async (req, res) => {
+  let username = req.query.username
+  let following = await getList(username)
+  console.log(`i am followinggggg ${following}`)
+  res.render("searchResults", { results: following, user: req.user });
+
+})
 
 router.post(
   "/createChallenge",
