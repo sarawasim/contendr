@@ -39,27 +39,26 @@ const findUsernames = async (input) => {
   
   return list;
 }
-const getList = async (input) => {
-  console.log(`this is input ${input}`)
-  let user = await getUserByUsername(input)
-  console.log(`this is user ${user}`)
-  let followingIds = user.following
-  console.log(`this is followingIds ${followingIds}`)
-
+const getList = async (username, type) => {
+  let user = await getUserByUsername(username)
+  let list;
+  if (type == "following") {
+    list = user.following
+  } else {
+    list = user.followers
+  }
   let usernameArr = [];
   await Promise.all(
-    followingIds.forEach(async (id) => {
+    list.map(async (id) => {
       try {
         let user = await getUserById(id.id)
         usernameArr.push({username: user.username})
-        console.log(user.username)
       } catch (error) {
         console.log(error);
       }
     })
-  ).then(() => {
-    return usernameArr
-  }).catch((error) => console.log(error))
+  )
+    return usernameArr;
 }
 
 const getFollowingUsernames = async (input) => {
