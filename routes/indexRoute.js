@@ -32,6 +32,7 @@ router.get("/", ensureAuthenticated, async (req, res) => {
       username: 1,
       posts: 1,
       following: 1,
+      pending: 1,
     })
     .toArray();
 

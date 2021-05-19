@@ -114,6 +114,7 @@ async function findOrCreate(profile) {
         posts: [],
         following: [],
         followers: [],
+        pending: 0,
       });
     } else {
       let usernameSplit = profile.displayName.split(" ");
@@ -125,6 +126,7 @@ async function findOrCreate(profile) {
         posts: [],
         following: [],
         followers: [],
+        pending: 0,
       });
     }
     user = await userModel.findById(parseInt(profile.id)); //this will find user again after they have been added to DB
@@ -179,6 +181,7 @@ async function registerUser(req, res) {
         posts: [],
         following: [],
         followers: [],
+        pending: 0,
       });
     } catch (ex) {
       res.render("error", { message: "Error connecting to Mongo" });
