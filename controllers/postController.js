@@ -6,7 +6,7 @@ async function uploadP2URL(req) {
   const postCollection = database.db("Contendr").collection("posts");
   await postCollection.updateOne(
     { postId: req.body.postId },
-    { $set: { p2URL: req.body.imageURL, isAccepted: true } }
+    { $set: { p2URL: req.body.imageURL, isAccepted: true, p2FileType: req.body.fileTypeInput } }
   );
 }
 
@@ -40,6 +40,8 @@ async function createChallenge(req, res) {
       timeInput: Joi.string().required(),
       imageURL: Joi.string().required(),
       followingList: Joi.string().allow(null).allow("").optional(),
+      fileTypeInput: Joi.string().required(),
+
     });
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
@@ -67,6 +69,8 @@ async function createChallenge(req, res) {
       p1URL: req.body.imageURL,
       p2URL: "/assets/waiting-for-response.jpg",
       isAccepted: false,
+      p1FileType: req.body.fileTypeInput,
+      p2FileType: "",
     });
 
     const userCollection = database.db("Contendr").collection("users");

@@ -41,8 +41,8 @@
           <p class="bold"><%= searchedUser.following.length %></p>
         </div>
         <div class="challenges-won">
-          <p>Challenges Won</p>
-          <p class="bold">111</p>
+          <p>Challenges</p>
+          <p class="bold"><%= searchedUser.posts.length %></p>
         </div>
       </div>
 
@@ -52,8 +52,27 @@
         posts[i].player1) %>
         <div class="profilePost">
           <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
-            <img src="<%= posts[i]['p1URL'] %>" id="postImage" />
-          </a>
+            <% if (posts[i]["p1FileType"] === "video/mp4") { %> 
+
+              <video 
+                src="<%= posts[i]['p1URL'] %>"
+                width="450"
+                height="600"
+                style="object-fit: cover"
+                muted
+                loop
+                id="postImage"
+              ></video>
+    
+            <% } else { %>
+              <img
+                src="<%= posts[i]['p1URL'] %>"
+                width="450"
+                height="600"
+                style="object-fit: cover"
+                id="postImage"
+              />
+            <% } %> </a>
         </div>
         <% } if (posts[i].player2==searchedUser.username) { console.log("+++++++++++++"
         + posts[i].player2)%>
