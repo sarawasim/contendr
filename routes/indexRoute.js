@@ -97,14 +97,23 @@ router.post("/createChallenge/searchUsername", (req, res) => {
 router.get("/search", async (req, res) => {
   let input = req.query.searchInput.toLowerCase();
   const results = await findUsernames(input);
-  res.render("searchResults", { results, user: req.user });
+  let title = "Showing search results"
+  res.render("searchResults", { results, user: req.user, title });
 });
 
 router.get("/showFollowing", async (req, res) => {
   let username = req.query.username
-  let following = await getList(username)
-  console.log(`i am followinggggg ${following}`)
-  res.render("searchResults", { results: following, user: req.user });
+  let following = await getList(username, "following")
+  let title = `Users ${username} is following`
+  res.render("searchResults", { results: following, user: req.user, title });
+
+})
+
+router.get("/showFollowers", async (req, res) => {
+  let username = req.query.username
+  let followers = await getList(username, "followers")
+  let title = `${username}'s followers`
+  res.render("searchResults", { results: followers, user: req.user, title });
 
 })
 

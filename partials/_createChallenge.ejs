@@ -143,7 +143,20 @@
                                             //generates img src for previewing file upload
                                             function showPreview(event) {
                                                 if (event.target.files.length > 0) {
+                                                    if (document.getElementById("previewImage")) {
+                                                        document.getElementById("previewImage").remove()
+                                                    }
+                                                    console.log(event.target.files[0].type)
                                                     let src = URL.createObjectURL(event.target.files[0]);
+                                                    let node;
+                                                    if(event.target.files[0].type == "video/mp4") {
+                                                        node = document.createElement("iframe")
+                                                    } else {
+                                                        node = document.createElement("img")
+                                                    }
+                                                    node.setAttribute("id", "previewImage")
+                                                    let previewDiv = document.getElementById("preview")
+                                                    previewDiv.appendChild(node)
                                                     let preview = document.getElementById("previewImage")
                                                     preview.src = src;
                                                     preview.style.height = "400px";
@@ -155,7 +168,8 @@
                                         </script>
                                     </div>
                                     <div id="preview">
-                                        <img id="previewImage">
+                                        <!-- <img id="previewImage"> -->
+                                        <!-- <iframe id="previewImage"></iframe> -->
                                     </div>
                                     
                                 </div>
