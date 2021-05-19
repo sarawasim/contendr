@@ -15,6 +15,7 @@ const userModel = {
         posts: 1,
         following: 1,
         followers: 1,
+        pending: 1,
       })
       .toArray();
     const user = users.find((user) => user.username === username);
@@ -32,6 +33,7 @@ const userModel = {
         following: 1,
         followers: 1,
         posts: 1,
+        pending: 1,
       })
       .toArray();
     if (results) {
@@ -53,6 +55,7 @@ const userModel = {
         password: 1,
         password_salt: 1,
         password_hash: 1,
+        pending: 1,
       })
       .toArray();
     const user = users.find((user) => user.email === email);
@@ -72,6 +75,7 @@ const userModel = {
         posts: 1,
         following: 1,
         followers: 1,
+        pending: 1,
       })
       .toArray();
     const user = users.find((user) => user.id === id);
