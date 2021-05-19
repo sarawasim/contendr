@@ -158,11 +158,11 @@
         <a href="/<%= post['postId'] %>/p1/like">
           <% if(post['p1Likes'][user.email]===true) { %>
             <span style="color: #5377fd">
-              <i class="fas fa-heart"></i>
+              <i class="fas fa-heart p1heart"></i>
             </span>
             <% } else { %>
               <span style="color: #5377fd">
-                <i class="far fa-heart"></i>
+                <i class="far fa-heart p1heart"></i>
               </span>
               <% } %>
         </a>
@@ -196,11 +196,11 @@
         <a href="/<%= post['postId'] %>/p2/like">
           <% if(post['p2Likes'][user.email]===true) { %>
             <span style="color: #ff84dd">
-              <i class="fas fa-heart"></i>
+              <i class="fas fa-heart p2heart"></i>
             </span>
             <% } else { %>
               <span style="color: #ff84dd">
-                <i class="far fa-heart"></i>
+                <i class="far fa-heart p2heart"></i>
               </span>
               <% } %>
         </a>
