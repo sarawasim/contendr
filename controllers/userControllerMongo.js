@@ -39,6 +39,28 @@ const findUsernames = async (input) => {
   
   return list;
 }
+const getList = async (input) => {
+  console.log(`this is input ${input}`)
+  let user = await getUserByUsername(input)
+  console.log(`this is user ${user}`)
+  let followingIds = user.following
+  console.log(`this is followingIds ${followingIds}`)
+
+  let usernameArr = [];
+  await Promise.all(
+    followingIds.forEach(async (id) => {
+      try {
+        let user = await getUserById(id.id)
+        usernameArr.push({username: user.username})
+        console.log(user.username)
+      } catch (error) {
+        console.log(error);
+      }
+    })
+  ).then(() => {
+    return usernameArr
+  }).catch((error) => console.log(error))
+}
 
 const getFollowingUsernames = async (input) => {
   let userArr = [];
@@ -201,4 +223,5 @@ module.exports = {
   getUserByUsername,
   toggleFollowUser,
   checkFollowing,
+  getList
 };
