@@ -226,14 +226,14 @@
     <div class="post-info">
       
       <hr>
-      <div> <p class="text-m"> Comments </p> 
+      <div class="commentSection"> <p class="text-m"> Comments </p> 
         <% let i=0; %> <% for(i=0; i < post.commentList.length; i++) { %>
           <div> <strong> <p class="text-comments"> <a href="/profile?username=<%=post.commentList[i].username%>"><%= post.commentList[i].username %>: </a></strong><%= post.commentList[i].comment %></p></div>
 
           <% } %>
 
       </div>
-      <div>
+      <div class="commentText">
         <form action="/post/<%= post.postId %>/comment" method="POST">
           <label for="commentInput">
           </label>

@@ -153,11 +153,9 @@ async function deletePost(req, res) {
   const posts = await postCollection.find().toArray();
 
   const targetPost = posts.find((post) => post.postId === postId);
-  console.log(`i am targetPost ${JSON.stringify(targetPost)}`);
   const userCollection = database.db("Contendr").collection("users");
 
   if (!targetPost.isAccepted) {
-    console.log(`i'm the if statemnt inside deletePost`);
     await userCollection.updateOne(
       { username: targetPost.player2 },
       { $inc: { pending: -1 } }
@@ -181,8 +179,6 @@ async function getPostByCat(category) {
       category: category,
     })
     .toArray();
-  console.log("i am results from getpostbycat");
-  console.log(JSON.stringify(results));
   return results;
 }
 
