@@ -192,7 +192,7 @@
       </a></strong> to <%= post["category"] %>!
   </p>
 
-  <p class="text-s ">Created: <%= post["createdAt"] %> </p>
+  <p id="createdAt" class="text-s">Created: <%= post["createdAt"] %> </p>
   <p class="text-s">Title: <%= post["title"] %></p>
   <p class="text-s">Description: <%= post["description"] %>
   </p>
@@ -248,7 +248,9 @@
       initComparisons();
     </script>
   </body>
-  <script >var createdAtDate= "<%= post['createdAt'] %>" </script>
+  <script >var createdAtDate= "<%= post['createdAt'] %>"; 
+  var expDate= "<%= post['expiry'] %>";
+  </script>
 
   <script defer src="/scripts/post.js"></script>
   <script defer src="/scripts/timer.js"></script>

@@ -29,7 +29,7 @@ async function addComment(req) {
           comment: req.body.commentInput,
           username: req.user.username,
           userId: req.user.id,
-          createdAt: new Date().toLocaleString(),
+          createdAt: new Date(),
         },
       },
     }
@@ -68,12 +68,8 @@ async function createChallenge(req, res) {
       description: req.body.descriptionInput,
       p1Likes: {},
       p2Likes: {},
-<<<<<<< HEAD
-      createdAt: new Date(),
-=======
       createdAt: date,
-      expiry:  new Date(date.getTime() + req.body.timeInput * 1000),
->>>>>>> 2d456a2b1993ee489d706f06c3c08ae3f958dd6e
+      expiry: new Date(date.getTime() + req.body.timeInput * 1000),
       comments: 0,
       commentList: [],
       timeLimit: req.body.timeInput,
