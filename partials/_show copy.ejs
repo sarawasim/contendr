@@ -3,6 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="css/global.css" />
   <link rel="stylesheet" href="css/post.css" />
   <script src="https://kit.fontawesome.com/761d42c757.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -96,40 +97,59 @@
 </head>
 
 <body>
-
   <h1 class="text-XL-blue">Explore <%= cat %>
   </h1>
-      <% let i=0; %>
-        <% for(i=0; i < feedPosts.length; i++) { %>
-          <br />
-          <div class="post-container">
-            <div class="post">
-              <p class="text-m">
-                <strong><a href="/profile?username=<%=feedPosts[i].player1%>">
-                    <%= feedPosts[i]["player1"] %>
-                  </a>
-                </strong>
-                challenged
-                <strong><a href="/profile?username=<%=feedPosts[i].player2%>">
-                    <%= feedPosts[i]["player2"] %>
-                  </a> </strong>to <%= feedPosts[i].category %>!
-              </p>
-              <div class="post-gradient"></div>
-              <div class="img-comp-container">
-                
-                <% if (feedPosts[i].isAccepted) { %>
-                  <div class="img-comp-img player2-post">
+  <% let i=0; %>
+    <% for(i=0; i < feedPosts.length; i++) { %>
+      <div class="post-container">
+        <div class="post">
+          <p class="text-m">
+            <strong><a href="/profile?username=<%=feedPosts[i].player1%>">
+                <%= feedPosts[i]["player1"] %>
+              </a>
+            </strong>
+            challenged
+            <strong><a href="/profile?username=<%=feedPosts[i].player2%>">
+                <%= feedPosts[i]["player2"] %>
+              </a> </strong>to <%= feedPosts[i].category %>!
+          </p>
+          <div class="post-gradient"></div>
+          <div class="img-comp-container">
 
-                    <% if (feedPosts[i]["p2FileType"]==="video/mp4" || feedPosts[i]["p2FileType"]==="video/quicktime" ) {
-                      %>
+            <div class="img-comp-img player2-post">
+              <% if (feedPosts[i]["isAccepted"]) { %>
 
-                      <video src="<%= feedPosts[i]['p2URL'] %>" width="450" height="600" style="object-fit: cover" muted
-                        loop onclick="this.paused ? this.play() : this.pause();"></video>
+                <% if (feedPosts[i]["p2FileType"]==="video/mp4" || feedPosts[i]["p2FileType"]==="video/quicktime" ) { %>
 
-                      <% } else { %>
-                        <img src="<%= feedPosts[i]['p2URL'] %>" width="450" height="600" style="object-fit: cover" />
-                        <% } %>
-                      
+                  <video src="<%= feedPosts[i]['p2URL'] %>" type="video/mp4" width="450" height="600"
+                    style="object-fit: cover" controls muted loop></video>
+
+                  <% } else { %>
+                    <img src="<%= feedPosts[i]['p2URL'] %>" width="450" height="600" style="object-fit: cover" />
+                    <% } %>
+                    
+                      <div class="bottomright">
+                        <div>
+                          <img id="displayPicture-playerTwo" src="mockUser2.png" alt="display picture" width="50px"
+                            height="50px" />
+                        </div>
+                        <div class="likes-container">
+                          <p class="likes">
+                            <%= Object.keys(feedPosts[i]['p2Likes']).length %>
+                          </p>
+                          <a href="/<%= feedPosts[i]['postId'] %>/p2/like">
+                            <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
+                              <span style="color: #ff84dd">
+                                <i class="fas fa-heart p2heart"></i>
+                              </span>
+                              <% } else { %>
+                                <span style="color: #ff84dd">
+                                  <i class="far fa-heart p2heart"></i>
+                                </span>
+                                <% } %>
+                          </a>
+                        </div>
+                      </div>
                       
 
                         <div class="bottomleft">
@@ -177,119 +197,95 @@
                           </a>
                         </div>
 
-                        <div class="bottomright">
-                          <div>
-                            <img id="displayPicture-playerTwo" src="mockUser2.png" alt="display picture"Z width="50px"
-                              height="50px" />
-                          </div>
-                          <div class="likes-container">
-                            <p class="likes">
-                              <%= Object.keys(feedPosts[i]['p2Likes']).length %>
-                            </p>
-                            <a href="/<%= feedPosts[i]['postId'] %>/p2/like">
-                              <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
-                                <span style="color: #ff84dd">
-                                  <i class="fas fa-heart p2heart"></i>
-                                </span>
-                                <% } else { %>
-                                  <span style="color: #ff84dd">
-                                    <i class="far fa-heart p2heart"></i>
-                                  </span>
-                                  <% } %>
-                            </a>
-                          </div>
-                        </div>
-                </div>
-                
-                  <div class="img-comp-img img-comp-overlay player1-post">
-                    <% if (feedPosts[i]["p1FileType"]==="video/mp4" || feedPosts[i]["p1FileType"]==="video/quicktime" ) {
-                      %>
+            </div>
+            <div class="img-comp-img img-comp-overlay player1-post">
 
-                      <video src="<%= feedPosts[i]['p1URL'] %>" type="video/mp4" width="450" height="600"
-                        style="object-fit: cover" onclick="this.paused ? this.play() : this.pause();" muted loop></video>
+              <% if (feedPosts[i]["p1FileType"]==="video/mp4" || feedPosts[i]["p1FileType"]==="video/quicktime" ) { %>
 
-                      <% } else { %>
-                        <img src="<%= feedPosts[i]['p1URL'] %>" width="450" height="600" style="object-fit: cover" />
-                        <% } %>
+                <video src="<%= feedPosts[i]['p1URL'] %>" width="450" height="600" style="object-fit: cover" controls
+                  muted loop></video>
 
-
-                  </div>
-                <% }  else { %>
-
-                  <div class="img-comp-img player1-post">
-                    <% if (feedPosts[i]["p1FileType"]==="video/mp4" || feedPosts[i]["p1FileType"]==="video/quicktime" ) {
-                      %>
-
-                      <video src="<%= feedPosts[i]['p1URL'] %>" type="video/mp4" width="450" height="600"
-                        style="object-fit: cover" onclick="this.paused ? this.play() : this.pause();" muted loop></video>
-
-                      <% } else { %>
-                        <img src="<%= feedPosts[i]['p1URL'] %>" width="450" height="600" style="object-fit: cover" />
-                        <% } %>
-
-
-                  </div>
-
-                  <div class="bottomleft">
-                    <div class="dp-title">
-                      <img id="displayPicture-playerOne" src="mockUser.png" alt="display picture" width="50px"
-                        height="50px" />
-                    </div>
-                    <div class="likes-container">
-                      <p class="likes">
-                        <%= Object.keys(feedPosts[i]['p1Likes']).length %>
-                      </p>
-                      <a href="/<%= feedPosts[i]['postId'] %>/p1/like">
-                        <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
-                          <span style="color: #5377fd">
-                            <i class="fas fa-heart p1heart"></i>
-                          </span>
-                          <% } else { %>
-                            <span style="color: #5377fd">
-                              <i class="far fa-heart p1heart"></i>
-                            </span>
-                            <% } %>
-                      </a>
-                    </div>
-                  </div>
-
-                  <div class="bottomCenter">
-                    <div class="postTitle">
-                      <strong>
-                        <p class="postTitle-s">
-                          <%= feedPosts[i]["player1"] %> challenged <%= feedPosts[i]["player2"] %>
-                        </p>
-                      </strong>
-                      <p class="postTitle-s">
-                        <%= feedPosts[i]["title"] %>
-                      </p>
-                      <p class="postTitle-s">
-                        <%= feedPosts[i]["descriptions"] %>
-                      </p>
-                      <p class="postTitle-s"><strong>ends in</strong></p>
-                    </div>
-                    <p class="likes">
-                      <%=feedPosts[i].commentList.length%>
-                    </p>
-                    <a href="/p?postId=<%= feedPosts[i]['postId'] %>"> <i class="far fa-comment"></i>
-                    </a>
-                  </div>
-
+                <% } else { %>
+                  <img src="<%= feedPosts[i]['p1URL'] %>" width="450" height="600" style="object-fit: cover" />
                   <% } %>
 
+          </div>
 
+            <% } else { %>            
+              testing123
+                <div class="bottomleft">
+                  <div class="dp-title">
+                    <img id="displayPicture-playerOne" src="mockUser.png" alt="display picture" width="50px"
+                      height="50px" />
+                  </div>
+                  <div class="likes-container">
+                    <p class="likes">
+                      <%= Object.keys(feedPosts[i]['p1Likes']).length %>
+                    </p>
+                    <a href="/<%= feedPosts[i]['postId'] %>/p1/like">
+                      <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
+                        <span style="color: #5377fd">
+                          <i class="fas fa-heart p1heart"></i>
+                        </span>
+                        <% } else { %>
+                          <span style="color: #5377fd">
+                            <i class="far fa-heart p1heart"></i>
+                          </span>
+                          <% } %>
+                    </a>
+                  </div>
+                </div>
 
-
+                <div class="bottomCenter">
+                  <div class="postTitle">
+                    <strong>
+                      <p class="postTitle-s">
+                        <%= feedPosts[i]["player1"] %> challenged <%= feedPosts[i]["player2"] %>
+                      </p>
+                    </strong>
+                    <p class="postTitle-s">
+                      <%= feedPosts[i]["title"] %>
+                    </p>
+                    <p class="postTitle-s">
+                      <%= feedPosts[i]["descriptions"] %>
+                    </p>
+                    <p class="postTitle-s"><strong>ends in</strong></p>
+                  </div>
+                  <p class="likes">
+                    <%=feedPosts[i].commentList.length%>
+                  </p>
+                  <a href="/p?postId=<%= feedPosts[i]['postId'] %>"> <i class="far fa-comment"></i>
+                  </a>
+                </div>
 
               </div>
-            </div>
-          </div>
-          <% } %>
+              <div class="img-comp-img player1-post">
+                
+                <% if (feedPosts[i]["p1FileType"]==="video/mp4" || feedPosts[i]["p1FileType"]==="video/quicktime" ) { %>
 
-            <script>
-              /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
-              initComparisons();
-            </script>
+                  <video src="<%= feedPosts[i]['p1URL'] %>" width="450" height="600" style="object-fit: cover" controls
+                    muted loop></video>
+
+                  <% } else { %>
+                    <img src="<%= feedPosts[i]['p1URL'] %>" width="450" height="600" style="object-fit: cover" />
+                    <% } %>
+
+              </div>
+              
+              <% } %>
+          </div>
+        </div>
+      </div>
+      <br />
+      <!-- <a href="/p?postId=<%= feedPosts[i]['postId'] %>"
+      >^^^ Individual Post page</a
+    > -->
+      <% } %>
+
+        <script>
+          /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
+          initComparisons();
+        </script>
 </body>
 <script defer src="/scripts/post.js"></script>
 
