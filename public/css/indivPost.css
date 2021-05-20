@@ -41,8 +41,17 @@
 }
 
 #commentInput {
-  width: 90%;
+  margin-top: 10px;
+  width: 80%;
   height: 2rem;
+}
+
+.commentSection {
+  width: 430px;
+}
+
+.commentText {
+  text-align: center;
 }
 
 #sendMessage-btn {
