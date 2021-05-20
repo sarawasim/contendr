@@ -191,12 +191,13 @@
         <%= post["player2"] %>
       </a></strong> to <%= post["category"] %>!
   </p>
-  <p class="text-s ">Created: <%= post["createdAt"] %> </p>
+
+  <p id="createdAt" class="text-s">Created: <%= post["createdAt"] %> </p>
   <p class="text-s">Title: <%= post["title"] %></p>
   <p class="text-s">Description: <%= post["description"] %>
   </p>
 
-  <p class="text-s">Ends in: </p>
+  <p class="text-s"> Ends in:<span id="expiration" class="text-s"> </span></p>
 </div>
     
     <div class="bottomright">
@@ -247,5 +248,11 @@
       initComparisons();
     </script>
   </body>
+  <script >var createdAtDate= "<%= post['createdAt'] %>"; 
+  var expDate= "<%= post['expiry'] %>";
+  </script>
+
   <script defer src="/scripts/post.js"></script>
+  <script defer src="/scripts/timer.js"></script>
+
 </html>
