@@ -257,9 +257,7 @@ router.post("/updateP2URL", ensureAuthenticated, upload.single("fileUpload"), (r
 });
 
 router.get("/faq", (req, res) => {
-  let date = new Date()
-  let newDate = new Date(date.getTime() + 86400000)
-  res.render("faq", {user: req.user, newDate})
+  res.render("faq", {user: req.user})
 })
 router.get("/termsOfUse", (req, res) => {
   res.render("terms", {user: req.user})

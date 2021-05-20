@@ -53,6 +53,7 @@ async function createChallenge(req, res) {
 
     const postID = uuidv4();
     const postCollection = database.db("Contendr").collection("posts");
+    let date = new Date();
     await postCollection.insertOne({
       postId: postID,
       player1: req.user.username,
@@ -62,7 +63,7 @@ async function createChallenge(req, res) {
       description: req.body.descriptionInput,
       p1Likes: {},
       p2Likes: {},
-      createdAt: new Date(),
+      createdAt: date,
       expiry:  new Date(date.getTime() + req.body.timeInput * 1000),
       comments: 0,
       commentList: [],
