@@ -104,7 +104,19 @@ router.get("/search", async (req, res) => {
 router.get("/showFollowing", async (req, res) => {
   let username = req.query.username
   let following = await getList(username, "following")
-  let title = `Users ${username} is following`
+  let title;
+  if (username == req.user.username) {
+    title = `You are following: `
+    if (following.length == 0) {
+        title = `You are not following anyone. Start following someone!`
+    } 
+  } else {
+    title = `${username} is following:`
+
+    if (following.length == 0) {
+      title = `${username} isn't following anyone`
+    }
+  }
   res.render("searchResults", { results: following, user: req.user, title });
 
 })
@@ -112,7 +124,18 @@ router.get("/showFollowing", async (req, res) => {
 router.get("/showFollowers", async (req, res) => {
   let username = req.query.username
   let followers = await getList(username, "followers")
-  let title = `${username}'s followers`
+  if (username == req.user.username) {
+    title = `Your followers:`
+    if (followers.length == 0) {
+        title = `Start challenging others to gain followers!`
+    } 
+  } else {
+    title = `${username}'s followers:`
+
+    if (followers.length == 0) {
+      title = `Be ${username}'s first follower!`
+    }
+  }
   res.render("searchResults", { results: followers, user: req.user, title });
 
 })
