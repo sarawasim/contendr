@@ -19,7 +19,7 @@ submitForm.addEventListener("click", async (event) => {
     await fetch(url, {
       method: "PUT",
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "video/quicktime",
       },
       body: file,
     });
@@ -40,7 +40,7 @@ submitForm.addEventListener("click", async (event) => {
     fileInput.setAttribute("value", file.type);
     fileInput.setAttribute("name", "fileTypeInput");
     let hiddenInput = document.getElementById("fileType");
-    hiddenInput.appendChild(fileInput)
+    hiddenInput.appendChild(fileInput);
     // submit form
     challengeForm.submit();
   }
