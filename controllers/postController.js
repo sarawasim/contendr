@@ -6,7 +6,13 @@ async function uploadP2URL(req) {
   const postCollection = database.db("Contendr").collection("posts");
   await postCollection.updateOne(
     { postId: req.body.postId },
-    { $set: { p2URL: req.body.imageURL, isAccepted: true, p2FileType: req.body.fileTypeInput } }
+    {
+      $set: {
+        p2URL: req.body.imageURL,
+        isAccepted: true,
+        p2FileType: req.body.fileTypeInput,
+      },
+    }
   );
 }
 
@@ -41,7 +47,6 @@ async function createChallenge(req, res) {
       imageURL: Joi.string().required(),
       followingList: Joi.string().allow(null).allow("").optional(),
       fileTypeInput: Joi.string().required(),
-
     });
     const validationResult = await schema.validate(req.body);
     if (validationResult.error != null) {
@@ -62,7 +67,7 @@ async function createChallenge(req, res) {
       description: req.body.descriptionInput,
       p1Likes: {},
       p2Likes: {},
-      createdAt: new Date().toLocaleString(),
+      createdAt: new Date(),
       comments: 0,
       commentList: [],
       timeLimit: req.body.timeInput,
@@ -83,14 +88,11 @@ async function createChallenge(req, res) {
       },
       { $push: { posts: { postId: postID } } }
     );
-    
+
     await userCollection.updateOne(
       { username: req.body.searchUser },
       { $inc: { pending: +1 } }
     );
-    
-
-
   } catch (ex) {
     res.render("error", { message: "Error connecting to Mongo" });
     console.log("Error connecting to Mongo");
@@ -143,31 +145,30 @@ async function likePost(req) {
 }
 
 async function deletePost(req, res) {
-  console.log("i am deletePost")
+  console.log("i am deletePost");
   const postId = req.params.id;
   const postCollection = database.db("Contendr").collection("posts");
   const posts = await postCollection.find().toArray();
 
   const targetPost = posts.find((post) => post.postId === postId);
-    console.log(`i am targetPost ${JSON.stringify(targetPost)}`)
+  console.log(`i am targetPost ${JSON.stringify(targetPost)}`);
   const userCollection = database.db("Contendr").collection("users");
-  
+
   if (!targetPost.isAccepted) {
-    console.log(`i'm the if statemnt inside deletePost`)
+    console.log(`i'm the if statemnt inside deletePost`);
     await userCollection.updateOne(
       { username: targetPost.player2 },
       { $inc: { pending: -1 } }
     );
   }
-  
+
   await userCollection.update(
     {},
     { $pull: { posts: { postId: postId } } },
     { multi: true }
   );
-  
-  await postCollection.deleteOne({ postId: postId });
 
+  await postCollection.deleteOne({ postId: postId });
 }
 
 async function getPostByCat(category) {
@@ -175,12 +176,12 @@ async function getPostByCat(category) {
     .db("Contendr")
     .collection("posts")
     .find({
-      category: category
+      category: category,
     })
     .toArray();
-    console.log("i am results from getpostbycat")
-    console.log(JSON.stringify(results))
-    return results;
+  console.log("i am results from getpostbycat");
+  console.log(JSON.stringify(results));
+  return results;
 }
 
 module.exports = {
