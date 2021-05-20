@@ -256,4 +256,19 @@ router.post("/updateP2URL", ensureAuthenticated, upload.single("fileUpload"), (r
   res.redirect(`/p?postId=${req.body.postId}`);
 });
 
+router.get("/faq", (req, res) => {
+  let date = new Date()
+  let newDate = new Date(date.getTime() + 86400000)
+  res.render("faq", {user: req.user, newDate})
+})
+router.get("/termsOfUse", (req, res) => {
+  res.render("terms", {user: req.user})
+})
+router.get("/privacyPolicy", (req, res) => {
+  res.render("privacy", {user: req.user})
+})
+router.get("/help", (req, res) => {
+  res.render("help", {user: req.user})
+})
+
 module.exports = router;
