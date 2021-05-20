@@ -11,7 +11,7 @@ submitForm.addEventListener("click", async (event) => {
     alert(inputMessage);
   } else {
     const file = challengeInput.files[0];
-    debugger;
+    // debugger;
     //get secure url from our Server
     const { url } = await fetch("/s3Url").then((res) => res.json());
 
