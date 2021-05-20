@@ -219,15 +219,6 @@
                   width="50px"
                   height="50px"
                 />
-                <div class="postTitle">
-                  <p class="postTitle-s">
-                    <%= feedPosts[i]["player1"] %> challenged <%=
-                    feedPosts[i]["player2"] %>
-                  </p>
-                  <p class="postTitle-s"><%= feedPosts[i]["title"] %></p>
-                  <p class="postTitle-s"><%= feedPosts[i]["descriptions"] %></p>
-                  <p class="postTitle-s"><strong>ends in</strong></p>
-                </div>
               </div>
               <div class="likes-container">
                 <p class="likes">
@@ -247,6 +238,23 @@
               </div>
             </div>
 
+            <div class="bottomCenter">
+                <div class="postTitle">
+                 <strong><p class="postTitle-s">
+                    <%= feedPosts[i]["player1"] %> challenged <%= feedPosts[i]["player2"] %>
+                  </p></strong>
+                  <p class="postTitle-s">
+                    <%= feedPosts[i]["title"] %>
+                  </p>
+                  <p class="postTitle-s">
+                    <%= feedPosts[i]["descriptions"] %>
+                  </p>
+                  <p class="postTitle-s"><strong>ends in</strong></p>
+                </div>
+              <p class="likes"> <%=feedPosts[i].commentList.length%> </p>
+              <a href="/p?postId=<%= feedPosts[i]['postId'] %>"> <i class="far fa-comment"></i>
+              </a>
+            </div>
 
             <div class="bottomright">
               <div>
@@ -273,11 +281,6 @@
                   </span>
                   <% } %>
                 </a>
-              </div>
-              <div class="bottomCenter"> 
-                <a
-                href="/p?postId=<%= feedPosts[i]['postId'] %>"
-                > <i class="far fa-comment"></i><%=feedPosts[i].commentList.length%></a>
               </div>
             </div>
           </div>
