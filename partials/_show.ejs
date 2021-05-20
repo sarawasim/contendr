@@ -121,7 +121,13 @@
           class="post-gradient"
         ></a>
         <div class="img-comp-container">
+
+          <% if (feedPosts[i]["isAccepted"]) { %>
+
+          
           <div class="img-comp-img player2-post">
+            
+
             <% if (feedPosts[i]["p2FileType"] === "video/mp4" || feedPosts[i]["p2FileType"] === "video/quicktime") { %> 
 
               <video 
@@ -171,8 +177,14 @@
               </div>
             </div>
           </div>
-
+          
           <div class="img-comp-img img-comp-overlay player1-post">
+          <% } else { %>
+          
+          <div class="img-comp-img player1-post">
+          
+          <% } %>
+
             <% if (feedPosts[i]["p1FileType"] === "video/mp4" || feedPosts[i]["p1FileType"] === "video/quicktime") { %> 
 
             <video
