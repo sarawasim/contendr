@@ -88,7 +88,7 @@ let createdAgo = function () {
     if (minutes == 1) {
       pCreatedAt.innerHTML = `Created a minutes ago`;
     } else {
-      pCreatedAt.innerHTML = `Created ${minutes} hours ago`;
+      pCreatedAt.innerHTML = `Created ${minutes} minutes ago`;
     }
   } else {
     pCreatedAt.innerHTML = `Created a minute ago`;
