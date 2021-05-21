@@ -98,6 +98,10 @@
   </head>
 
   <body>
+    <div class="tabs">
+      <a href="/" id="mainFeed-btn"> Main Feed </a>
+      <a href="/explore" id="active-btn"> Explore </a>
+    </div>
     <h1 class="text-XL-blue">Explore <%= cat %></h1>
     <% for(let i = feedPosts.length-1; i >= 0; i--) { %>
     <br />
