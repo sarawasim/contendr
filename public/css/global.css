@@ -16,6 +16,12 @@ body {
   height: 100%;
 }
 
+.text-container {
+  padding-top: 1rem;
+  width: 450px;
+  text-align: center;
+}
+
 /* navigation ------------------------------------------------------ */
 
 nav {
