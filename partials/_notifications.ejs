@@ -18,7 +18,7 @@
       Taunt some of your followers so that they want to challenge you
     </p>
     <% } else { %>
-    <h2>Incomming Challenges</h2>
+    <h2>Incoming Challenges</h2>
     <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
     <div class="notification">
       <div class="title">
@@ -36,7 +36,7 @@
       </div>
       <div class="acceptReject-btns">
         <a href="accept?postId=<%= feedPosts[i]['postId'] %>" id="acceptBtn"
-          >Accept</a
+          >View</a
         >
 
         <a href="/<%= feedPosts[i]['postId'] %>/deletePost" id="rejectBtn"

@@ -76,7 +76,8 @@
         </div>
 
         <div class="title">
-          <p class="text-m">You were challenged to <%= post["category"] %>!</p>
+          <p class="text-m"><a href="/profile?username=<%=post.player1%>">
+            <%= post["player1"] %></a> challenged you to <%= post["category"] %>!</p>
           <p class="text-s">Created: <%= post["createdAt"] %></p>
           <p class="text-s">Title: <%= post["title"] %></p>
           <p class="text-s">Description: <%= post["description"] %></p>
@@ -128,7 +129,7 @@
                         />
                       </label>
                       <p class="text-xs text-gray-500">
-                        PNG, JPG, or GIF up to 10MB
+                        PNG, JPG, GIF, MP4, MOV up to 100MB
                       </p>
                       <script>
                         //generates img src for previewing file upload
