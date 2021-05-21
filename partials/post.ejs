@@ -166,7 +166,8 @@
       Follow your friends to see their posts or click on the Start a Challenge
       button below to send them a challenge!
     </p>
-    <% } %> <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
+    <% } %> <% for(let i = feedPosts.length-1; i >= 0; i--) { %>
+
     <br />
     <div class="post-container">
       <div class="post">
