@@ -29,19 +29,33 @@ $(document).ready(function () {
         //   "$THIS SIBLING IS " + $(this).closest(".post-container").attr("class")
         // );
         let otherLike;
+
         if ($(this).find("i").hasClass("p1heart")) {
           otherLike = $(this).closest(".post-container").find(".p2heart");
         } else {
           otherLike = $(this).closest(".post-container").find(".p1heart");
         }
+        let otherLikeNum = otherLike
+          .closest(".likes-container")
+          .find("p.likes")
+          .text();
         console.log("THIS OTHER LIKE HAS " + otherLike.attr("class"));
         if (otherLike.hasClass("fas")) {
           otherLike.removeClass("fas");
           otherLike.addClass("far");
+          console.log(
+            "THIS OTHER LIKE HAS " +
+              otherLike.closest(".likes-container").find("p.likes").text()
+          );
+
           otherLike
             .closest(".likes-container")
             .find("p.likes")
-            .text(`${parseInt(likesNum)}`);
+            .text(`${parseInt(otherLikeNum - 1)}`);
+          console.log(
+            "THIS OTHER LIKE HAS " +
+              otherLike.closest(".likes-container").find("p.likes").text()
+          );
         }
       }
     });
