@@ -2,13 +2,8 @@ const database = include("databaseConnection/databaseConnection");
 const Joi = require("joi");
 const { v4: uuidv4 } = require("uuid");
 
-
-const postCollection = database.db("Contendr").collection("posts");
-
-const userCollection = database.db("Contendr").collection("users");
-
-
 async function uploadP2URL(req) {
+  const postCollection = database.db("Contendr").collection("posts");
   await postCollection.updateOne(
     { postId: req.body.postId },
     {
@@ -19,6 +14,8 @@ async function uploadP2URL(req) {
       },
     }
   );
+  
+  const userCollection = database.db("Contendr").collection("users");
 
   await userCollection.updateOne(
     { username: req.user.username },
@@ -27,6 +24,7 @@ async function uploadP2URL(req) {
 }
 
 async function addComment(req) {
+  const postCollection = database.db("Contendr").collection("posts");
   await postCollection.updateOne(
     {
       postId: req.params.id,
@@ -66,6 +64,7 @@ async function createChallenge(req, res) {
     }
 
     const postID = uuidv4();
+    const postCollection = database.db("Contendr").collection("posts");
     let date = new Date();
     await postCollection.insertOne({
       postId: postID,
@@ -88,6 +87,7 @@ async function createChallenge(req, res) {
       p2FileType: "",
     });
 
+    const userCollection = database.db("Contendr").collection("users");
     await userCollection.updateMany(
       {
         $or: [
@@ -112,6 +112,7 @@ async function createChallenge(req, res) {
 async function likePost(req) {
   const postId = req.params.id;
   const player = req.params.player;
+  const postCollection = database.db("Contendr").collection("posts");
   const posts = await postCollection.find().toArray();
 
   const targetPost = posts.find((post) => post.postId === postId);
@@ -155,9 +156,11 @@ async function likePost(req) {
 async function deletePost(req, res) {
   console.log("i am deletePost");
   const postId = req.params.id;
+  const postCollection = database.db("Contendr").collection("posts");
   const posts = await postCollection.find().toArray();
 
   const targetPost = posts.find((post) => post.postId === postId);
+  const userCollection = database.db("Contendr").collection("users");
 
   if (!targetPost.isAccepted) {
     await userCollection.updateOne(
