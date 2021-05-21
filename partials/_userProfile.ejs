@@ -50,7 +50,7 @@
       <!-- <%- JSON.stringify(posts) %> -->
       <div class="userPosts-Profile">
         <% for(let i= posts.length-1; i >=0; i--) { if (posts[i].player1
-        == user.username) { console.log("*************" + posts[i].player1) %>
+        == user.username) { %>
         <div class="profilePost">
           <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
             <% if (posts[i]["p1FileType"] === "video/mp4" ||
@@ -69,10 +69,16 @@
             <% } %>
           </a>
         </div>
-        <% } if (posts[i].player2 == user.username) {
-        console.log("+++++++++++++" + posts[i].player2)%>
+        <% } if (posts[i].player2 == user.username) { %>
         <div class="profilePost">
-          <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
+          <% if (!posts[i].isAccepted) { %>
+            <a href="/accept?postId=<%= posts[i]['postId'] %>" class="post-gradient">
+
+
+
+          <% } else { %>
+            <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
+          <% } %>
             <% if (posts[i]["p2FileType"] === "video/mp4" ||
             posts[i]["p2FileType"] === "video/quicktime") { %>
 
