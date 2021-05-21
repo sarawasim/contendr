@@ -30,11 +30,15 @@
 
       <div class="userInfo-Profile">
         <div class="followers">
-          <p><a href="showFollowers?username=<%=user.username%>">Followers</a></p>
+          <p>
+            <a href="showFollowers?username=<%=user.username%>">Followers</a>
+          </p>
           <p class="bold"><%= user.followers.length %></p>
         </div>
         <div class="following">
-          <p><a href="showFollowing?username=<%=user.username%>">Following</a></p>
+          <p>
+            <a href="showFollowing?username=<%=user.username%>">Following</a>
+          </p>
           <p class="bold"><%= user.following.length %></p>
         </div>
         <div class="challenges-won">
@@ -49,42 +53,40 @@
         == user.username) { console.log("*************" + posts[i].player1) %>
         <div class="profilePost">
           <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
-            <% if (posts[i]["p1FileType"] === "video/mp4" || posts[i]["p1FileType"] === "video/quicktime") { %> 
+            <% if (posts[i]["p1FileType"] === "video/mp4" ||
+            posts[i]["p1FileType"] === "video/quicktime") { %>
 
-              <video 
-                src="<%= posts[i]['p1URL'] %>"
-                muted
-                loop
-                id="postImage"
-              ></video>
-    
+            <video
+              src="<%= posts[i]['p1URL'] %>"
+              muted
+              loop
+              id="postImage"
+              autoplay
+            ></video>
+
             <% } else { %>
-              <img
-                src="<%= posts[i]['p1URL'] %>"
-                id="postImage"
-              />
+            <img src="<%= posts[i]['p1URL'] %>" id="postImage" />
             <% } %>
           </a>
         </div>
         <% } if (posts[i].player2 == user.username) {
         console.log("+++++++++++++" + posts[i].player2)%>
         <div class="profilePost">
-            <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
-              <% if (posts[i]["p2FileType"] === "video/mp4" || posts[i]["p2FileType"] === "video/quicktime") { %> 
-  
-                <video 
-                  src="<%= posts[i]['p2URL'] %>"
-                  muted
-                  loop
-                  id="postImage"
-                ></video>
-      
-              <% } else { %>
-                <img
-                  src="<%= posts[i]['p2URL'] %>"
-                  id="postImage"
-                />
-              <% } %>
+          <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
+            <% if (posts[i]["p2FileType"] === "video/mp4" ||
+            posts[i]["p2FileType"] === "video/quicktime") { %>
+
+            <video
+              src="<%= posts[i]['p2URL'] %>"
+              muted
+              loop
+              id="postImage"
+              autoplay
+            ></video>
+
+            <% } else { %>
+            <img src="<%= posts[i]['p2URL'] %>" id="postImage" />
+            <% } %>
           </a>
         </div>
         <% } }%>

@@ -1,102 +1,104 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/post.css" />
+    <script
+      src="https://kit.fontawesome.com/761d42c757.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<head>
-  <meta name="viewport" content="width=device-width" />
-  <link rel="stylesheet" href="css/post.css" />
-  <script src="https://kit.fontawesome.com/761d42c757.js" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-  <script>
-    function initComparisons() {
-      var x, i;
-      /*find all elements with an "overlay" class:*/
-      x = document.getElementsByClassName("img-comp-overlay");
-      for (i = 0; i < x.length; i++) {
-        /*once for each "overlay" element:
+    <script>
+      function initComparisons() {
+        var x, i;
+        /*find all elements with an "overlay" class:*/
+        x = document.getElementsByClassName("img-comp-overlay");
+        for (i = 0; i < x.length; i++) {
+          /*once for each "overlay" element:
               pass the "overlay" element as a parameter when executing the compareImages function:*/
-        compareImages(x[i]);
+          compareImages(x[i]);
+        }
+        function compareImages(img) {
+          var slider,
+            img,
+            clicked = 0,
+            w,
+            h;
+          /*get the width and height of the img element*/
+          w = img.offsetWidth;
+          h = img.offsetHeight;
+          /*set the width of the img element to 50%:*/
+          img.style.width = w / 2 + "px";
+          /*create slider:*/
+          slider = document.createElement("DIV");
+          slider.setAttribute("class", "img-comp-slider");
+          /*insert slider*/
+          img.parentElement.insertBefore(slider, img);
+          /*position the slider in the middle:*/
+          slider.style.top = h / 2 - slider.offsetHeight / 2 + "px";
+          slider.style.left = w / 2 - slider.offsetWidth / 2 + "px";
+          /*execute a function when the mouse button is pressed:*/
+          slider.addEventListener("mousedown", slideReady);
+          /*and another function when the mouse button is released:*/
+          window.addEventListener("mouseup", slideFinish);
+          /*or touched (for touch screens:*/
+          slider.addEventListener("touchstart", slideReady);
+          /*and released (for touch screens:*/
+          window.addEventListener("touchend", slideFinish);
+          function slideReady(e) {
+            /*prevent any other actions that may occur when moving over the image:*/
+            e.preventDefault();
+            e.stopPropagation();
+            /*the slider is now clicked and ready to move:*/
+            clicked = 1;
+            /*execute a function when the slider is moved:*/
+            window.addEventListener("mousemove", slideMove);
+            window.addEventListener("touchmove", slideMove);
+          }
+          function slideFinish() {
+            /*the slider is no longer clicked:*/
+            clicked = 0;
+          }
+          function slideMove(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var pos;
+            /*if the slider is no longer clicked, exit this function:*/
+            if (clicked == 0) return false;
+            /*get the cursor's x position:*/
+            pos = getCursorPos(e);
+            /*prevent the slider from being positioned outside the image:*/
+            if (pos < 0) pos = 0;
+            if (pos > w) pos = w;
+            /*execute a function that will resize the overlay image according to the cursor:*/
+            slide(pos);
+          }
+          function getCursorPos(e) {
+            var a,
+              x = 0;
+            e = e || window.event;
+            /*get the x positions of the image:*/
+            a = img.getBoundingClientRect();
+            /*calculate the cursor's x coordinate, relative to the image:*/
+            x = e.pageX - a.left;
+            /*consider any page scrolling:*/
+            x = x - window.pageXOffset;
+            return x;
+          }
+          function slide(x) {
+            /*resize the image:*/
+            img.style.width = x + "px";
+            /*position the slider:*/
+            slider.style.left = img.offsetWidth - slider.offsetWidth / 2 + "px";
+          }
+        }
       }
-      function compareImages(img) {
-        var slider,
-          img,
-          clicked = 0,
-          w,
-          h;
-        /*get the width and height of the img element*/
-        w = img.offsetWidth;
-        h = img.offsetHeight;
-        /*set the width of the img element to 50%:*/
-        img.style.width = w / 2 + "px";
-        /*create slider:*/
-        slider = document.createElement("DIV");
-        slider.setAttribute("class", "img-comp-slider");
-        /*insert slider*/
-        img.parentElement.insertBefore(slider, img);
-        /*position the slider in the middle:*/
-        slider.style.top = h / 2 - slider.offsetHeight / 2 + "px";
-        slider.style.left = w / 2 - slider.offsetWidth / 2 + "px";
-        /*execute a function when the mouse button is pressed:*/
-        slider.addEventListener("mousedown", slideReady);
-        /*and another function when the mouse button is released:*/
-        window.addEventListener("mouseup", slideFinish);
-        /*or touched (for touch screens:*/
-        slider.addEventListener("touchstart", slideReady);
-        /*and released (for touch screens:*/
-        window.addEventListener("touchend", slideFinish);
-        function slideReady(e) {
-          /*prevent any other actions that may occur when moving over the image:*/
-          e.preventDefault();
-          e.stopPropagation();
-          /*the slider is now clicked and ready to move:*/
-          clicked = 1;
-          /*execute a function when the slider is moved:*/
-          window.addEventListener("mousemove", slideMove);
-          window.addEventListener("touchmove", slideMove);
-        }
-        function slideFinish() {
-          /*the slider is no longer clicked:*/
-          clicked = 0;
-        }
-        function slideMove(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          var pos;
-          /*if the slider is no longer clicked, exit this function:*/
-          if (clicked == 0) return false;
-          /*get the cursor's x position:*/
-          pos = getCursorPos(e);
-          /*prevent the slider from being positioned outside the image:*/
-          if (pos < 0) pos = 0;
-          if (pos > w) pos = w;
-          /*execute a function that will resize the overlay image according to the cursor:*/
-          slide(pos);
-        }
-        function getCursorPos(e) {
-          var a,
-            x = 0;
-          e = e || window.event;
-          /*get the x positions of the image:*/
-          a = img.getBoundingClientRect();
-          /*calculate the cursor's x coordinate, relative to the image:*/
-          x = e.pageX - a.left;
-          /*consider any page scrolling:*/
-          x = x - window.pageXOffset;
-          return x;
-        }
-        function slide(x) {
-          /*resize the image:*/
-          img.style.width = x + "px";
-          /*position the slider:*/
-          slider.style.left = img.offsetWidth - slider.offsetWidth / 2 + "px";
-        }
-      }
-    }
-  </script>
-</head>
+    </script>
+  </head>
 
-<body>
-  <!-- <div class="post">
+  <body>
+    <!-- <div class="post">
       <div class="post-gradient"></div>
       <div class="img-comp-container">
         <div class="img-comp-img player2-post">
@@ -152,139 +154,171 @@
       </div>
     </div> -->
 
-  <!-- main feed is blue -->
-  <div class="tabs">
-    <a href="/" id="active-btn"> Main Feed </a>
-    <a href="/explore" id="explore-btn"> Explore </a>
-  </div>
+    <!-- main feed is blue -->
+    <div class="tabs">
+      <a href="/" id="active-btn"> Main Feed </a>
+      <a href="/explore" id="explore-btn"> Explore </a>
+    </div>
 
-  <% if(feedPosts.length==0) { %>
+    <% if(feedPosts.length==0) { %>
     <h1 class="text-XL">Awww. Nothing to show :(</h1>
     <p class="text-m">
       Follow your friends to see their posts or click on the Start a Challenge
       button below to send them a challenge!
     </p>
-    <% } %>
-      <% let i=0; %>
-        <% for(i=0; i < feedPosts.length; i++) { %>
-          <br />
-          <div class="post-container">
-            <div class="post">
-              <p class="text-m">
-                <strong><a href="/profile?username=<%=feedPosts[i].player1%>">
-                    <%= feedPosts[i]["player1"] %>
-                  </a>
+    <% } %> <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
+    <br />
+    <div class="post-container">
+      <div class="post">
+        <p class="text-m">
+          <strong
+            ><a href="/profile?username=<%=feedPosts[i].player1%>">
+              <%= feedPosts[i]["player1"] %>
+            </a>
+          </strong>
+          challenged
+          <strong
+            ><a href="/profile?username=<%=feedPosts[i].player2%>">
+              <%= feedPosts[i]["player2"] %>
+            </a> </strong
+          >to <%= feedPosts[i].category %>!
+        </p>
+        <div class="post-gradient"></div>
+        <div class="img-comp-container">
+          <div class="img-comp-img player2-post">
+            <% if (feedPosts[i]["p2FileType"]==="video/mp4" ||
+            feedPosts[i]["p2FileType"]==="video/quicktime" ) { %>
+
+            <video
+              src="<%= feedPosts[i]['p2URL'] %>"
+              width="450"
+              height="600"
+              style="object-fit: cover"
+              muted
+              loop
+              onclick="this.paused ? this.play() : this.pause();"
+              autoplay
+            ></video>
+
+            <% } else { %>
+            <img
+              src="<%= feedPosts[i]['p2URL'] %>"
+              width="450"
+              height="600"
+              style="object-fit: cover"
+            />
+            <% } %>
+
+            <div class="bottomleft">
+              <div class="dp-title">
+                <img
+                  id="displayPicture-playerOne"
+                  src="mockUser.png"
+                  alt="display picture"
+                  width="50px"
+                  height="50px"
+                />
+              </div>
+              <div class="likes-container">
+                <p class="likes">
+                  <%= Object.keys(feedPosts[i]['p1Likes']).length %>
+                </p>
+                <a href="/<%= feedPosts[i]['postId'] %>/p1/like">
+                  <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
+                  <span style="color: #5377fd">
+                    <i class="fas fa-heart p1heart"></i>
+                  </span>
+                  <% } else { %>
+                  <span style="color: #5377fd">
+                    <i class="far fa-heart p1heart"></i>
+                  </span>
+                  <% } %>
+                </a>
+              </div>
+            </div>
+
+            <div class="bottomCenter">
+              <div class="postTitle">
+                <strong>
+                  <p class="postTitle-s">
+                    <%= feedPosts[i]["player1"] %> challenged <%=
+                    feedPosts[i]["player2"] %>
+                  </p>
                 </strong>
-                challenged
-                <strong><a href="/profile?username=<%=feedPosts[i].player2%>">
-                    <%= feedPosts[i]["player2"] %>
-                  </a> </strong>to <%= feedPosts[i].category %>!
-              </p>
-              <div class="post-gradient"></div>
-              <div class="img-comp-container">
-                <div class="img-comp-img player2-post">
-                  <% if (feedPosts[i]["p2FileType"]==="video/mp4" || feedPosts[i]["p2FileType"]==="video/quicktime" ) {
-                    %>
+                <p class="postTitle-s"><%= feedPosts[i]["title"] %></p>
+                <p class="postTitle-s"><%= feedPosts[i]["descriptions"] %></p>
+                <p class="postTitle-s"><strong>ends in</strong></p>
+              </div>
+              <p class="likes"><%=feedPosts[i].commentList.length%></p>
+              <a href="/p?postId=<%= feedPosts[i]['postId'] %>">
+                <i class="far fa-comment"></i>
+              </a>
+            </div>
 
-                    <video src="<%= feedPosts[i]['p2URL'] %>" width="450" height="600" style="object-fit: cover" muted
-                      loop onclick="this.paused ? this.play() : this.pause();"></video>
-
-                    <% } else { %>
-                      <img src="<%= feedPosts[i]['p2URL'] %>" width="450" height="600" style="object-fit: cover" />
-                      <% } %>
-
-                        <div class="bottomleft">
-                          <div class="dp-title">
-                            <img id="displayPicture-playerOne" src="mockUser.png" alt="display picture" width="50px"
-                              height="50px" />
-                          </div>
-                          <div class="likes-container">
-                            <p class="likes">
-                              <%= Object.keys(feedPosts[i]['p1Likes']).length %>
-                            </p>
-                            <a href="/<%= feedPosts[i]['postId'] %>/p1/like">
-                              <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
-                                <span style="color: #5377fd">
-                                  <i class="fas fa-heart p1heart"></i>
-                                </span>
-                                <% } else { %>
-                                  <span style="color: #5377fd">
-                                    <i class="far fa-heart p1heart"></i>
-                                  </span>
-                                  <% } %>
-                            </a>
-                          </div>
-                        </div>
-
-                        <div class="bottomCenter">
-                          <div class="postTitle">
-                            <strong>
-                              <p class="postTitle-s">
-                                <%= feedPosts[i]["player1"] %> challenged <%= feedPosts[i]["player2"] %>
-                              </p>
-                            </strong>
-                            <p class="postTitle-s">
-                              <%= feedPosts[i]["title"] %>
-                            </p>
-                            <p class="postTitle-s">
-                              <%= feedPosts[i]["descriptions"] %>
-                            </p>
-                            <p class="postTitle-s"><strong>ends in</strong></p>
-                          </div>
-                          <p class="likes">
-                            <%=feedPosts[i].commentList.length%>
-                          </p>
-                          <a href="/p?postId=<%= feedPosts[i]['postId'] %>"> <i class="far fa-comment"></i>
-                          </a>
-                        </div>
-
-                        <div class="bottomright">
-                          <div>
-                            <img id="displayPicture-playerTwo" src="mockUser2.png" alt="display picture"Z width="50px"
-                              height="50px" />
-                          </div>
-                          <div class="likes-container">
-                            <p class="likes">
-                              <%= Object.keys(feedPosts[i]['p2Likes']).length %>
-                            </p>
-                            <a href="/<%= feedPosts[i]['postId'] %>/p2/like">
-                              <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
-                                <span style="color: #ff84dd">
-                                  <i class="fas fa-heart p2heart"></i>
-                                </span>
-                                <% } else { %>
-                                  <span style="color: #ff84dd">
-                                    <i class="far fa-heart p2heart"></i>
-                                  </span>
-                                  <% } %>
-                            </a>
-                          </div>
-                        </div>
-                </div>
-
-                <div class="img-comp-img img-comp-overlay player1-post">
-                  <% if (feedPosts[i]["p1FileType"]==="video/mp4" || feedPosts[i]["p1FileType"]==="video/quicktime" ) {
-                    %>
-
-                    <video src="<%= feedPosts[i]['p1URL'] %>" type="video/mp4" width="450" height="600"
-                      style="object-fit: cover" onclick="this.paused ? this.play() : this.pause();" muted loop></video>
-
-                    <% } else { %>
-                      <img src="<%= feedPosts[i]['p1URL'] %>" width="450" height="600" style="object-fit: cover" />
-                      <% } %>
-
-
-                </div>
+            <div class="bottomright">
+              <div>
+                <img
+                  id="displayPicture-playerTwo"
+                  src="mockUser2.png"
+                  alt="display picture"
+                  Z
+                  width="50px"
+                  height="50px"
+                />
+              </div>
+              <div class="likes-container">
+                <p class="likes">
+                  <%= Object.keys(feedPosts[i]['p2Likes']).length %>
+                </p>
+                <a href="/<%= feedPosts[i]['postId'] %>/p2/like">
+                  <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
+                  <span style="color: #ff84dd">
+                    <i class="fas fa-heart p2heart"></i>
+                  </span>
+                  <% } else { %>
+                  <span style="color: #ff84dd">
+                    <i class="far fa-heart p2heart"></i>
+                  </span>
+                  <% } %>
+                </a>
               </div>
             </div>
           </div>
-          <% } %>
 
-            <script>
-              /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
-              initComparisons();
-            </script>
-</body>
-<script defer src="/scripts/post.js"></script>
+          <div class="img-comp-img img-comp-overlay player1-post">
+            <% if (feedPosts[i]["p1FileType"]==="video/mp4" ||
+            feedPosts[i]["p1FileType"]==="video/quicktime" ) { %>
 
+            <video
+              src="<%= feedPosts[i]['p1URL'] %>"
+              type="video/mp4"
+              width="450"
+              height="600"
+              style="object-fit: cover"
+              onclick="this.paused ? this.play() : this.pause();"
+              muted
+              loop
+              autoplay
+            ></video>
+
+            <% } else { %>
+            <img
+              src="<%= feedPosts[i]['p1URL'] %>"
+              width="450"
+              height="600"
+              style="object-fit: cover"
+            />
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <script>
+      /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
+      initComparisons();
+    </script>
+  </body>
+  <script defer src="/scripts/post.js"></script>
 </html>
