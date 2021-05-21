@@ -98,74 +98,18 @@
   </head>
 
   <body>
-    <!-- <div class="post">
-      <div class="post-gradient"></div>
-      <div class="img-comp-container">
-        <div class="img-comp-img player2-post">
-          <img
-            src="https://source.unsplash.com/Yyk4OmVJAyE"
-            width="450"
-            height="600"
-          />
-          <div class="bottomright">
-            <div>
-              <img
-                id="displayPicture-playerTwo"
-                src="mockUser2.png"
-                alt="display picture"
-                width="50px"
-                height="auto"
-              />
-            </div>
-            <p class="likes">1212</p>
-            <i class="far fa-heart"></i>
-          </div>
-        </div>
-
-        <div class="img-comp-img img-comp-overlay player1-post">
-          <img
-            src="https://source.unsplash.com/LIEQsu5JuoM"
-            width="450"
-            height="600"
-          />
-          <div class="bottomleft">
-            <div class="dp-title">
-              <img
-                id="displayPicture-playerOne"
-                src="mockUser.png"
-                alt="display picture"
-                width="50px"
-                height="50px"
-              />
-              <div class="postTitle">
-                <p class="postTitle-s">
-                  <strong>Player1</strong> challanged <strong>Player2</strong>
-                </p>
-                <p class="postTitle-s">Dance-off</p>
-                <p class="postTitle-s"><strong>ends in 11:34:26</strong></p>
-              </div>
-            </div>
-            <div class="likes-container">
-              <p class="likes">1212</p>
-              <i class="far fa-heart"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- main feed is blue -->
     <div class="tabs">
       <a href="/" id="active-btn"> Main Feed </a>
       <a href="/explore" id="explore-btn"> Explore </a>
     </div>
 
     <% if(feedPosts.length==0) { %>
-    <h1 class="text-XL">Awww. Nothing to show :(</h1>
+    <div class="text-container"><h1 class="text-XL">Awww. Nothing to show :(</h1>
     <p class="text-m">
       Follow your friends to see their posts or click on the Start a Challenge
       button below to send them a challenge!
     </p>
+    </div>
     <% } %> <% let i=0; %> <% for(i=0; i < feedPosts.length; i++) { %>
     <br />
     <div class="post-container">
