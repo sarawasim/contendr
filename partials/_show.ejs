@@ -104,6 +104,17 @@
     </div>
     <h1 class="text-XL-blue">Explore <%= cat %></h1>
     <% for(let i = feedPosts.length-1; i >= 0; i--) { %>
+      <% let isExpired=false %>
+                  <% let now = new Date().getTime(); %>
+                  <% let countDownDate = new Date(feedPosts[i]["expiry"]).getTime(); %>
+                  <% let distance = countDownDate - now; %>
+                  <% let days = Math.floor(distance / (1000 * 60 * 60 * 24)); %>
+                  <% let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); %>
+                  <% let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); %>
+                  <% let seconds = Math.floor((distance % (1000 * 60)) / 1000); %>
+                  <% if (distance < 0) { %>
+                    <% isExpired=true %>
+                    <% } %>
     <br />
     <div class="post-container">
       <div class="post">
@@ -161,7 +172,7 @@
                 <p class="likes">
                   <%= Object.keys(feedPosts[i]['p1Likes']).length %>
                 </p>
-                <a href="/<%= feedPosts[i]['postId'] %>/p1/like">
+                <% if (isExpired) { %><i><% } else { %> <a href="/<%= feedPosts[i]['postId'] %>/p1/like"><% } %>
                   <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
                   <span style="color: #5377fd">
                     <i class="fas fa-heart p1heart"></i>
@@ -171,7 +182,7 @@
                     <i class="far fa-heart p1heart"></i>
                   </span>
                   <% } %>
-                </a>
+                  <% if (isExpired) { %></i><% }else { %></a><% } %>
               </div>
             </div>
 
@@ -185,7 +196,23 @@
                 </strong>
                 <p class="postTitle-s"><%= feedPosts[i]["title"] %></p>
                 <p class="postTitle-s"><%= feedPosts[i]["descriptions"] %></p>
-                <p class="postTitle-s"><strong>ends in</strong></p>
+                <p class="postTitle-s"><strong>
+                  <% if (distance < 0) { %>
+                    Challenge has ended
+                    <% isExpired=true %>
+                    <% } else { %>
+
+                  <% if (days) { %>
+      ends in: <%= days %> days
+    <% } else if (hours) { %>
+      ends in: <%= hours %> hours
+      <% } else if (minutes) { %>
+      ends in: <%= minutes %> minutes
+ <% } else { %>
+    ends in: a minute
+ <% } %>
+ <% } %>
+                </strong></p>
               </div>
               <p class="likes"><%=feedPosts[i].commentList.length%></p>
               <a href="/p?postId=<%= feedPosts[i]['postId'] %>">
@@ -208,7 +235,7 @@
                 <p class="likes">
                   <%= Object.keys(feedPosts[i]['p2Likes']).length %>
                 </p>
-                <a href="/<%= feedPosts[i]['postId'] %>/p2/like">
+                <% if (isExpired) { %><i><% } else { %> <a href="/<%= feedPosts[i]['postId'] %>/p2/like"><% } %>
                   <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
                   <span style="color: #ff84dd">
                     <i class="fas fa-heart p2heart"></i>
@@ -218,7 +245,7 @@
                     <i class="far fa-heart p2heart"></i>
                   </span>
                   <% } %>
-                </a>
+                  <% if (isExpired) { %></i><% }else { %></a><% } %>
               </div>
             </div>
           </div>
@@ -290,7 +317,7 @@
               <p class="likes">
                 <%= Object.keys(feedPosts[i]['p1Likes']).length %>
               </p>
-              <a href="/<%= feedPosts[i]['postId'] %>/p1/like">
+              <i>
                 <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
                 <span style="color: #5377fd">
                   <i class="fas fa-heart p1heart"></i>
@@ -300,7 +327,7 @@
                   <i class="far fa-heart p1heart"></i>
                 </span>
                 <% } %>
-              </a>
+              </i>
             </div>
           </div>
 
@@ -314,7 +341,23 @@
               </strong>
               <p class="postTitle-s"><%= feedPosts[i]["title"] %></p>
               <p class="postTitle-s"><%= feedPosts[i]["descriptions"] %></p>
-              <p class="postTitle-s"><strong>ends in</strong></p>
+              <p class="postTitle-s"><strong>
+                <% if (distance < 0) { %>
+                  Challenge has ended
+                  <% isExpired=true %>
+                  <% } else { %>
+
+                <% if (days) { %>
+    ends in: <%= days %> days
+  <% } else if (hours) { %>
+    ends in: <%= hours %> hours
+    <% } else if (minutes) { %>
+    ends in: <%= minutes %> minutes
+<% } else { %>
+  ends in: a minute
+<% } %>
+<% } %>
+              </strong></p>
             </div>
             <p class="likes"><%=feedPosts[i].commentList.length%></p>
             <a href="/p?postId=<%= feedPosts[i]['postId'] %>">
