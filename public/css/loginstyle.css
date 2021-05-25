@@ -110,7 +110,7 @@ input {
   box-sizing: unset;
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
 
@@ -150,6 +150,11 @@ a:hover,
 
 a:active {
   color: white;
+}
+
+.error {
+  color: #ff85dd;
+  position: absolute;
 }
 
 @media screen and (min-width: 600px) {

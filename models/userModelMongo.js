@@ -82,7 +82,7 @@ const userModel = {
     if (user) {
       return user;
     }
-    return null;
+    return new Error(`Couldn't find user with id: ${id}`);
     // throw new Error(`Couldn't find user with id: ${id}`);
   },
 

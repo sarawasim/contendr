@@ -54,6 +54,9 @@
       </div>
       <div class="login-fields">
         <h2>challenge your friends!</h2>
+        <% for (let i=0; i<errors.length; i++) { %>
+          <p class="error"><%= errors[i] %></p>
+        <% } %> 
         <br />
         <br />
         <form action="/auth/login" method="POST">

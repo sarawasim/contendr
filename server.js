@@ -14,6 +14,7 @@ const path = require("path");
 const port = process.env.PORT || 8080;
 const dotenv = require("dotenv").config();
 const { generateUploadURL } = require("./models/s3model");
+const flash = require("connect-flash");
 
 const app = express();
 
@@ -51,12 +52,12 @@ const indexRoute = require("./routes/indexRoute");
 // Middleware for express
 app.use(express.json());
 app.use(expressLayouts);
-
+app.use(flash());
 // layouts for ejs
 app.set("layout auth/login", false);
-app.get("/auth/login", (req, res) => {
-  res.render("login", { layout: "login" });
-});
+// app.get("/auth/login", (req, res) => {
+//   res.render("login", { layout: "login" });
+// });
 
 app.set("layout auth/register", false);
 app.get("/auth/register", (req, res) => {
