@@ -10,11 +10,6 @@ const localLogin = new LocalStrategy(
     passwordField: "password",
   },
   async (email, password, done) => {
-    console.log("------------");
-    console.log("Form password post ------------ " + password);
-
-    console.log("------------");
-
     const user = await userController.getUserByEmailIdAndPassword(
       email,
       password
@@ -22,7 +17,7 @@ const localLogin = new LocalStrategy(
     return user
       ? done(null, user)
       : done(null, false, {
-          message: "Your login details are not valid. Please try again",
+          message: "Email or password is invalid. Please try again :)",
         });
   }
 );

@@ -6,11 +6,22 @@ const { registerUser } = require("../controllers/userControllerMongo");
 
 const router = express.Router();
 
-router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
+router.get("/login", forwardAuthenticated, (req, res) => {
+  const errors = req.flash().error || [];
+  console.log("LOGIN ERRORS " + errors);
+  res.render("login", { layout: "login", errors: errors });
+});
+
+// router.get("/login", (req, res) => {
+//   res.render("login", { layout: "login" });
+// });
 
 router.post(
   "/login",
-  passport.authenticate("local", { failureRedirect: "/auth/login" }),
+  passport.authenticate("local", {
+    failureRedirect: "/auth/login",
+    failureFlash: true,
+  }),
   function (req, res) {
     // console.log("req.user is ------------------------------------- " + req.user);
 

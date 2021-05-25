@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.896.0",
+    "connect-flash": "^0.1.1",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
