@@ -27,7 +27,7 @@ const userModel = {
   searchUsernames: async (input) => {
     const userCollection = database.db("Contendr").collection("users");
     const results = await userCollection
-      .find({"username" : {$regex : `.*${input}.*`, $options: "i"}})
+      .find({ username: { $regex: `.*${input}.*`, $options: "i" } })
       .project({
         username: 1,
         following: 1,
@@ -62,7 +62,7 @@ const userModel = {
     if (user) {
       return user;
     }
-    throw new Error(`Couldn't find user with email: ${email}`);
+    return new Error(`Couldn't find user with email: ${email}`);
   },
   findById: async (id) => {
     const userCollection = database.db("Contendr").collection("users");
