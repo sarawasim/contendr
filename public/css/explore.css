@@ -29,6 +29,11 @@
     width: 11.5rem;
 }
 
+.catImg2 {
+    height: auto;
+    width: 24.5rem;
+}
+
 @media screen and (max-width: 600px) {
   .challenge-container {
     min-width: fit-content;
