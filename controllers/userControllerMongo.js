@@ -32,34 +32,34 @@ const getUserByUsername = (username) => {
     return user;
   }
   return null;
-}
+};
 
 const findUsernames = async (input) => {
   let list = await userModel.searchUsernames(input);
-  
+
   return list;
-}
+};
 const getList = async (username, type) => {
-  let user = await getUserByUsername(username)
+  let user = await getUserByUsername(username);
   let list;
   if (type == "following") {
-    list = user.following
+    list = user.following;
   } else {
-    list = user.followers
+    list = user.followers;
   }
   let usernameArr = [];
   await Promise.all(
     list.map(async (id) => {
       try {
-        let user = await getUserById(id.id)
-        usernameArr.push({username: user.username})
+        let user = await getUserById(id.id);
+        usernameArr.push({ username: user.username });
       } catch (error) {
         console.log(error);
       }
     })
-  )
-    return usernameArr;
-}
+  );
+  return usernameArr;
+};
 
 const getFollowingUsernames = async (input) => {
   let userArr = [];
@@ -77,39 +77,39 @@ const getFollowingUsernames = async (input) => {
 };
 
 const checkFollowing = (followingList, otherId) => {
-  const checkFollowing = followingList.find((id) => id.id === otherId )
-  let isFollowing = false
+  const checkFollowing = followingList.find((id) => id.id === otherId);
+  let isFollowing = false;
   if (!checkFollowing) {
-    return isFollowing
-  } else return isFollowing = true
-}
+    return isFollowing;
+  } else return (isFollowing = true);
+};
 
 const toggleFollowUser = async (req) => {
-    const userCollection = database.db("Contendr").collection("users");
-    const usernameToFollow = req.params.username;
-    const userToFollow = await userModel.findByUsername(usernameToFollow);
-      let check = await checkFollowing(req.user.following, userToFollow.id)
-      const userId = req.user.id;
-      if (!check) {
-        await userCollection.updateOne(
-          { id: userId },
-          { $push: { following: { id: userToFollow.id } } }
-        );
-        await userCollection.updateOne(
-          { id: userToFollow.id },
-          { $push: { followers: { id: userId } } }
-        );
-      } else {
-        await userCollection.updateOne(
-          { id: userId },
-          { $pull: { following: { id: userToFollow.id }}}
-        )
-        await userCollection.updateOne(
-          { id: userToFollow.id},
-          { $pull: { followers: { id: userId }}}
-        )
-      }
-}
+  const userCollection = database.db("Contendr").collection("users");
+  const usernameToFollow = req.params.username;
+  const userToFollow = await userModel.findByUsername(usernameToFollow);
+  let check = await checkFollowing(req.user.following, userToFollow.id);
+  const userId = req.user.id;
+  if (!check) {
+    await userCollection.updateOne(
+      { id: userId },
+      { $push: { following: { id: userToFollow.id } } }
+    );
+    await userCollection.updateOne(
+      { id: userToFollow.id },
+      { $push: { followers: { id: userId } } }
+    );
+  } else {
+    await userCollection.updateOne(
+      { id: userId },
+      { $pull: { following: { id: userToFollow.id } } }
+    );
+    await userCollection.updateOne(
+      { id: userToFollow.id },
+      { $pull: { followers: { id: userId } } }
+    );
+  }
+};
 
 function isUserValid(user, password) {
   const passHash = userModel.hashPassword(password, user.password_salt);
@@ -117,7 +117,6 @@ function isUserValid(user, password) {
 }
 
 async function findOrCreate(profile) {
-
   //will first find if user is in DB, and if not then user will be added to DB
 
   let user = await userModel.findById(parseInt(profile.id));
@@ -169,7 +168,7 @@ async function registerUser(req, res) {
       const schema = await Joi.object({
         email: Joi.string().min(5).max(40).required(),
         password: Joi.string().pattern(
-          new RegExp('^[a-zA-Z0-9!@#$&()\\-`.+,/"]{6,30}$')
+          new RegExp('^[a-zA-Z0-9!@#$&()\\-`.+,/"]{3,30}$')
         ),
         username: Joi.string().max(15).required(),
         email: Joi.string().max(50).required(),
@@ -222,5 +221,5 @@ module.exports = {
   getUserByUsername,
   toggleFollowUser,
   checkFollowing,
-  getList
+  getList,
 };

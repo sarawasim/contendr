@@ -7,8 +7,8 @@ const { registerUser } = require("../controllers/userControllerMongo");
 const router = express.Router();
 
 router.get("/login", forwardAuthenticated, (req, res) => {
-  const errors = req.flash().error || [];
-  console.log("LOGIN ERRORS " + errors);
+  const errors = [];
+
   res.render("login", { layout: "login", errors: errors });
 });
 
@@ -59,6 +59,7 @@ router.get("/register", forwardAuthenticated, (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
+  console.log("register has been hit-------------");
   registerUser(req, res);
   res.redirect("/auth/login");
 });

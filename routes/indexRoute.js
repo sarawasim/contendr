@@ -78,20 +78,19 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   //   b.createdAt.getTime().toString() - a.createdAt.getTime().toString()
   // })
   let filteredDateArray = filteredPostArray.sort((a, b) => {
-    return b.createdAt - a.createdAt
-  })
+    return b.createdAt - a.createdAt;
+  });
 
+  console.log(filteredDateArray);
+  console.log(`i am filteredPostArray ${JSON.stringify(filteredPostArray)}`);
 
-  console.log(filteredDateArray)
-  console.log(`i am filteredPostArray ${JSON.stringify(filteredPostArray)}`)
-    
   // Each post contains urls to each video. display the urls in the ejs page.
   res.render("index", { feedPosts: filteredDateArray, user: req.user });
 });
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
   let following = await getFollowingUsernames(req.user.following);
-  console.log(`following from createChallenge route ${following}`)
+  console.log(`following from createChallenge route ${following}`);
   res.render("createChallenge", {
     layout: "layoutB",
     following: following,
@@ -109,48 +108,46 @@ router.post("/createChallenge/searchUsername", (req, res) => {
 router.get("/search", async (req, res) => {
   let input = req.query.searchInput.toLowerCase();
   const results = await findUsernames(input);
-  let title = "Showing search results"
+  let title = "Showing search results";
   res.render("searchResults", { results, user: req.user, title });
 });
 
 router.get("/showFollowing", async (req, res) => {
-  let username = req.query.username
-  let following = await getList(username, "following")
+  let username = req.query.username;
+  let following = await getList(username, "following");
   let title;
   if (username == req.user.username) {
-    title = `You are following: `
+    title = `You are following: `;
     if (following.length == 0) {
-        title = `You are not following anyone. Start following someone!`
-    } 
+      title = `You are not following anyone. Start following someone!`;
+    }
   } else {
-    title = `${username} is following:`
+    title = `${username} is following:`;
 
     if (following.length == 0) {
-      title = `${username} isn't following anyone`
+      title = `${username} isn't following anyone`;
     }
   }
   res.render("searchResults", { results: following, user: req.user, title });
-
-})
+});
 
 router.get("/showFollowers", async (req, res) => {
-  let username = req.query.username
-  let followers = await getList(username, "followers")
+  let username = req.query.username;
+  let followers = await getList(username, "followers");
   if (username == req.user.username) {
-    title = `Your followers:`
+    title = `Your followers:`;
     if (followers.length == 0) {
-        title = `Start challenging others to gain followers!`
-    } 
+      title = `Start challenging others to gain followers!`;
+    }
   } else {
-    title = `${username}'s followers:`
+    title = `${username}'s followers:`;
 
     if (followers.length == 0) {
-      title = `Be ${username}'s first follower!`
+      title = `Be ${username}'s first follower!`;
     }
   }
   res.render("searchResults", { results: followers, user: req.user, title });
-
-})
+});
 
 router.post(
   "/createChallenge",
@@ -277,31 +274,40 @@ router.get("/accept", ensureAuthenticated, async (req, res) => {
 });
 
 router.get("/explore", ensureAuthenticated, (req, res) => {
-
   res.render("explore", { user: req.user });
-})
-
-router.get("/show", ensureAuthenticated, async (req, res) => {
-  let feedPosts = await getPostByCat(req.query.category)
-  res.render("show", {layout: "layout", feedPosts, user: req.user, cat: req.query.category })
-})
-
-router.post("/updateP2URL", ensureAuthenticated, upload.single("fileUpload"), (req, res) => {
-  uploadP2URL(req);
-  res.redirect(`/p?postId=${req.body.postId}`);
 });
 
+router.get("/show", ensureAuthenticated, async (req, res) => {
+  let feedPosts = await getPostByCat(req.query.category);
+  res.render("show", {
+    layout: "layout",
+    feedPosts,
+    user: req.user,
+    cat: req.query.category,
+  });
+});
+
+router.post(
+  "/updateP2URL",
+  ensureAuthenticated,
+  upload.single("fileUpload"),
+  (req, res) => {
+    uploadP2URL(req);
+    res.redirect(`/p?postId=${req.body.postId}`);
+  }
+);
+
 router.get("/faq", (req, res) => {
-  res.render("faq", {user: req.user})
-})
+  res.render("faq", { user: req.user });
+});
 router.get("/termsOfUse", (req, res) => {
-  res.render("terms", {user: req.user})
-})
+  res.render("terms", { user: req.user });
+});
 router.get("/privacyPolicy", (req, res) => {
-  res.render("privacy", {user: req.user})
-})
+  res.render("privacy", { user: req.user });
+});
 router.get("/help", (req, res) => {
-  res.render("help", {user: req.user})
-})
+  res.render("help", { user: req.user });
+});
 
 module.exports = router;
