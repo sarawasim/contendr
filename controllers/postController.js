@@ -179,13 +179,22 @@ async function deletePost(req, res) {
 }
 
 async function getPostByCat(category) {
-  const results = await database
+  let results;
+  if(category=="all") {
+    results = await database
+    .db("Contendr")
+    .collection("posts")
+    .find()
+    .toArray();
+  } else {
+    results = await database
     .db("Contendr")
     .collection("posts")
     .find({
       category: category,
     })
     .toArray();
+  }
   return results;
 }
 
