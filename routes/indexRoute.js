@@ -73,10 +73,17 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     (post) => post.isAccepted === true
   );
 
+  // let filteredDateArray = filteredPostArray.sort((a, b) => {
 
+  //   b.createdAt.getTime().toString() - a.createdAt.getTime().toString()
+  // })
   let filteredDateArray = filteredPostArray.sort((a, b) => {
     return b.createdAt - a.createdAt
   })
+
+
+  console.log(filteredDateArray)
+  console.log(`i am filteredPostArray ${JSON.stringify(filteredPostArray)}`)
     
   // Each post contains urls to each video. display the urls in the ejs page.
   res.render("index", { feedPosts: filteredDateArray, user: req.user });
