@@ -72,9 +72,14 @@ router.get("/", ensureAuthenticated, async (req, res) => {
   let filteredPostArray = feedPostsArray.filter(
     (post) => post.isAccepted === true
   );
+
+
+  let filteredDateArray = filteredPostArray.sort((a, b) => {
+    return b.createdAt - a.createdAt
+  })
     
   // Each post contains urls to each video. display the urls in the ejs page.
-  res.render("index", { feedPosts: filteredPostArray, user: req.user });
+  res.render("index", { feedPosts: filteredDateArray, user: req.user });
 });
 
 router.get("/createChallenge", ensureAuthenticated, async (req, res) => {
