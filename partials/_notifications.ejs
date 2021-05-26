@@ -27,7 +27,17 @@
     * 60 * 60 * 24)); %> <% let hours = Math.floor((distance % (1000 * 60 * 60 *
     24)) / (1000 * 60 * 60)); %> <% let minutes = Math.floor((distance % (1000 *
     60 * 60)) / (1000 * 60)); %> <% let seconds = Math.floor((distance % (1000 *
-    60)) / 1000); %> <% if (distance < 0) { %> <% isExpired=true %> <% } %>
+    60)) / 1000); %> <% if (distance < 0) { %> <% isExpired=true %> <% } %> <%
+
+    <!-- calculate created at time -->
+    let createdAtDate = new Date(feedPosts[i]["createdAt"]).getTime(); %> <% let
+    createdAtDistance = now - createdAtDate; %> <% let daysCreatedAt =
+    Math.floor(createdAtDistance / (1000 * 60 * 60 * 24)); %> <% let
+    hoursCreatedAt = Math.floor((createdAtDistance % (1000 * 60 * 60 * 24)) /
+    (1000 * 60 * 60)); %> <% let minutesCreatedAt =
+    Math.floor((createdAtDistance % (1000 * 60 * 60)) / (1000 * 60)); %> <% let
+    secondsCreatedAt = Math.floor((createdAtDistance % (1000 * 60)) / 1000); %>
+
     <div class="notification">
       <div class="title">
         <p class="text-m-b">
@@ -36,7 +46,16 @@
           </a>
           challenged you to <%= feedPosts[i]["category"] %>!
         </p>
-        <p class="text-s">Created: <%= feedPosts[i]["createdAt"] %></p>
+        <p class="text-s">
+          <% if (daysCreatedAt > 31) { %> Created on <%= createdAtDate %> <% }
+          else if (daysCreatedAt) { if (daysCreatedAt == 1) { %> Created 1 day
+          ago <% } else { %> Created <%= daysCreatedAt %> days ago <% } } else
+          if (hoursCreatedAt) { if (hoursCreatedAt == 1) { %> Created an hour
+          ago <% } else { %> Created <%= hoursCreatedAt %> hours ago <% } } else
+          if (minutesCreatedAt) { if (minutesCreatedAt == 1) { %> Created a
+          minutes ago <% } else { %> Created <%= minutesCreatedAt %> minutes ago
+          <%} } else { %> Created a minute ago <% } %>
+        </p>
         <p class="text-s">Title: <%= feedPosts[i]["title"] %></p>
         <p class="text-s">Description: <%= feedPosts[i]["description"] %></p>
 
