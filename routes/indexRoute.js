@@ -303,8 +303,6 @@ router.get("/termsOfUse", (req, res) => {
 router.get("/privacyPolicy", (req, res) => {
   res.render("privacy", { user: req.user });
 });
-router.get("/help", (req, res) => {
-  res.render("help", { user: req.user });
-});
+
 
 module.exports = router;
