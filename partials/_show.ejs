@@ -199,6 +199,15 @@
                 <p class="postTitle-s"><strong>
                   <% if (distance < 0) { %>
                     Challenge has ended
+
+                    <% if ( Object.keys(feedPosts[i]['p1Likes']).length > Object.keys(feedPosts[i]['p2Likes']).length ) { %>
+                      <%= feedPosts[i].player1 %> is the winner!
+                    <% } else if (Object.keys(feedPosts[i]['p1Likes']).length ==  Object.keys(feedPosts[i]['p2Likes']).length) { %>
+                      It was a tie! 
+                      <% } else { %>
+                         <%= feedPosts[i].player2 %> is the winner!
+                      <% } %>
+
                     <% isExpired=true %>
                     <% } else { %>
 

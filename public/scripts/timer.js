@@ -39,8 +39,19 @@ var x = setInterval(function () {
       item.replaceWith(unlikable);
     });
 
+    let results;
+    if ( p1Likes > p2Likes) {
+      results = `${player1} is the winner!`
+    } else if (p1Likes == p2Likes) {
+      console.log((p1Likes))
+      console.log((p2Likes))
+      results = "It was a tie!"
+    } else {
+      results = `${player2} is the winner!`
+    }
+
     document.getElementById("expiration").innerHTML =
-      "EXPIRED. Likes now disabled.";
+      results;
   }
 }, 250);
 
