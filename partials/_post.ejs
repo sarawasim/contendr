@@ -250,6 +250,10 @@
   </body>
   <script >var createdAtDate= "<%= post['createdAt'] %>"; 
   var expDate= "<%= post['expiry'] %>";
+  var p1Likes= "<%=Object.keys(post['p1Likes']).length%>";
+  var p2Likes= "<%=Object.keys(post['p2Likes']).length%>";
+  var player1= "<%= post.player1 %>";
+  var player2= "<%= post.player2 %>";
   </script>
 
   <script defer src="/scripts/post.js"></script>
