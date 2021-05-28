@@ -22,7 +22,7 @@
         </div>
         <div class="userInfo">
           <h1 class="username-profile"><%=searchedUser.username%></h1>
-          <p class="bio">Bio</p>
+          <p class="bio"></p>
         </div>
         <div class="follow">
           <a href="/<%=searchedUser.username%>/toggleFollow" id="follow-btn">
@@ -55,9 +55,8 @@
       </div>
 
       <div class="userPosts-Profile">
-
         <% for(let i= posts.length-1; i >=0; i--) { if (posts[i].player1
-          ==searchedUser.username) { %>
+        ==searchedUser.username) { %>
 
         <div class="profilePost">
           <a href="/p?postId=<%= posts[i]['postId'] %>" class="post-gradient">
