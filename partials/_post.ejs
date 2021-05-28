@@ -168,7 +168,7 @@
         <p class="likes">
           <%= Object.keys(post['p1Likes']).length %>
         </p>
-        <a href="/<%= post['postId'] %>/p1/like">
+        <a class="<%= post['postId'] %> p1">
           <% if(post['p1Likes'][user.email]===true) { %>
             <span style="color: #5377fd">
               <i class="fas fa-heart p1heart"></i>
@@ -207,7 +207,7 @@
         <p class="likes">
           <%= Object.keys(post['p2Likes']).length %>
         </p>
-        <a href="/<%= post['postId'] %>/p2/like">
+        <a class="<%= post['postId'] %> p2">
           <% if(post['p2Likes'][user.email]===true) { %>
             <span style="color: #ff84dd">
               <i class="fas fa-heart p2heart"></i>

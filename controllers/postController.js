@@ -14,7 +14,7 @@ async function uploadP2URL(req) {
       },
     }
   );
-  
+
   const userCollection = database.db("Contendr").collection("users");
 
   await userCollection.updateOne(
@@ -110,8 +110,8 @@ async function createChallenge(req, res) {
 }
 
 async function likePost(req) {
-  const postId = req.params.id;
-  const player = req.params.player;
+  const postId = req.body.id;
+  const player = req.body.player;
   const postCollection = database.db("Contendr").collection("posts");
   const posts = await postCollection.find().toArray();
 
@@ -180,20 +180,20 @@ async function deletePost(req, res) {
 
 async function getPostByCat(category) {
   let results;
-  if(category=="all") {
+  if (category == "all") {
     results = await database
-    .db("Contendr")
-    .collection("posts")
-    .find()
-    .toArray();
+      .db("Contendr")
+      .collection("posts")
+      .find()
+      .toArray();
   } else {
     results = await database
-    .db("Contendr")
-    .collection("posts")
-    .find({
-      category: category,
-    })
-    .toArray();
+      .db("Contendr")
+      .collection("posts")
+      .find({
+        category: category,
+      })
+      .toArray();
   }
   return results;
 }

@@ -30,7 +30,7 @@ var x = setInterval(function () {
     let likable = document.querySelectorAll(".likes-container a");
     likable.forEach(function (item) {
       let unlikable = document.createElement("i");
-      item.removeAttribute("href");
+      item.removeAttribute("class");
       for (const attr of item.attributes) {
         unlikable.setAttribute(attr.name, attr.value);
       }
@@ -40,18 +40,17 @@ var x = setInterval(function () {
     });
 
     let results;
-    if ( p1Likes > p2Likes) {
-      results = `${player1} is the winner!`
+    if (p1Likes > p2Likes) {
+      results = `${player1} is the winner!`;
     } else if (p1Likes == p2Likes) {
-      console.log((p1Likes))
-      console.log((p2Likes))
-      results = "It was a tie!"
+      console.log(p1Likes);
+      console.log(p2Likes);
+      results = "It was a tie!";
     } else {
-      results = `${player2} is the winner!`
+      results = `${player2} is the winner!`;
     }
 
-    document.getElementById("expiration").innerHTML =
-      results;
+    document.getElementById("expiration").innerHTML = results;
   }
 }, 250);
 
