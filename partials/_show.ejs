@@ -173,15 +173,30 @@
                   <%= Object.keys(feedPosts[i]['p1Likes']).length %>
                 </p>
                 <% if (isExpired) { %><i><% } else { %> <a class="<%= feedPosts[i]['postId'] %> p1"><% } %>
-                  <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
-                  <span style="color: #5377fd">
-                    <i class="fas fa-heart p1heart"></i>
-                  </span>
-                  <% } else { %>
-                  <span style="color: #5377fd">
-                    <i class="far fa-heart p1heart"></i>
-                  </span>
-                  <% } %>
+                  
+                  <% if (distance < 0) { %>
+                    <% if(Object.keys(feedPosts[i]['p1Likes']).length > Object.keys(feedPosts[i]['p2Likes']).length) { %>
+                                      
+                      <span style="color: #ffdf00">
+                        <i class="fas fa-crown p1heart"></i>
+                      </span>
+                    
+                                      <% } else { %>
+                                        <span style="color: #55C2FF">
+                                          <i class="far fa-sad-cry p1heart"></i>
+                                        </span>
+                                      <% } %>
+                                      <% } else { %>
+                                        <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
+                                          <span style="color: #5377fd">
+                                            <i class="fas fa-heart p1heart"></i>
+                                          </span>
+                                          <% } else { %>
+                                          <span style="color: #5377fd">
+                                            <i class="far fa-heart p1heart"></i>
+                                          </span>
+                                          <% } %>
+                                        <% } %>
                   <% if (isExpired) { %></i><% }else { %></a><% } %>
               </div>
             </div>
@@ -245,15 +260,29 @@
                   <%= Object.keys(feedPosts[i]['p2Likes']).length %>
                 </p>
                 <% if (isExpired) { %><i><% } else { %> <a class="<%= feedPosts[i]['postId'] %> p2"><% } %>
-                  <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
-                  <span style="color: #ff84dd">
-                    <i class="fas fa-heart p2heart"></i>
-                  </span>
-                  <% } else { %>
-                  <span style="color: #ff84dd">
-                    <i class="far fa-heart p2heart"></i>
-                  </span>
-                  <% } %>
+                  <% if (distance < 0) { %>
+                    <% if(Object.keys(feedPosts[i]['p1Likes']).length < Object.keys(feedPosts[i]['p2Likes']).length) { %>
+                                      
+                      <span style="color: #ffdf00">
+                        <i class="fas fa-crown p2heart"></i>
+                      </span>
+                    
+                                      <% } else { %>
+                                        <span style="color: #55C2FF">
+                                          <i class="far fa-sad-cry p2heart"></i>
+                                        </span>
+                                      <% } %>
+                                      <% } else { %>
+                                        <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
+                                          <span style="color: #ff84dd">
+                                            <i class="fas fa-heart p2heart"></i>
+                                          </span>
+                                          <% } else { %>
+                                          <span style="color: #ff84dd">
+                                            <i class="far fa-heart p2heart"></i>
+                                          </span>
+                                          <% } %>
+                                        <% } %>
                   <% if (isExpired) { %></i><% }else { %></a><% } %>
               </div>
             </div>
@@ -327,14 +356,15 @@
                 <%= Object.keys(feedPosts[i]['p1Likes']).length %>
               </p>
               <i>
+                
                 <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
-                <span style="color: #5377fd">
-                  <i class="fas fa-heart p1heart"></i>
-                </span>
-                <% } else { %>
-                <span style="color: #5377fd">
-                  <i class="far fa-heart p1heart"></i>
-                </span>
+                  <span style="color: #717171">
+                    <i class="fas fa-heart p1heart"></i>
+                  </span>
+                  <% } else { %>
+                  <span style="color: #717171">
+                    <i class="far fa-heart p1heart"></i>
+                  </span>
                 <% } %>
               </i>
             </div>
