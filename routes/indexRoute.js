@@ -156,9 +156,8 @@ router.post(
   }
 );
 
-router.get("/:id/:player/like", (req, res) => {
+router.post("/like", (req, res) => {
   likePost(req);
-  res.status(204).end();
 });
 
 router.get("/:id/deletePost", async (req, res) => {
@@ -303,6 +302,5 @@ router.get("/termsOfUse", (req, res) => {
 router.get("/privacyPolicy", (req, res) => {
   res.render("privacy", { user: req.user });
 });
-
 
 module.exports = router;
