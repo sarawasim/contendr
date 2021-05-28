@@ -21,7 +21,7 @@ var x = setInterval(function () {
 
   // Output the result in an element with id="expiration"
   document.getElementById("expiration").innerHTML =
-    hours + "h " + minutes + "m " + seconds + "s ";
+    "Ends in: " + hours + "h " + minutes + "m " + seconds + "s ";
 
   // If the count down is over, it will disable likes by replacing the
   // <a> tag with an <i> tag
@@ -37,17 +37,48 @@ var x = setInterval(function () {
       unlikable.innerHTML = item.innerHTML;
 
       item.replaceWith(unlikable);
+
+      //     <span style="color: #ffdf00">
+      //       <i class="fas fa-crown p1heart"></i>
+      //     </span>
+
+      //                     <% } else { %>
+      //                       <span style="color: #55C2FF">
+      //                         <i class="far fa-sad-cry p1heart"></i>
+      //                       </span>
+      //                     <% } %>
+      //                     <% } else { %>
+      //   <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
+      //                   <span style="color: #5377fd">
+      //                     <i class="fas fa-heart p1heart"></i>
+      //                   </span>
+      //                   <% } else { %>
+      //                   <span style="color: #5377fd">
+      //                     <i class="far fa-heart p1heart"></i>
+      //                   </span>
     });
+    let p1LikesIcon = document.querySelector(".p1heart");
+    let p2LikesIcon = document.querySelector(".p2heart");
 
     let results;
     if (p1Likes > p2Likes) {
-      results = `${player1} is the winner!`;
+      results = `GAME OVER! ${player1} is the winner!`;
+      p1LikesIcon.closest("span").style.color = "#ffdf00";
+      p2LikesIcon.closest("span").style.color = "#55C2FF";
+      p1LikesIcon.className = "fas fa-crown p1heart";
+      p2LikesIcon.className = "far fa-sad-cry p2heart";
     } else if (p1Likes == p2Likes) {
-      console.log(p1Likes);
-      console.log(p2Likes);
-      results = "It was a tie!";
+      p1LikesIcon.closest("span").style.color = "#55C2FF";
+      p2LikesIcon.closest("span").style.color = "#55C2FF";
+      p1LikesIcon.className = "far fa-sad-cry p1heart";
+      p2LikesIcon.className = "far fa-sad-cry p2heart";
+      results = "GAME OVER! It was a tie!";
     } else {
-      results = `${player2} is the winner!`;
+      p2LikesIcon.closest("span").style.color = "#ffdf00";
+      p1LikesIcon.closest("span").style.color = "#55C2FF";
+      results = `GAME OVER! ${player2} is the winner!`;
+      p2LikesIcon.className = "fas fa-crown p2heart";
+      p1LikesIcon.className = "far fa-sad-cry p1heart";
     }
 
     document.getElementById("expiration").innerHTML = results;
