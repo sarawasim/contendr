@@ -172,7 +172,7 @@
                 <p class="likes">
                   <%= Object.keys(feedPosts[i]['p1Likes']).length %>
                 </p>
-                <% if (isExpired) { %><i><% } else { %> <a href="/<%= feedPosts[i]['postId'] %>/p1/like"><% } %>
+                <% if (isExpired) { %><i><% } else { %> <a class="<%= feedPosts[i]['postId'] %> p1"><% } %>
                   <% if(feedPosts[i]['p1Likes'][user.email]===true) { %>
                   <span style="color: #5377fd">
                     <i class="fas fa-heart p1heart"></i>
@@ -244,7 +244,7 @@
                 <p class="likes">
                   <%= Object.keys(feedPosts[i]['p2Likes']).length %>
                 </p>
-                <% if (isExpired) { %><i><% } else { %> <a href="/<%= feedPosts[i]['postId'] %>/p2/like"><% } %>
+                <% if (isExpired) { %><i><% } else { %> <a class="<%= feedPosts[i]['postId'] %> p2"><% } %>
                   <% if(feedPosts[i]['p2Likes'][user.email]===true) { %>
                   <span style="color: #ff84dd">
                     <i class="fas fa-heart p2heart"></i>
